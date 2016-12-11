@@ -1,0 +1,62 @@
+<ion-view title="Vendor EDIT" ng-controller="vendors" ng-init="Edit()">
+	<ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
+    </ion-nav-buttons>
+	<ion-content>
+		<h1 ng-model= "Vendors.cname" style="text-align: center;"> {{Vendors.cname}}</h1>
+		<form name="vendorsForm" ng-submit="Update(vendorsForm)">
+			
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input type="text" required placeholder="Vender Name" ng-model="Vendors.cname">
+			  </label>
+			</div>
+			
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input required type="number" placeholder="Mobile No" ng-model="Vendors.ccontact">
+			  </label>
+			</div>		  
+			
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input required type="text" placeholder="Address" ng-model="Vendors.caddress">
+			  </label>
+			</div>
+			
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input  type="email" placeholder="Email" ng-model="Vendors.cemail">
+			  </label>
+			</div>
+			
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input type="text" placeholder="City" required ng-model="Vendors.ccity">
+			  </label>
+			</div>
+			
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input type="text" placeholder="State" required ng-model="Vendors.cstate">
+			  </label>
+			</div>
+			
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input type="number" placeholder="Pincode" required ng-model="Vendors.cpincode">
+			  </label>
+			</div>
+			
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input type="number" required placeholder="Opening Balance" ng-model="Vendors.openbalance">
+			  </label>
+			</div>
+			
+			<label class="item">
+				<button class="button button-block button-positive" type="submit">Submit</button>
+			</label>
+		</form>
+	</ion-content>
+</ion-view>

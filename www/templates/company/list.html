@@ -1,0 +1,38 @@
+
+
+<ion-view title="COMPANY_LIST" ng-controller="CompanyCtrl" ng-init="SelectCompany()">
+	<ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
+    </ion-nav-buttons>
+
+	<ion-nav-buttons side="right">
+        <a href="#/app/company_add" class="button button-icon button-clear ion-plus"></a>
+    </ion-nav-buttons>
+
+	
+  <ion-content>
+	 <ion-list>
+	  <ion-item ng-if="CompanyList.length == 0" class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" >
+	  No Records Found !
+	  </ion-item>
+      <ion-item ng-repeat="list in CompanyList" class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#/app/company_details/{{list.id}}">
+          <h2>{{list.name}}</h2>
+		  <i class="icon ion-chevron-right icon-accessory"></i>
+
+		  <div class="button-bar">
+			<ion-option-button class="ion-edit icon-left button-positive" ng-click="Selectid(list.id)" >
+			  Edit
+			</ion-option-button>
+		  
+		   <ion-option-button class="ion-ios-trash-outline icon-left button-assertive" ng-click="Delete(list.id)">
+			  Delete
+			</ion-option-button>
+		  </div>
+		  
+
+		  
+      </ion-item>
+    </ion-list>
+		
+  </ion-content>
+</ion-view>

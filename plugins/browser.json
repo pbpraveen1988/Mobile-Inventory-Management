@@ -1,0 +1,38 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Camera\"><param name=\"browser-package\" value=\"Camera\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "com.paypal.cordova.mobilesdk": {
+            "PACKAGE_NAME": "com.ionicframework.myapp948209"
+        },
+        "org.apache.cordova.camera": {
+            "PACKAGE_NAME": "com.ionicframework.myapp948209"
+        },
+        "org.apache.cordova.file": {
+            "PACKAGE_NAME": "com.ionicframework.myapp948209"
+        },
+        "org.apache.cordova.file-transfer": {
+            "PACKAGE_NAME": "com.ionicframework.myapp948209"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "com.ionicframework.myapp948209"
+        }
+    },
+    "dependent_plugins": {}
+}

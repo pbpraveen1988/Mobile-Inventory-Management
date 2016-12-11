@@ -1,0 +1,38 @@
+<ion-view ng-controller="products" title="Add Product ">
+<ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
+    </ion-nav-buttons>
+  <ion-content>
+  
+	<form name="productsForm" ng-submit="Save(productsForm)">
+		<div class="list list-inset">
+		  <label class="item item-input">
+			<input type="text" placeholder="Product Name" ng-model="Products.pname">
+		  </label>
+		</div>
+		
+		<div class="list list-inset">
+		  <label class="item item-input">
+			<input type="text" placeholder="Product Description" ng-model="Products.pdescription">
+		  </label>
+		</div>  
+		
+		<div class="list list-inset">
+		  <label class="item item-input">
+			<input type="number" placeholder="Sale Price" ng-model="Products.pprice">
+		  </label>
+		</div>
+		
+		<div class="list list-inset">
+		  <label class="item item-input">
+			<input type="number" placeholder="Vat (in %)" ng-model="Products.vat">
+		  </label>
+		</div>
+		
+		<label class="item">
+			<button class="button button-block button-positive" type="submit">Submit</button>
+		</label>
+	</form>
+	
+  </ion-content>
+</ion-view>

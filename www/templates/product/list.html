@@ -1,0 +1,27 @@
+<ion-view title="PRODUCTS LIST" ng-controller="products" ng-init="SelectProducts()">
+<ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
+    </ion-nav-buttons>
+	<ion-nav-buttons side="right">
+        <a  href="#/app/product_add" class="button button-icon button-clear ion-plus"></a>
+    </ion-nav-buttons>
+  <ion-content>
+	 <ion-list>
+	 <ion-item  class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" ng-if="ProductslList.length == 0">
+	 No Records Found!
+	 </ion-item>
+      <ion-item ng-repeat="list in ProductslList" class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#/app/product_details/{{list.pid}}">
+          <h2>{{list.pname}}</h2>
+		   <i class="icon ion-chevron-right icon-accessory" style="color:black;"></i>
+		  <div class="button-bar">
+			<ion-option-button class="ion-edit icon-left button-positive" ng-click="Selectid(list.pid)">
+			  Edit
+			</ion-option-button>	
+		   <ion-option-button class="ion-ios-trash-outline icon-left button-assertive" ng-click="Delete(list.pid)">
+			  Delete
+			</ion-option-button>
+		  </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,29 @@
+<ion-view title="VENDER LIST" ng-controller="vendors" ng-init="Select()">
+<ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
+    </ion-nav-buttons>
+	<ion-nav-buttons side="right">
+        <a  href="#/app/vender_add" class="button button-icon button-clear ion-plus"></a>
+    </ion-nav-buttons>
+  <ion-content>
+	 <ion-list>
+	  <ion-item  class="item-remove-animate item-avatar" type="item-text-wrap" ng-if="VendorsList.length == 0">
+	  No Records Found!
+	  </ion-item>
+      <ion-item ng-repeat="list in VendorsList" class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#/app/vender_details/{{list.cid}}">
+          <h2>{{list.cname}}</h2>
+		  <i class="icon ion-chevron-right icon-accessory"></i>
+		  <div class="button-bar">
+			<ion-option-button class="ion-edit icon-left button-positive" ng-click="Selectid(list.cid)" >
+			  Edit
+			</ion-option-button>
+		  
+		   <ion-option-button class="ion-ios-trash-outline icon-left button-assertive" ng-click="Delete(list.cid)">
+			  Delete
+			</ion-option-button>
+		  </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
+

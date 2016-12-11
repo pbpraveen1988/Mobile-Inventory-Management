@@ -1,0 +1,78 @@
+/* Empty. Add your own CSS if you like */
+/*Profile Section*/
+      .gem-sidebar.dark .gem-profile-image { border-radius:50px; width:100%; border: 4px solid rgba(255, 255, 255, 0.2);}
+      .gem-profile-settings-icon {font-size: 200%; margin-top: 15px;}
+      .gem-text-center {text-align: center;}
+      .bold {font-weight: bold;}
+      .gem-text-right {text-align: right;}
+      .gem-text-left {text-align: left;}
+      .gem-label {padding: 3px 14px; border-radius: 50px;}
+        .gem-label.default, .gem-default {background: #95A5A6;}
+        .gem-label.warning, .gem-warning {background: #F39C12;}
+        .gem-label.danger, .gem-danger {background: #E74C3C;}
+        .gem-label.success, .gem-success {background: #27AE60;}
+        .gem-label.primary, .gem-primary {background: #428bca;}
+        /*.button {margin-right: 7px;}*/
+        .item .button {font-size: 13px; padding: 3px 17px;}
+        .button.gem-default, .button.gem-outline, .button.gem-warning, .button.gem-primary, .button.gem-danger, .button.gem-success {color: #fff; padding: 3px 17px; /*border: none;*/ border-radius: 3px;}
+        .button-rounded {border-radius: 35px; padding-left: 30px; padding-right: 30px;}
+        .button.gem-outline {border: 1px solid rgba(0, 0, 0, 0.3); color: #333;}
+        .button-outline.button-outline {border-color: #eaeaea;}
+        .button-outline.button-outline.gem-white {color: #fff;}
+        .button-borderless {border:none;}
+        .button-action {margin:0 !Important; padding-top: 10px; padding-bottom: 10px; text-transform: uppercase;}
+        .gem-color-default {color:#95A5A6;}
+        .gem-color-success {color:#27AE60;}
+        .gem-color-warning {color:#F39C12;}
+        .gem-color-danger {color:#E74C3C;}
+      .no-margin {margin: 0; margin-right: 0; margin-bottom: 0; margin-top: 0; margin-left: 0;}
+      .no-border {border:none;}
+      /*.gem-icon {font-size: 200%;}*/
+      /*.article-actions {padding: 5px 0;}*/
+/* .item{
+	    background-color: #ff9e9e;
+} */
+/* .pane{
+	 background-color: gainsboro;
+} */
+
+
+
+
+.error-container {
+  margin: 5px 0;
+}
+
+.error-container:last-child {
+    margin: 5px 0 0;
+}
+
+.error {
+  padding: 10px 16px;
+  font-family: "Arial Black", Gadget, sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #555;
+  vertical-align: middle;
+}
+
+.error i {
+  font-size: 24px;
+  color: #B83E2C;  
+  vertical-align: middle;
+}
+
+
+.last-error-container > .error {
+  padding: 10px 16px 0;
+}
+
+.has-errors {
+  border-bottom: 3px solid #B83E2C;
+}
+
+.no-errors {
+  border-bottom: 3px solid green;
+}
+
+

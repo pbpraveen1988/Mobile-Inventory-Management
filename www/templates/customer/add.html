@@ -1,0 +1,61 @@
+<ion-view title="Add Customer" ng-controller="customers">
+	<ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
+    </ion-nav-buttons>
+  <ion-content>
+		<form name="customersForm" ng-submit="Save(customersForm)">
+
+
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input required type="text" placeholder="Customer Name" ng-model="Customers.cname">
+			  </label>
+			</div>
+			
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input required type="number" maxlength="10" placeholder="Mobile" ng-model="Customers.ccontact">
+			  </label>
+			</div>
+			
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input type="email" placeholder="Email" ng-model="Customers.cemail">
+			  </label>
+			</div>
+			
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input required type="text" placeholder="billing_address" ng-model="Customers.caddress">
+			  </label>
+			</div>
+			
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input required type="text" placeholder="billing_city" ng-model="Customers.ccity">
+			  </label>
+			</div>
+
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input required type="text" placeholder="billing_state" ng-model="Customers.cstate">
+			  </label>
+			</div>
+					
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input required type="number" placeholder="pincode" ng-model="Customers.cpincode">
+			  </label>
+			</div>
+			
+			<label class="item">
+				<button class="button button-block button-positive" type="submit">Submit</button>
+			</label>
+		</form>
+
+
+  </ion-content>
+
+ 
+
+</ion-view>

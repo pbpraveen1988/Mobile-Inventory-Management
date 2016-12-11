@@ -1,0 +1,58 @@
+<ion-view title="Customer Edit" ng-controller="customers" ng-init="Edit()">
+<ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
+    </ion-nav-buttons>
+	<ion-nav-buttons side="right">
+        <button  class="button button-icon button-clear ion-trash-b" ng-click="Delete({{EditId}})"></button>
+    </ion-nav-buttons>
+  <ion-content>
+	<h1 ng-model= "Customers.cname" style="text-align: center;"> {{Customers.cname}}</h1>
+		<form name="customersForm" ng-submit="Update(customersForm)">
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input type="text" placeholder="Customer Name" ng-model="Customers.cname">
+			  </label>
+			</div>
+			
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input type="number" placeholder="Mobile" ng-model="Customers.ccontact">
+			  </label>
+			</div>
+			
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input type="text" placeholder="Email" ng-model="Customers.cemail">
+			  </label>
+			</div>
+			
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input type="text" placeholder="billing_address" ng-model="Customers.caddress">
+			  </label>
+			</div>
+			
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input type="text" placeholder="billing_city" ng-model="Customers.ccity">
+			  </label>
+			</div>
+			
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input type="text" placeholder="billing_state" ng-model="Customers.cstate">
+			  </label>
+			</div>
+					
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input type="number" placeholder="pincode" ng-model="Customers.cpincode">
+			  </label>
+			</div>
+			
+			<label class="item">
+				<button class="button button-block button-positive" type="submit">Submit</button>
+			</label>
+		</form>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,61 @@
+﻿<ion-side-menus>
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-light nav-title-slide-ios7 bar bar-header bar-assertive">
+            <!-- <ion-nav-back-button class="button-clear">
+                <div class="bar bar-header">
+                  <button class="button button-icon icon ion-navicon" menu-toggle="left"></button>
+                </div>
+            </ion-nav-back-button> -->
+        </ion-nav-bar>
+
+        <ion-nav-view name="menuContent" animation="slide-left-right">
+
+        </ion-nav-view>
+    </ion-side-menu-content>
+
+    <ion-side-menu side="left">
+
+        <!-- Sidebar Content -->
+        <ion-content class="gem-sidebar dark">
+
+            <div class="row gem-sidebar-profile-box" style="padding-top: 10%; background-color: gainsboro;">
+                <!-- Profile Thumb -->
+                <div class="col col-25">
+                    <img src="img/perry.png" class="gem-profile-image" alt="" style="width:100%">
+                </div>
+                <!-- End Profile Thumb -->
+                <!-- Profile Name -->
+                <div class="col col-50">
+                    <h5 class="title">{{ ExistUser.FirstName}}</h5>
+                    <h6 class="action-links">Name | Stack InfoTech</h6>
+                </div>
+                <!-- End Profile Name -->
+                <!-- Account Settings Icon -->
+                <div class="col col-25 gem-text-center">
+                    <a nav-clear menu-close class="link-button" href="#/app/list">
+                        <h3>
+                            <i class="gem-profile-settings-icon icon ion-home" style="float: right;
+                   margin-top: -49px;"></i>
+                        </h3>
+                    </a>
+                </div>
+                <!-- End Account Settings Icon -->
+            </div>
+
+            <ion-list>
+                <ion-item href="#/app/material_list">Raw Material<i class="icon ion-filing" style="float: left; margin-top: 0px;    margin-right: 8px;"></i></ion-item>
+                <ion-item href="#/app/product_list">Finished Products<i class="icon ion-android-list" style="float: left; margin-top: 0px;    margin-right: 8px;"></i></ion-item>
+                <ion-item href="#/app/vender_list">Vendors<i class="icon ion-person" style="float: left; margin-top: 0px;    margin-right: 8px;"></i></ion-item>
+                <ion-item href="#/app/customer_list">Customers<i class="icon ion-person-stalker" style="float: left; margin-top: 0px;    margin-right: 8px;"></i></ion-item>
+                <ion-item href="#/app/company_list">Companies<i class="icon ion-easel" style="float: left; margin-top: 0px;    margin-right: 8px;"></i></ion-item>
+                <ion-item href="#/app/purchase_list">Purchase<i class="icon ion-ios-box" style="float: left; margin-top: 0px;    margin-right: 8px;"></i></ion-item>
+                <ion-item href="#/app/sale_list">Sales<i class="icon ion-ios-cart-outline" style="float: left; margin-top: 0px;    margin-right: 8px;"></i></ion-item>
+                <ion-item href="#/app/reports">Puchase Reports<i class="icon ion-ios-cart-outline" style="float: left; margin-top: 0px;    margin-right: 8px;"></i></ion-item>
+                <ion-item href="#/app/reports">Sales Reports<i class="icon ion-ios-cart-outline" style="float: left; margin-top: 0px;    margin-right: 8px;"></i></ion-item>
+                <ion-item nav-clear menu-close href="#/signin">Logout<i class="icon ion-log-out" style="float: left; margin-top: 0px;    margin-right: 8px;"></i></ion-item>
+            </ion-list>
+
+        </ion-content>
+        <!-- End sidemenu content -->
+    </ion-side-menu>
+</ion-side-menus>

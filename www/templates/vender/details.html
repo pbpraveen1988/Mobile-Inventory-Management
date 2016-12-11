@@ -1,0 +1,67 @@
+<ion-view title="Vendors Details" ng-controller="vendors" ng-init="Edit()">
+<ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
+    </ion-nav-buttons>
+	<ion-nav-buttons side="right">
+        <a href="#/app/vender_edit/{{EditId}}" class="button button-icon button-clear ion-edit"></a>
+    </ion-nav-buttons>
+  <ion-content>
+	<h1 ng-model= "Vendors.cname" style="text-align: center;"> {{Vendors.cname}}</h1>
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">Vender Name</span>
+			<label  ng-model= "Vendors.cname">{{Vendors.cname}}</label>
+		  </label>
+		</div>  
+		  
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">Mobile No</span>
+			<label  ng-model= "Vendors.ccontact">{{Vendors.ccontact}}</label>
+		  </label>
+		</div>  
+		  
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">Address</span>
+			<label  ng-model= "Vendors.caddress">{{Vendors.caddress}}</label>
+		  </label>
+		</div>  
+		
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">Opening Balance</span>
+			<label  ng-model= "Vendors.ccity">{{Vendors.ccity}}</label>
+		  </label>
+		</div>
+		
+				<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">Vender Name</span>
+			<label  ng-model= "Vendors.cstate">{{Vendors.cstate}}</label>
+		  </label>
+		</div>  
+		  
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">Mobile No</span>
+			<label  ng-model= "Vendors.cemail">{{Vendors.cemail}}</label>
+		  </label>
+		</div>  
+		  
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">Address</span>
+			<label  ng-model= "Vendors.cpincode">{{Vendors.cpincode}}</label>
+		  </label>
+		</div>  
+		
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">Opening Balance</span>
+			<label  ng-model= "Vendors.openbalance">{{Vendors.openbalance}}</label>
+		  </label>
+		</div>
+
+  </ion-content>
+</ion-view>

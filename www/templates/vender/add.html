@@ -1,0 +1,64 @@
+
+
+
+<ion-view ng-controller="vendors" title="Vendor Form">
+	<ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
+    </ion-nav-buttons>
+  <ion-content>
+ 
+		<form name="vendorsForm" ng-submit="Save(vendorsForm)">
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input type="text" placeholder="Vender Name" ng-model="Vendors.cname" required>
+			  </label>
+			</div>
+			
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input type="number" required  maxlength="10" placeholder="Mobile No" ng-model="Vendors.ccontact">
+			  </label>
+			</div>		  
+			
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input type="text" required placeholder="Address" ng-model="Vendors.caddress">
+			  </label>
+			</div>
+			
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input type="email"  placeholder="Email" ng-model="Vendors.cemail">
+			  </label>
+			</div>
+			
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input type="text" required placeholder="City" ng-model="Vendors.ccity">
+			  </label>
+			</div>
+			
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input type="text" required placeholder="State" ng-model="Vendors.cstate">
+			  </label>
+			</div>
+			
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input type="number" required placeholder="Pincode" ng-model="Vendors.cpincode">
+			  </label>
+			</div>
+			
+			<div class="list list-inset">
+			  <label class="item item-input">
+				<input type="number" required placeholder="Opening Balance" ng-model="Vendors.openbalance">
+			  </label>
+			</div>
+			
+			<label class="item">
+				<button class="button button-block button-positive" type="submit">Submit</button>
+			</label>
+		</form>
+  </ion-content>
+</ion-view>

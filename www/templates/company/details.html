@@ -1,0 +1,72 @@
+<ion-view title="Company Details" ng-controller="CompanyCtrl" ng-init="Detail()">
+<ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
+    </ion-nav-buttons>
+	
+	<ion-nav-buttons side="right">
+        <a  href="#/app/company_edit/{{EditId}}" class="button button-icon button-clear ion-edit"></a>
+    </ion-nav-buttons>
+	
+  <ion-content>
+	<h1 style="text-align: center;"> {{Company.name}}</h1>
+      <div class="list">
+          <label class="item item-input">
+              <span class="input-label"></span>
+              <label><img ng-src="{{Company.logo}}"  style="height:100px;width:100px;"/></label>
+          </label>
+      </div>  
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">Company Name</span>
+			<label>{{Company.name}}</label>
+		  </label>
+		</div>  
+		  <!-- INSERT INTO CompanyInfo (tin, name, address, city, contact, state, pin, email) -->
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">Mobile</span>
+			<label>{{Company.contact}}</label>
+		  </label>
+		</div>  
+		  
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">Email</span>
+			<label>{{Company.email}}</label>
+		  </label>
+		</div>  
+		
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">Address</span>
+			<label>{{Company.address}}</label>
+		  </label>
+		</div>
+		
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">City</span>
+			<label>{{Company.city}}</label>
+		  </label>
+		</div>
+		
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">State</span>
+			<label>{{Company.state}}</label>
+		  </label>
+		</div>
+		
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">pincode</span>
+			<label>{{Company.pin}}</label>
+		  </label>
+		</div>
+	<!--
+		<label class="item">
+			<button class="button button-block button-positive" type="submit" >Update</button>
+		</label>
+	-->
+  </ion-content>
+</ion-view>
