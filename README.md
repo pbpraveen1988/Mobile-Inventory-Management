@@ -15,6 +15,8 @@ h) Filteration by Customers, Products and by Trasaction Id <br>
 <br>
 <br>
 This is still under developing and any views are welcome, 
-
-
-
+<br>
+<br>
+<b>Technical Specifications</b><br>
+<br>
+Mobile application is built on Hybrid using Ionic Framework using Apace Cordova, also added the cordova plugin for Google cloud printer.
