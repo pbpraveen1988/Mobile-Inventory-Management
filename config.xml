@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.mim819801" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.stackinfotech.mim" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>MIM</name>
   <description>
-        An Ionic Framework and Cordova project.
+        Mobile inventory Management 
     </description>
-  <author email="you@example.com" href="http://example.com.com/">
-      Your Name Here
+  <author email="pbpraveen1988@gmail.com" href="http://pbpraveen.com">
+     PB PRAVEEN KUMAR
     </author>
   <content src="index.html"/>
   <access origin="*"/>
