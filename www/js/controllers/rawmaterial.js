@@ -53,6 +53,13 @@ angular.module('starter.controllers.rawmaterial', [])
   // };
   $scope.Select = function()
 {
+$ionicLoading.show({
+                content: 'Loading',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 200,
+                showDelay: 0
+            });
 debugger;
 $scope.RawMaterials  = [];
 
@@ -64,7 +71,8 @@ DATABASE.database().ref('rawmaterials').on('value',function(snap){
 	 a.val = s.val();
     $scope.RawMaterials.push(a);
   
-  });
+  }).then
+  $ionicLoading.hide();
   
   SharedDataService.RawMaterial = $scope.RawMaterials;
 });
@@ -83,6 +91,12 @@ DATABASE.database().ref('rawmaterials').on('value',function(snap){
   
   
   $scope.DisplayData = function(){
+  DATABASE.database().ref('rawmaterials').child($stateParams.rawid).on('value',function(snapshot){
+    $scope.RawMaterial = snapshot.val();
+  
+  
+  });
+  
 	 var query = "SELECT * FROM RawMaterial where mid = " + $stateParams.rawid  ; // where $stateParams.rawid
 	    $cordovaSQLite.execute(DATABASE, query).then(function(res) {
 		
