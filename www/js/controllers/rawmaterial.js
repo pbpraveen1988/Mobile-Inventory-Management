@@ -1,12 +1,12 @@
 angular.module('starter.controllers.rawmaterial', [])
 
-.controller('rawmaterial', function($scope, $cordovaSQLite, DATABASE, $stateParams, $ionicPopup, $ionicLoading, $state) {
+.controller('rawmaterial', function($scope, $cordovaSQLite, DATABASE,SharedDataService, $stateParams, $ionicPopup, $ionicLoading, $state) {
 	
 	
 	$scope.RawMaterial = new Object();
 	$scope.RawMaterialList = new Array();
 	$scope.EditId = $stateParams.rawid;
-	
+	$scope.RawMaterials = SharedDataService.RawMaterial;
 /* Insert data in RawMaterial */	
 	$scope.Save = function (rawmaterialForm) {
 	    if (rawmaterialForm.$valid) {
@@ -39,33 +39,34 @@ angular.module('starter.controllers.rawmaterial', [])
   
   
 /* Select data in RawMaterial */  
-    $scope.Select = function() { 
+    // $scope.Select = function() { 
 
-    var query = "SELECT * FROM RawMaterial"; // where $stateParams.rawid
-    $scope.RawMaterialList = new Array();
-	$cordovaSQLite.execute(DATABASE, query).then(function(res) {
-		for(var i = 0; i < res.rows.length; i++){			
-			$scope.RawMaterialList.push(res.rows.item(i));
-		}
-    }, function (err) {
-      console.error(err);
-    });
-  };
-  $scope.select = function()
+    // var query = "SELECT * FROM RawMaterial"; // where $stateParams.rawid
+    // $scope.RawMaterialList = new Array();
+	// $cordovaSQLite.execute(DATABASE, query).then(function(res) {
+		// for(var i = 0; i < res.rows.length; i++){			
+			// $scope.RawMaterialList.push(res.rows.item(i));
+		// }
+    // }, function (err) {
+      // console.error(err);
+    // });
+  // };
+  $scope.Select = function()
 {
 debugger;
 $scope.RawMaterials  = [];
-CONNECT.database().ref('RawMaterial').on('value',function(snap){
+
+DATABASE.database().ref('rawmaterials').on('value',function(snap){
 
   snap.forEach(function(s){
      var a = new Object();
-	 a.Id = s.key;
+	 a.mid = s.key;
 	 a.val = s.val();
     $scope.RawMaterials.push(a);
   
   });
   
-  SharedDataService.metal = $scope.Metals;
+  SharedDataService.RawMaterial = $scope.RawMaterials;
 });
 }
 
