@@ -7,58 +7,134 @@
     </ion-nav-buttons>
   <ion-content>
  
-		<form name="vendorsForm" ng-submit="Save(vendorsForm)">
-			<div class="list list-inset">
-			  <label class="item item-input">
-				<input type="text" placeholder="Vender Name" ng-model="Vendors.cname" required>
-			  </label>
-			</div>
-			
-			<div class="list list-inset">
-			  <label class="item item-input">
-				<input type="number" required  maxlength="10" placeholder="Mobile No" ng-model="Vendors.ccontact">
-			  </label>
-			</div>		  
-			
-			<div class="list list-inset">
-			  <label class="item item-input">
-				<input type="text" required placeholder="Address" ng-model="Vendors.caddress">
-			  </label>
-			</div>
-			
-			<div class="list list-inset">
-			  <label class="item item-input">
-				<input type="email"  placeholder="Email" ng-model="Vendors.cemail">
-			  </label>
-			</div>
-			
-			<div class="list list-inset">
-			  <label class="item item-input">
-				<input type="text" required placeholder="City" ng-model="Vendors.ccity">
-			  </label>
-			</div>
-			
-			<div class="list list-inset">
-			  <label class="item item-input">
-				<input type="text" required placeholder="State" ng-model="Vendors.cstate">
-			  </label>
-			</div>
-			
-			<div class="list list-inset">
-			  <label class="item item-input">
-				<input type="number" required placeholder="Pincode" ng-model="Vendors.cpincode">
-			  </label>
-			</div>
-			
-			<div class="list list-inset">
-			  <label class="item item-input">
-				<input type="number" required placeholder="Opening Balance" ng-model="Vendors.openbalance">
-			  </label>
-			</div>
-			
-			<label class="item">
-				<button class="button button-block button-positive" type="submit">Submit</button>
-			</label>
-		</form>
+      <form name="vendorsForm" novalidate="" ng-submit="Save(vendorsForm)">
+       
+
+          <div class="list list-inset">
+              <label class="item item-input" ng-class="{ 'has-errors' : vendorsForm.cname.$invalid && vendorsForm.$submitted, 'no-errors' : vendorsForm.cname.$valid && vendorsForm.$submitted}">
+                  <input type="text" placeholder="Vender Name" ng-model="Vendors.cname" required name="cname" ng-minlength="5">
+             </label>
+          </div>
+          <div class="error-container" ng-show="vendorsForm.cname.$error && vendorsForm.$submitted" ng-messages="vendorsForm.cname.$error">
+              <div class="error" ng-message="required">
+                  <i class="ion-information-circled"></i>
+                  This field is required!
+              </div>
+              <div class="error" ng-message="minlength">
+                  <i class="ion-information-circled"></i>
+                  Minimum length of this field is 5 characters!
+              </div>
+          </div>
+                
+
+          <div class="list list-inset">
+              <label class="item item-input" ng-class="{ 'has-errors' : vendorsForm.ccontact.$invalid && vendorsForm.$submitted, 'no-errors' : vendorsForm.ccontact.$valid && vendorsForm.$submitted}">
+                  <input type="number" required ng-minlength="10" maxlength="10" placeholder="Mobile No" ng-model="Vendors.ccontact" name="ccontact">
+              </label>
+          </div>
+          <div class="error-container" ng-show="vendorsForm.ccontact.$error && vendorsForm.$submitted" ng-messages="vendorsForm.ccontact.$error">
+              <div class="error" ng-message="required">
+                  <i class="ion-information-circled"></i>
+                  This field is required!
+              </div>
+              <div class="error" ng-message="minlength">
+                  <i class="ion-information-circled"></i>
+                  Minimum length of this field is 10 characters!
+              </div>
+              <div class="error" ng-message="maxlength">
+                  <i class="ion-information-circled"></i>
+                  Minimum length of this field is 10 characters!
+              </div>
+          </div>
+
+         <div class="list list-inset">
+             <label class="item item-input" ng-class="{ 'has-errors' : vendorsForm.caddress.$invalid && vendorsForm.$submitted, 'no-errors' : vendorsForm.caddress.$valid && vendorsForm.$submitted}">
+                 <input type="text" required ng-minlength="5" placeholder="Address" ng-model="Vendors.caddress" name="caddress">
+             </label>
+          </div>
+          <div class="error-container" ng-show="vendorsForm.caddress.$error && vendorsForm.$submitted" ng-messages="vendorsForm.caddress.$error">
+              <div class="error" ng-message="required">
+                  <i class="ion-information-circled"></i>
+                  This field is required!
+              </div>
+              <div class="error" ng-message="minlength">
+                  <i class="ion-information-circled"></i>
+                  Minimum length of this field is 5 characters!
+              </div>           
+          </div>
+
+
+        
+          <div class="list list-inset">
+              <label class="item item-input" ng-class="{ 'has-errors' : vendorsForm.cemail.$invalid && vendorsForm.$submitted, 'no-errors' : vendorsForm.cemail.$valid && vendorsForm.$submitted}">
+                  <input type="email" placeholder="Email" ng-model="Vendors.cemail" required name="cemail">
+              </label>
+          </div>
+          <div class="error-container" ng-show="vendorsForm.cemail.$error && vendorsForm.$submitted" ng-messages="vendorsForm.cemail.$error">
+              <div class="error" ng-message="required">
+                  <i class="ion-information-circled"></i>
+                  This field is required!
+              </div>
+          </div>
+
+
+
+          <div class="list list-inset">
+              <label class="item item-input" ng-class="{ 'has-errors' : vendorsForm.ccity.$invalid && vendorsForm.$submitted, 'no-errors' : vendorsForm.ccity.$valid && vendorsForm.$submitted}">
+                  <input type="text" required placeholder="City" ng-model="Vendors.ccity" ng-minlength="5" name="ccity">
+              </label>
+          </div>
+          <div class="error-container" ng-show="vendorsForm.ccity.$error && vendorsForm.$submitted" ng-messages="vendorsForm.ccity.$error">
+              <div class="error" ng-message="required">
+                  <i class="ion-information-circled"></i>
+                  This field is required!
+              </div>
+              <div class="error" ng-message="minlength">
+                  <i class="ion-information-circled"></i>
+                  Minimum length of this field is 5 characters!
+              </div>
+          </div>
+         
+
+          <div class="list list-inset">
+              <label class="item item-input" ng-class="{ 'has-errors' : vendorsForm.cstate.$invalid && vendorsForm.$submitted, 'no-errors' : vendorsForm.cstate.$valid && vendorsForm.$submitted}">
+                  <input type="text" required placeholder="State" ng-model="Vendors.cstate" ng-minlength="5" name="cstate">
+              </label>
+          </div>
+          <div class="error-container" ng-show="vendorsForm.cstate.$error && vendorsForm.$submitted" ng-messages="vendorsForm.cstate.$error">
+              <div class="error" ng-message="required">
+                  <i class="ion-information-circled"></i>
+                  This field is required!
+              </div>
+              <div class="error" ng-message="minlength">
+                  <i class="ion-information-circled"></i>
+                  Minimum length of this field is 5 characters!
+              </div>
+          </div>
+       
+          <div class="list list-inset">
+              <label class="item item-input">
+                  <input type="number" required placeholder="Pincode" ng-model="Vendors.cpincode">
+              </label>
+          </div>
+
+
+
+          <div class="list list-inset">
+              <label class="item item-input" ng-class="{ 'has-errors' : vendorsForm.openbalance.$invalid && vendorsForm.$submitted, 'no-errors' : vendorsForm.openbalance.$valid && vendorsForm.$submitted}">
+                  <input type="number" required placeholder="Opening Balance" ng-model="Vendors.openbalance" name="openbalance">
+              </label>
+          </div>
+          <div class="error-container" ng-show="vendorsForm.openbalance.$error && vendorsForm.$submitted" ng-messages="vendorsForm.openbalance.$error">
+              <div class="error" ng-message="required">
+                  <i class="ion-information-circled"></i>
+                  This field is required!
+              </div>
+          </div>        
+
+          <label class="item">
+              <button class="button button-block button-positive" type="submit">Submit</button>
+          </label>
+      </form>
   </ion-content>
 </ion-view>

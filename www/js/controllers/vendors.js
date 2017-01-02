@@ -8,37 +8,37 @@ angular.module('starter.controllers.vendors', [])
 	$scope.EditId = $stateParams.vendorid;
 	
 /* Start Insert data in Vendors */	
-  $scope.Save = function() {
-	  
-	  $ionicLoading.show({
-                content: 'Loading',
-                animation: 'fade-in',
-                showBackdrop: true,
-                maxWidth: 200,
-                showDelay: 0
-            });
-	  
-    var query = "INSERT INTO VenderMaster (cname, caddress, ccity, cstate, ccontact, cpincode, cemail, openbalance) VALUES (?,?,?,?,?,?,?,?)";
-    
-      $cordovaSQLite.execute(DATABASE, query, [$scope.Vendors.cname, $scope.Vendors.caddress, $scope.Vendors.ccity, $scope.Vendors.cstate, $scope.Vendors.ccontact, $scope.Vendors.cpincode, $scope.Vendors.cemail, $scope.Vendors.openbalance]).then(function(res) {
-		
-		console.log("insertId: " + res.insertId);
-		
-		$ionicLoading.hide();
-		$ionicPopup.alert({
-			title: 'Saved.',
-			template: 'Data Saved successfully'
-		});
-		
-		$scope.Vendors =null;
-		$state.go('app.vender_list', {}, {
-			
-		});
-		
-    }, function (err) {
-      console.error(err);
-    });
-	
+	$scope.Save = function (vendorsForm) {
+      if (vendorsForm.$valid) {
+          $ionicLoading.show({
+              content: 'Loading',
+              animation: 'fade-in',
+              showBackdrop: true,
+              maxWidth: 200,
+              showDelay: 0
+          });
+
+          var query = "INSERT INTO VenderMaster (cname, caddress, ccity, cstate, ccontact, cpincode, cemail, openbalance) VALUES (?,?,?,?,?,?,?,?)";
+
+          $cordovaSQLite.execute(DATABASE, query, [$scope.Vendors.cname, $scope.Vendors.caddress, $scope.Vendors.ccity, $scope.Vendors.cstate, $scope.Vendors.ccontact.toString(), $scope.Vendors.cpincode, $scope.Vendors.cemail, $scope.Vendors.openbalance]).then(function (res) {
+
+              console.log("insertId: " + res.insertId);
+
+              $ionicLoading.hide();
+              $ionicPopup.alert({
+                  title: 'Saved.',
+                  template: 'Data Saved successfully'
+              });
+
+              $scope.Vendors = null;
+              $state.go('app.vender_list', {}, {
+
+              });
+
+          }, function (err) {
+              console.error(err);
+          });
+      }
   };
 /*End Save Button.*/
 
@@ -118,30 +118,31 @@ angular.module('starter.controllers.vendors', [])
 
 /*Start Update Button*/
 
-	$scope.Update = function() {
-	 	  $ionicLoading.show({
-                content: 'Loading',
-                animation: 'fade-in',
-                showBackdrop: true,
-                maxWidth: 200,
-                showDelay: 0
-            });
-		var query = "UPDATE VenderMaster SET cname =?, caddress =?, ccity =?, cstate =?, ccontact =?, cpincode =?, cemail =?, openbalance =? WHERE cid = "+ $scope.Vendors.cid;
-		
-		$cordovaSQLite.execute(DATABASE, query, [$scope.Vendors.cname, $scope.Vendors.caddress, $scope.Vendors.ccity, $scope.Vendors.cstate, $scope.Vendors.ccontact, $scope.Vendors.cpincode, $scope.Vendors.cemail, $scope.Vendors.openbalance]).then(function(res) {
-			
-			$ionicLoading.hide();
-			$ionicPopup.alert({
-                        title: 'Updated.....',
-                        template: 'Data Updated successfully'
-            });
-					
-			$state.go('app.vender_list', {}, {
-							
-			});
-		});
-  };
+	$scope.Update = function (vendorsForm) {
+	    if (vendorsForm.$valid) {
+	        $ionicLoading.show({
+	            content: 'Loading',
+	            animation: 'fade-in',
+	            showBackdrop: true,
+	            maxWidth: 200,
+	            showDelay: 0
+	        });
+	        var query = "UPDATE VenderMaster SET cname =?, caddress =?, ccity =?, cstate =?, ccontact =?, cpincode =?, cemail =?, openbalance =? WHERE cid = " + $scope.Vendors.cid;
 
+	        $cordovaSQLite.execute(DATABASE, query, [$scope.Vendors.cname, $scope.Vendors.caddress, $scope.Vendors.ccity, $scope.Vendors.cstate, $scope.Vendors.ccontact.toString(), $scope.Vendors.cpincode, $scope.Vendors.cemail, $scope.Vendors.openbalance]).then(function (res) {
+
+	            $ionicLoading.hide();
+	            $ionicPopup.alert({
+	                title: 'Updated.....',
+	                template: 'Data Updated successfully'
+	            });
+
+	            $state.go('app.vender_list', {}, {
+
+	            });
+	        });
+	    };
+	}
 /*End Update Button*/
 	
 });

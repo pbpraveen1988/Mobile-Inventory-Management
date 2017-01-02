@@ -5,7 +5,7 @@
         function createPdf(invoice) {
             return $q(function (resolve, reject) {
                 var dd = createDocumentDefinition(invoice);
-                var pdf = pdfMake.createPdf(dd).download();
+                var pdf = pdfMake.createPdf(dd);
 
                 pdf.getBase64(function (output) {
                     resolve(base64ToUint8Array(output));

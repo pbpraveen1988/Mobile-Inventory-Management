@@ -39,7 +39,7 @@ angular.module('starter.controllers.Purchase', [])
     $scope.InvoiceItems = new Object();
     $scope.CreateInvoice = function (chalanid) {
 
-       // debugger;
+        debugger;
         $ionicLoading.show();
        
         var query = 'SELECT * FROM ChallanInfo as CI,VenderMaster as VI,CompanyInfo as ComI   WHERE  '+
@@ -69,8 +69,7 @@ angular.module('starter.controllers.Purchase', [])
 									$ionicLoading.hide();
 									var d = document.getElementById('pdf').toDataURL();
 									var doc = '<html><img src="'+d+'"</html>';
-									$cordovaPrinter.print(doc);
-									
+									$cordovaPrinter.print(doc);									
                                 });
 
                 // createDocumentDefinition($scope.InvoiceItems);

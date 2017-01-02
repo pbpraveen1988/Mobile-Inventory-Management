@@ -1,5 +1,8 @@
 <ion-view style="background-color:grey;" ng-controller="InvoicesController" title="Add New Sale">
-    <ion-content class="padding has-header" >
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-content class="padding has-header">
         <!-- <form name="salesform"> -->
         <div class="item item-body">
             <button ng-if="!CheckCustomer" class="button button-full button" ng-click="ModalForCustomersList()" value="vendor">
@@ -7,10 +10,13 @@
             </button>
             <ion-list ng-if="CheckCustomer">
                 <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" style="background-color: White; importent">
-                    <div class="row responsive-sm">
-                        <div class="list">
+                    <!--<div class="row responsive-sm">-->
+                        <div class="list row responsive-sm">
                             <button class="button button-full button-light" ng-model="someThirdModel" ng-click="ModalForCustomersList()">
                                 <div class="col">
+                                    <span style="background-color: lightgoldenrodyellow">
+                                        <u><b>Customer Detail</b></u>
+                                    </span>
                                     <p style="margin-bottom: -24px;">{{Customer.cname}}</p>
                                     <p style="margin-bottom: -24px;">
                                         {{Customer.caddress}} , {{Customer.cstate}}
@@ -24,7 +30,7 @@
                                 </div>
                             </button>
                         </div>
-                    </div>
+                    <!--</div>-->
                 </ion-item>
             </ion-list>
         </div>
@@ -34,10 +40,13 @@
             </button>
             <ion-list ng-if="CheckCompany">
                 <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" style="background-color: White; importent">
-                    <div class="row responsive-sm">
-                        <div class="list">
+                  
+                        <div class="list row responsive-sm">
                             <button class="button button-full button-light" ng-model="someThirdModel" ng-click="ModalForCompaniesList()">
                                 <div class="col">
+                                    <span style="background-color: lightgoldenrodyellow">
+                                        <u><b>Company Detail</b></u>
+                                    </span>
                                     <p style="margin-bottom: -24px;"><b>{{Company.name}}</b></p>
                                     <p style="margin-bottom: -24px;">
                                         {{Company.address}} , {{Company.dist}}
@@ -50,8 +59,7 @@
                                     </p>
                                 </div>
                             </button>
-                        </div>
-                    </div>
+                        </div>                 
                 </ion-item>
             </ion-list>
         </div>
@@ -59,12 +67,21 @@
         <ion-list>
             <div class="list list-inset">
                 <div class="row" style="background-color: White">
-                    <div class="col col-50">Created Date</div>
-                    <input type="date" ng-model="FormValues.datenew" />
+                    <div class="col col-33">Created Date</div>
+                    <div class="col col">
+                        <label class="item item-input">
+                            <input type="date" placeholder="Date" ng-model="FormValues.datenew" ng-required="true">
+                        </label>
+                    </div>
+                    <!--<input type="date" ng-model="FormValues.datenew" />-->
                 </div>
                 <div class="row" style="background-color: White">
-                    <div class="col col-50">Due Date</div>
-                    <input type="date" ng-model="FormValues.datedue" />
+                    <div class="col col-33">Due Date</div>
+                    <div class="col col">
+                        <label class="item item-input">
+                            <input type="date" placeholder="Date" ng-model="FormValues.datedue" ng-required="true">
+                        </label>
+                    </div>                 
                 </div>
             </div>
         </ion-list>
@@ -72,9 +89,9 @@
 
             <div class="list list-inset">
                 <label class="item item-input item-select">
-                    <div class="input-label">
+                    <span class="input-label">
                         Status
-                    </div>
+                    </span>
                     <select ng-model="FormValues.status">
                         <option>Processing</option>
                         <option selected>Pending</option>
@@ -85,7 +102,7 @@
             <div class="list list-inset">
                 <div class="list">
                     <label class="item item-input ">
-                        <div class="input-label">Currency</div>
+                        <span class="input-label">Currency</span>
                         INR
                     </label>
                 </div>
@@ -93,7 +110,7 @@
             <div class="list list-inset">
                 <div class="list">
                     <label class="item item-input ">
-                        <div class="input-label">Challan No.</div>
+                        <span class="input-label">Challan No.</span>
                         <input type="text" placeholder="Challan No." ng-model="FormValues.challansno" name="challansno">
                     </label>
                 </div>
@@ -161,9 +178,9 @@
                 <div class="item item-divider">
                     <div class="list" style="background-color: White">
                         <label class="item item-input item-select">
-                            <div class="input-label">
+                            <span class="input-label">
                                 Payment Option
-                            </div>
+                            </span>
                             <select ng-model="FormValues.optionSelected" ng-change="selectpayment(optionSelected)" id="payment">
                                 <option value="cash">Cash</option>
                                 <option value="check">Check</option>
@@ -190,27 +207,27 @@
 
                             </div>
                         </div>
-						<div class="card">
-						<h2 style="text-align: center;"><b>SHIPPING DETAILS</b></h2>
-                                <div class="list">
-                                    <label class="item item-input">
-                                        <input type="text" placeholder="Shipping Name" ng-model="FormValues.shippingname" ng-required="true">
-                                    </label>
-                                    <label class="item item-input">
-                                        <input type="text" placeholder="Shipping Address" ng-model="FormValues.shippingaddress" ng-required="true">
-                                    </label>
-                                    <label class="item item-input">
-                                        <input type="date" placeholder="ShippingDate" ng-model="FormValues.shippingdate" ng-required="true">
-                                    </label>
-                                    <label class="item item-input">
-                                        <input type="text" placeholder="LR Number" ng-model="FormValues.lrnumber" ng-required="true">
-                                    </label>
-									  <label class="item item-input">
-                                        <input type="text" placeholder="Transport" ng-model="FormValues.shippingtransport" ng-required="true">
-                                    </label>
-                                </div>
-						
-						</div>
+                        <div class="card">
+                            <h2 style="text-align: center;"><b>SHIPPING DETAILS</b></h2>
+                            <div class="list">
+                                <label class="item item-input">
+                                    <input type="text" placeholder="Shipping Name" ng-model="FormValues.shippingname" ng-required="true">
+                                </label>
+                                <label class="item item-input">
+                                    <input type="text" placeholder="Shipping Address" ng-model="FormValues.shippingaddress" ng-required="true">
+                                </label>
+                                <label class="item item-input">
+                                    <input type="date" placeholder="ShippingDate" ng-model="FormValues.shippingdate" ng-required="true">
+                                </label>
+                                <label class="item item-input">
+                                    <input type="text" placeholder="LR Number" ng-model="FormValues.lrnumber" ng-required="true">
+                                </label>
+                                <label class="item item-input">
+                                    <input type="text" placeholder="Transport" ng-model="FormValues.shippingtransport" ng-required="true">
+                                </label>
+                            </div>
+
+                        </div>
 
                     </div>
                 </div>

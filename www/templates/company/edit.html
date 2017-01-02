@@ -10,73 +10,173 @@
   
   <ion-content>
   <h1 style="text-align: center;"> {{Company.name}}</h1>
-	<form name="companyForm" ng-submit="Update(companyForm)">
+      <form name="companyForm" novalidate="" ng-submit="Update(companyForm)">
+
+          <div class="list list-inset">
+              <label class="item item-input">
+                  Upload Company Logo
+                  <input type="file" onchange="angular.element(this).scope().fileNameChanged(this)" class="custom-file-input" accept="image/*" />
+
+              </label>
+              <img style="height:100px;width:100px;" ng-src="{{Company.logo}}" ng-if="Company.logo" />
+          </div>
+          <div class="list list-inset">
+              <label class="item item-input">
+                  <input type="text" id="Tin" name="Tin" placeholder="Tin No" ng-model="Company.tin" required />
+              </label>
+              <span ng-show="companyForm.Tin.$error.required && companyForm.Tin.$dirty">required</span>
+          </div>
+          <div class="error-container" ng-show="companyForm.Tin.$error && companyForm.$submitted" ng-messages="companyForm.Tin.$error">
+              <div class="error" ng-message="required">
+                  <i class="ion-information-circled"></i>
+                  This field is required!
+              </div>
+          </div>
 
 
-        <div class="list list-inset">
-            <label class="item item-input">
-                Upload Company Logo
-                <input type="file" onchange="angular.element(this).scope().fileNameChanged(this)" class="custom-file-input" accept="image/*" />
+          <div class="list list-inset">
+              <label class="item item-input">
+                  <input type="text" id="name" name="name" placeholder="Company Name" ng-model="Company.name" required />
+              </label>
+          </div>
+          <div class="error-container" ng-show="companyForm.name.$error && companyForm.$submitted" ng-messages="companyForm.name.$error">
+              <div class="error" ng-message="required">
+                  <i class="ion-information-circled"></i>
+                  This field is required!
+              </div>
+          </div>
 
-            </label>
-            <img style="height:100px;width:100px;" ng-src="{{Company.logo}}" ng-if="Company.logo" />
+          <div class="list list-inset">
+              <label class="item item-input">
+                  <input type="number" id="contact" name="contact" placeholder="Mobile" ng-model="Company.contact" required />
+              </label>
+              <span ng-show="companyForm.contact.$error.required && companyForm.contact.$dirty">required</span>
+          </div>
+          <div class="error-container" ng-show="companyForm.contact.$error && companyForm.$submitted" ng-messages="companyForm.contact.$error">
+              <div class="error" ng-message="required">
+                  <i class="ion-information-circled"></i>
+                  This field is required!
+              </div>
+          </div>
+
+
+          <div class="list list-inset">
+              <label class="item item-input">
+                  <input type="email" id="email" name="email" placeholder="Email" ng-model="Company.email" required />
+              </label>
+              <span ng-show="companyForm.email.$error.required && companyForm.email.$dirty">required</span>
+              <span ng-show="!companyForm.email.$error.required && companyForm.email.$error.email && companyForm.email.$dirty" style="color:red;">Invalid email</span>
+          </div>
+          <div class="error-container" ng-show="companyForm.email.$error && companyForm.$submitted" ng-messages="companyForm.email.$error">
+              <div class="error" ng-message="required">
+                  <i class="ion-information-circled"></i>
+                  This field is required!
+              </div>
+          </div>
+
+          <div class="list list-inset">
+              <label class="item item-input">
+                  <input type="text" id="address" name="address" placeholder="Address" ng-model="Company.address" required />
+              </label>
+              <span ng-show="companyForm.address.$error.required && companyForm.address.$dirty">required</span>
+          </div>
+          <div class="error-container" ng-show="companyForm.address.$error && companyForm.$submitted" ng-messages="companyForm.address.$error">
+              <div class="error" ng-message="required">
+                  <i class="ion-information-circled"></i>
+                  This field is required!
+              </div>
+          </div>
+
+          <div class="list list-inset">
+              <label class="item item-input">
+                  <input type="text" id="city" name="city" placeholder="City" ng-model="Company.city" required />
+              </label>
+              <span ng-show="companyForm.city.$error.required && companyForm.city.$dirty">required</span>
+          </div>
+          <div class="error-container" ng-show="companyForm.city.$error && companyForm.$submitted" ng-messages="companyForm.city.$error">
+              <div class="error" ng-message="required">
+                  <i class="ion-information-circled"></i>
+                  This field is required!
+              </div>
+          </div>
+
+          <div class="list list-inset">
+              <label class="item item-input">
+                  <input type="text" placeholder="State" id="state" name="state" ng-model="Company.state" required />
+              </label>
+              <span ng-show="companyForm.state.$error.required && companyForm.state.$dirty">required</span>
+          </div>
+          <div class="error-container" ng-show="companyForm.state.$error && companyForm.$submitted" ng-messages="companyForm.state.$error">
+              <div class="error" ng-message="required">
+                  <i class="ion-information-circled"></i>
+                  This field is required!
+              </div>
+          </div>
+
+          <div class="list list-inset">
+              <label class="item item-input">
+                  <input type="number" placeholder="pincode" id="pin" name="pin" ng-model="Company.pin" required />
+              </label>
+              <span ng-show="companyForm.pin.$error.required && companyForm.pin.$dirty">required</span>
+          </div>
+          <div class="error-container" ng-show="companyForm.pin.$error && companyForm.$submitted" ng-messages="companyForm.pin.$error">
+              <div class="error" ng-message="required">
+                  <i class="ion-information-circled"></i>
+                  This field is required!
+              </div>
+          </div>
+          <!--<div class="list list-inset">
+          <label class="item item-input">
+            <input type="text" placeholder="Tin No" ng-model="Company.tin">
+          </label>
         </div>
 
+        <div class="list list-inset">
+          <label class="item item-input">
+            <input type="text" placeholder="Company Name"  ng-model="Company.name">
+          </label>
+        </div>
 
+        <div class="list list-inset">
+          <label class="item item-input">
+            <input type="number" placeholder="Mobile"  ng-model="Company.contact">
+          </label>
+        </div>
 
-		<div class="list list-inset">
-		  <label class="item item-input">
-			<input type="text" placeholder="Tin No" ng-model="Company.tin">
-		  </label>
-		</div>
-		<!-- tin, name, address, city, contact, state, pin, email -->
-		<div class="list list-inset">
-		  <label class="item item-input">
-			<input type="text" placeholder="Company Name"  ng-model="Company.name">
-		  </label>
-		</div>
-		
-		<div class="list list-inset">
-		  <label class="item item-input">
-			<input type="number" placeholder="Mobile"  ng-model="Company.contact">
-		  </label>
-		</div>
-		
-		<div class="list list-inset">
-		  <label class="item item-input">
-			<input type="email" placeholder="Email"  ng-model="Company.email">
-		  </label>
-		</div>
-		
-		<div class="list list-inset">
-		  <label class="item item-input">
-			<input type="text" placeholder="Address"  ng-model="Company.address">
-		  </label>
-		</div>
-		
-		<div class="list list-inset">
-		  <label class="item item-input">
-			<input type="text" placeholder="City"  ng-model="Company.city">
-		  </label>
-		</div>
-		
-		<div class="list list-inset">
-		  <label class="item item-input">
-			<input type="text" placeholder="State"  ng-model="Company.state">
-		  </label>
-		</div>
-		
-		<div class="list list-inset">
-		  <label class="item item-input">
-			<input type="number" placeholder="pincode"  ng-model="Company.pin">
-		  </label>
-		</div>
+        <div class="list list-inset">
+          <label class="item item-input">
+            <input type="email" placeholder="Email"  ng-model="Company.email">
+          </label>
+        </div>
 
-		
-		<label class="item">
-			<button class="button button-block button-positive" type="submit">Submit</button>
-		</label>
-	</form>
+        <div class="list list-inset">
+          <label class="item item-input">
+            <input type="text" placeholder="Address"  ng-model="Company.address">
+          </label>
+        </div>
+
+        <div class="list list-inset">
+          <label class="item item-input">
+            <input type="text" placeholder="City"  ng-model="Company.city">
+          </label>
+        </div>
+
+        <div class="list list-inset">
+          <label class="item item-input">
+            <input type="text" placeholder="State"  ng-model="Company.state">
+          </label>
+        </div>
+
+        <div class="list list-inset">
+          <label class="item item-input">
+            <input type="number" placeholder="pincode"  ng-model="Company.pin">
+          </label>
+        </div>-->
+
+          <label class="item">
+              <button class="button button-block button-positive" type="submit">Submit</button>
+          </label>
+      </form>
 
       <style>
           .custom-file-input {

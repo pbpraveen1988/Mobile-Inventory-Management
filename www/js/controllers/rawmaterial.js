@@ -8,30 +8,33 @@ angular.module('starter.controllers.rawmaterial', [])
 	$scope.EditId = $stateParams.rawid;
 	
 /* Insert data in RawMaterial */	
-  $scope.Save = function() {   
-	  $ionicLoading.show({
-                content: 'Loading',
-                animation: 'fade-in',
-                showBackdrop: true,
-                maxWidth: 200,
-                showDelay: 0
-            });
-    var query = "INSERT INTO RawMaterial (mname,mtype,mprice,mdescription,vat) VALUES (?,?,?,?,?)";
-	$cordovaSQLite.execute(DATABASE, query, [$scope.RawMaterial.mname, $scope.RawMaterial.mtype,$scope.RawMaterial.mprice,$scope.RawMaterial.mdescription,$scope.RawMaterial.mvat])
-	              .then(function(res) {					
-					console.log("insertId: " + res.insertId);
-                     $ionicLoading.hide();
-					 $ionicPopup.alert({
-									title: 'Saved.',
-									template: 'Data Saved successfully'
-								});
-					
-					$scope.RawMaterial = null;
-					$scope.RawMaterial = new Object();
-					$state.go('app.material_list', {},  { reload: true });
-				}, function (err) {
-				  console.error(err);
-				});
+	$scope.Save = function (rawmaterialForm) {
+	    if (rawmaterialForm.$valid) {
+	        $ionicLoading.show({
+	            content: 'Loading',
+	            animation: 'fade-in',
+	            showBackdrop: true,
+	            maxWidth: 200,
+	            showDelay: 0
+	        });
+	        DATABASE.database().ref('rawmaterials')
+                                .push($scope.RawMaterial)
+	        
+			        .then(function () {
+                               console.log("fdfdfd");
+                              $ionicLoading.hide();
+                              $ionicPopup.alert({
+                                  title: 'Saved.',
+                                  template: 'Data Saved successfully'
+                              });
+
+                              $scope.RawMaterial = null;
+                              $scope.RawMaterial = new Object();
+                              $state.go('app.material_list', {}, { reload: true });
+                          }, function (err) {
+                              console.error(err);
+                          });
+	    }
   };
   
   
@@ -48,7 +51,23 @@ angular.module('starter.controllers.rawmaterial', [])
       console.error(err);
     });
   };
+  $scope.select = function()
+{
+debugger;
+$scope.RawMaterials  = [];
+CONNECT.database().ref('RawMaterial').on('value',function(snap){
+
+  snap.forEach(function(s){
+     var a = new Object();
+	 a.Id = s.key;
+	 a.val = s.val();
+    $scope.RawMaterials.push(a);
   
+  });
+  
+  SharedDataService.metal = $scope.Metals;
+});
+}
 
     $scope.Selectid = function(mid) {
 			 
@@ -109,29 +128,29 @@ angular.module('starter.controllers.rawmaterial', [])
   
 /* Update data in RawMaterial */
     
-	$scope.Update = function() {
-	   
-	 	  $ionicLoading.show({
+    $scope.Update = function (rawmaterialForm) {
+        if (rawmaterialForm.$valid) {
+            $ionicLoading.show({
                 content: 'Loading',
                 animation: 'fade-in',
                 showBackdrop: true,
                 maxWidth: 200,
                 showDelay: 0
             });
-		var query = "UPDATE RawMaterial SET mname =?,mtype =?,mprice =?,mdescription =?,vat =? WHERE mid = "+ $scope.RawMaterial.mid;
-		
-		$cordovaSQLite.execute(DATABASE, query, [$scope.RawMaterial.mname, $scope.RawMaterial.mtype,$scope.RawMaterial.mprice,$scope.RawMaterial.mdescription,$scope.RawMaterial.vat]).then(function(res) {
-			
-			$ionicLoading.hide();
-			$ionicPopup.alert({
-                        title: 'Updated.....',
-                        template: 'Data Updated successfully'
+            var query = "UPDATE RawMaterial SET mname =?,mtype =?,mprice =?,mdescription =?,vat =? WHERE mid = " + $scope.RawMaterial.mid;
+
+            $cordovaSQLite.execute(DATABASE, query, [$scope.RawMaterial.mname, $scope.RawMaterial.mtype, $scope.RawMaterial.mprice, $scope.RawMaterial.mdescription, $scope.RawMaterial.vat]).then(function (res) {
+
+                $ionicLoading.hide();
+                $ionicPopup.alert({
+                    title: 'Updated.....',
+                    template: 'Data Updated successfully'
+                });
+
+                $state.go('app.material_list', {}, {
+
+                });
             });
-					
-			$state.go('app.material_list', {}, {
-							
-			});
-		});
-  };
-  
+        };
+    }
 });

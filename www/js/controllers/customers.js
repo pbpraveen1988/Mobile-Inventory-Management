@@ -9,39 +9,39 @@ angular.module('starter.controllers.customers', [])
 	$scope.EditId = $stateParams.customerid;
 	
 /* Start Insert data in Customers */	
-  $scope.Save = function() {
-	  
-	  $ionicLoading.show({
-                content: 'Loading',
-                animation: 'fade-in',
-                showBackdrop: true,
-                maxWidth: 200,
-                showDelay: 0
-            });
+	$scope.Save = function (customersForm) {
+	    if (customersForm.$valid) {
+	    $ionicLoading.show({
+	        content: 'Loading',
+	        animation: 'fade-in',
+	        showBackdrop: true,
+	        maxWidth: 200,
+	        showDelay: 0
+	    });
 
-	  //cid cname caddress ccity cstate ccontact cpincode cemail
+	    //cid cname caddress ccity cstate ccontact cpincode cemail
 	  
-    var query = "INSERT INTO CustomerMaster (cname, caddress, ccity, cstate, ccontact, cpincode, cemail) VALUES (?,?,?,?,?,?,?)";
+	    var query = "INSERT INTO CustomerMaster (cname, caddress, ccity, cstate, ccontact, cpincode, cemail) VALUES (?,?,?,?,?,?,?)";
    
-	$cordovaSQLite.execute(DATABASE, query, [$scope.Customers.cname, $scope.Customers.caddress,$scope.Customers.ccity, $scope.Customers.cstate, $scope.Customers.ccontact, $scope.Customers.cpincode, $scope.Customers.cemail]).then(function(res) {
+	    $cordovaSQLite.execute(DATABASE, query, [$scope.Customers.cname, $scope.Customers.caddress,$scope.Customers.ccity, $scope.Customers.cstate, $scope.Customers.ccontact.toString(), $scope.Customers.cpincode, $scope.Customers.cemail]).then(function(res) {
 		
-		console.log("insertId: " + res.insertId);
+	        console.log("insertId: " + res.insertId);
 		
-		$ionicLoading.hide();
-		$ionicPopup.alert({
-			title: 'Saved.',
-			template: 'Data Saved successfully'
-		});
+	        $ionicLoading.hide();
+	        $ionicPopup.alert({
+	            title: 'Saved.',
+	            template: 'Data Saved successfully'
+	        });
 		
-		$scope.Customers =null;
-		$state.go('app.customer_list', {}, {
+	        $scope.Customers =null;
+	        $state.go('app.customer_list', {}, {
 			
-		});
+	        });
 		
-    }, function (err) {
-      console.error(err);
-    });
-	
+	    }, function (err) {
+	        console.error(err);
+	    });
+	}
   };
 /*End Save Button.*/
 
@@ -134,28 +134,30 @@ debugger;
 
 /*Start Update Button*/
 
-	$scope.Update = function() {
-	 	  $ionicLoading.show({
-                content: 'Loading',
-                animation: 'fade-in',
-                showBackdrop: true,
-                maxWidth: 200,
-                showDelay: 0
-            });
-		var query = "UPDATE CustomerMaster SET cname =?, caddress =?, ccity =?, cstate =?, ccontact =?, cpincode =?, cemail =? WHERE cid = "+ $scope.Customers.cid;
-		    
-		$cordovaSQLite.execute(DATABASE, query, [$scope.Customers.cname, $scope.Customers.caddress, $scope.Customers.ccity, $scope.Customers.cstate, $scope.Customers.ccontact, $scope.Customers.cpincode, $scope.Customers.cemail]).then(function(res) {
-			
-			$ionicLoading.hide();
-			$ionicPopup.alert({
-                        title: 'Updated.....',
-                        template: 'Data Updated successfully'
-            });
-					
-			$state.go('app.customer_list', {}, {
-							
-			});
-		});
+	$scope.Update =  function (customersForm) {
+	    if (customersForm.$valid) {
+	        $ionicLoading.show({
+	            content: 'Loading',
+	            animation: 'fade-in',
+	            showBackdrop: true,
+	            maxWidth: 200,
+	            showDelay: 0
+	        });
+	        var query = "UPDATE CustomerMaster SET cname =?, caddress =?, ccity =?, cstate =?, ccontact =?, cpincode =?, cemail =? WHERE cid = " + $scope.Customers.cid;
+
+	        $cordovaSQLite.execute(DATABASE, query, [$scope.Customers.cname, $scope.Customers.caddress, $scope.Customers.ccity, $scope.Customers.cstate, $scope.Customers.ccontact.toString(), $scope.Customers.cpincode, $scope.Customers.cemail]).then(function (res) {
+
+	            $ionicLoading.hide();
+	            $ionicPopup.alert({
+	                title: 'Updated.....',
+	                template: 'Data Updated successfully'
+	            });
+
+	            $state.go('app.customer_list', {}, {
+
+	            });
+	        });
+	    }
   };
 
 /*End Update Button*/

@@ -13,7 +13,7 @@ angular.module('starter.controllers.challans', [])
 
     // select customer event
     $scope.ModalForVendorsList = function () {
-
+debugger;
         $ionicModal.fromTemplateUrl('my-modal.html', {
             scope: $scope,
             unfocusOnHide: false

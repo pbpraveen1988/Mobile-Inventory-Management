@@ -9,38 +9,65 @@
 	
   <ion-content>
 		<h1 ng-model= "Products.pname" style="text-align: center;"> {{Products.pname}}</h1>
-		<form name="productsForm" ng-submit="Update(productsForm)">
-			<div class="list list-inset">
-			  <label class="item item-input">
-				<span class="input-label">Product Name</span>
-				<input type="text" placeholder="Product Name" ng-model= "Products.pname">
-			  </label>
-			</div>
-			
-			<div class="list list-inset">
-			  <label class="item item-input">
-				<span class="input-label">Product Description</span>
-				<input type="text" placeholder="Product Description" ng-model= "Products.pdescription">
-			  </label>
-			</div>  
-			
-			<div class="list list-inset">
-			  <label class="item item-input">
-				<span class="input-label">Sale Price</span>
-				<input type="number" placeholder="Sale Price" ng-model= "Products.pprice">
-			  </label>
-			</div>
-			
-			<div class="list list-inset">
-			  <label class="item item-input">
-				<span class="input-label">Vat </span>
-				<input type="number" placeholder="Vat (in %)" ng-model= "Products.vat">
-			  </label>
-			</div>
-			
-			<label class="item">
-				<button class="button button-block button-positive" type="submit">Submit</button>
-			</label> 
-		</form>
+      <form name="productsForm" novalidate="" ng-submit="Update(productsForm)">
+       
+          <div class="list list-inset">
+              <label class="item item-input" ng-class="{ 'has-errors' : productsForm.pname.$invalid && productsForm.$submitted, 'no-errors' : productsForm.pname.$valid && productsForm.$submitted}">
+                  <span class="input-label">Product Name</span>
+                  <input type="text" placeholder="Product Name" name="pname" ng-minlength="5" ng-model="Products.pname" required>
+              </label>
+          </div>
+          <div class="error-container" ng-show="productsForm.pname.$error && productsForm.$submitted" ng-messages="productsForm.pname.$error">
+              <div class="error" ng-message="required">
+                  <i class="ion-information-circled"></i>
+                  This field is required!
+              </div>
+              <div class="error" ng-message="minlength">
+                  <i class="ion-information-circled"></i>
+                  Minimum length of this field is 5 characters!
+              </div>
+          </div>
+
+          <div class="list list-inset">
+              <label class="item item-input" ng-class="{ 'has-errors' : productsForm.pdescription.$invalid && productsForm.$submitted, 'no-errors' : productsForm.pdescription.$valid && productsForm.$submitted}">
+                  <span class="input-label">Description </span>
+                     <input type="text" placeholder="Product Description" name="pdescription" ng-minlength="5" ng-model="Products.pdescription" required>
+              </label>
+          </div>
+          <div class="error-container" ng-show="productsForm.pdescription.$error && productsForm.$submitted" ng-messages="productsForm.pdescription.$error">
+              <div class="error" ng-message="required">
+                  <i class="ion-information-circled"></i>
+                  This field is required!
+              </div>
+              <div class="error" ng-message="minlength">
+                  <i class="ion-information-circled"></i>
+                  Minimum length of this field is 5 characters!
+              </div>
+          </div>
+       
+          <div class="list list-inset">
+              <label class="item item-input" ng-class="{ 'has-errors' : productsForm.pprice.$invalid && productsForm.$submitted, 'no-errors' : productsForm.pprice.$valid && productsForm.$submitted}">
+                  <span class="input-label">Price </span>
+                   <input type="number" name="pprice" placeholder="Sale Price" ng-model="Products.pprice" required>
+              </label>
+          </div>
+          <div class="error-container" ng-show="productsForm.pprice.$error && productsForm.$submitted" ng-messages="productsForm.pprice.$error">
+              <div class="error" ng-message="required">
+                  <i class="ion-information-circled"></i>
+                  This field is required!
+              </div>
+          </div>         
+
+          <div class="list list-inset">
+              <label class="item item-input">
+                  <span class="input-label">Vat (%)</span>
+                  <input type="number" placeholder="Vat (in %)" ng-model="Products.vat">
+              </label>
+          </div>
+
+          <label class="item">
+              <button class="button button-block button-positive" type="submit">Submit</button>
+          </label>
+      </form>
   </ion-content>
 </ion-view>
