@@ -136,18 +136,20 @@ $ionicLoading.hide();
 
 
 
-            var query = "UPDATE CompanyInfo SET tin=?, name=?, address=?, city=?, contact=?, state=?, pin=?, email=?,logo =? WHERE id = " + $scope.Company.id;
-            $cordovaSQLite.execute(DATABASE, query, [_tin, $scope.Company.name, $scope.Company.address, $scope.Company.city, $scope.Company.contact.toString(), $scope.Company.state, $scope.Company.pin, $scope.Company.email, $scope.Company.logo]).then(function (res) {
+            // var query = "UPDATE CompanyInfo SET tin=?, name=?, address=?, city=?, contact=?, state=?, pin=?, email=?,logo =? WHERE id = " + $scope.Company.id;
+            // $cordovaSQLite.execute(DATABASE, query, [_tin, $scope.Company.name, $scope.Company.address, $scope.Company.city, $scope.Company.contact.toString(), $scope.Company.state, $scope.Company.pin, $scope.Company.email, $scope.Company.logo])
+			DATABASE.database().ref('Company').child($stateParams.cmpid)
+			.set($scope.Company).then(function(e){
+			$ionicLoading.hide();
+	             $ionicPopup.alert({
+	            title: 'Updated.....',
+	                template: 'Data Updated successfully'
+	            });
 
-                $ionicLoading.hide();
-                $ionicPopup.alert({
-                    title: 'Updated.....',
-                    template: 'Data Updated successfully'
-                });
-                $state.go('app.company_list', {}, {
+	             $state.go('app.company_list', {}, {
 
-                });
-            });
+	           });
+			 })
         }
     };
 

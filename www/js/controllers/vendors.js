@@ -163,9 +163,12 @@ DATABASE.database().ref('Vendors').on('value',function(snap){
 	            maxWidth: 200,
 	            showDelay: 0
 	        });
-	        var query = "UPDATE VenderMaster SET cname =?, caddress =?, ccity =?, cstate =?, ccontact =?, cpincode =?, cemail =?, openbalance =? WHERE cid = " + $scope.Vendors.cid;
+	        // var query = "UPDATE VenderMaster SET cname =?, caddress =?, ccity =?, cstate =?, ccontact =?, cpincode =?, cemail =?, openbalance =? WHERE cid = " + $scope.Vendors.cid;
 
-	        $cordovaSQLite.execute(DATABASE, query, [$scope.Vendors.cname, $scope.Vendors.caddress, $scope.Vendors.ccity, $scope.Vendors.cstate, $scope.Vendors.ccontact.toString(), $scope.Vendors.cpincode, $scope.Vendors.cemail, $scope.Vendors.openbalance]).then(function (res) {
+	        // $cordovaSQLite.execute(DATABASE, query, [$scope.Vendors.cname, $scope.Vendors.caddress, $scope.Vendors.ccity, $scope.Vendors.cstate, $scope.Vendors.ccontact.toString(), $scope.Vendors.cpincode, $scope.Vendors.cemail, $scope.Vendors.openbalance])
+			DATABASE.database().ref('Vendors').child($stateParams.vendorid)
+			.set($scope.Vendors)
+			.then(function (res) {
 
 	            $ionicLoading.hide();
 	            $ionicPopup.alert({

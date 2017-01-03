@@ -152,22 +152,40 @@ debugger;
 	            maxWidth: 200,
 	            showDelay: 0
 	        });
-	        var query = "UPDATE CustomerMaster SET cname =?, caddress =?, ccity =?, cstate =?, ccontact =?, cpincode =?, cemail =? WHERE cid = " + $scope.Customers.cid;
-
-	        $cordovaSQLite.execute(DATABASE, query, [$scope.Customers.cname, $scope.Customers.caddress, $scope.Customers.ccity, $scope.Customers.cstate, $scope.Customers.ccontact.toString(), $scope.Customers.cpincode, $scope.Customers.cemail]).then(function (res) {
-
-	            $ionicLoading.hide();
-	            $ionicPopup.alert({
-	                title: 'Updated.....',
+			
+			DATABASE.database().ref('Customers').child($stateParams.customerid)
+			.set($scope.Customers).then(function(e){
+			$ionicLoading.hide();
+	             $ionicPopup.alert({
+	            title: 'Updated.....',
 	                template: 'Data Updated successfully'
 	            });
 
-	            $state.go('app.customer_list', {}, {
+	             $state.go('app.customer_list', {}, {
 
-	            });
-	        });
+	           });
+			 })
+			
+	        
 	    }
   };
+			
+	        // var query = "UPDATE CustomerMaster SET cname =?, caddress =?, ccity =?, cstate =?, ccontact =?, cpincode =?, cemail =? WHERE cid = " + $scope.Customers.cid;
+
+	        // $cordovaSQLite.execute(DATABASE, query, [$scope.Customers.cname, $scope.Customers.caddress, $scope.Customers.ccity, $scope.Customers.cstate, $scope.Customers.ccontact.toString(), $scope.Customers.cpincode, $scope.Customers.cemail]).then(function (res) {
+
+	            // $ionicLoading.hide();
+	            // $ionicPopup.alert({
+	                // title: 'Updated.....',
+	                // template: 'Data Updated successfully'
+	            // });
+
+	            // $state.go('app.customer_list', {}, {
+
+	            // });
+	        // });
+	    // }
+  // };
 
 /*End Update Button*/
 	

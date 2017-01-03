@@ -144,30 +144,72 @@ DATABASE.database().ref('rawmaterials').on('value',function(snap){
   
 /* Update data in RawMaterial */
     
-    $scope.Update = function (rawmaterialForm) {
-        if (rawmaterialForm.$valid) {
-            $ionicLoading.show({
-                content: 'Loading',
-                animation: 'fade-in',
-                showBackdrop: true,
-                maxWidth: 200,
-                showDelay: 0
-            });
-            // var query = "UPDATE RawMaterial SET mname =?,mtype =?,mprice =?,mdescription =?,vat =? WHERE mid = " + $scope.RawMaterial.mid;
+    // $scope.Update = function (rawmaterialForm) {
+        // if (rawmaterialForm.$valid) {
+            // $ionicLoading.show({
+                // content: 'Loading',
+                // animation: 'fade-in',
+                // showBackdrop: true,
+                // maxWidth: 200,
+                // showDelay: 0
+            // });
+			// DATABASE.database().ref('Customers').child($stateParams.customerid)
+			// .set($scope.Customers).then(function(e){
+			// $ionicLoading.hide();
+	            // $ionicPopup.alert({
+	                // title: 'Updated.....',
+	                // template: 'Data Updated successfully'
+	            // });
+
+	            // $state.go('app.customer_list', {}, {
+
+	            // });
+			// })
+			
+	        
+	    // }
+  // };
+             // var query = "UPDATE RawMaterial SET mname =?,mtype =?,mprice =?,mdescription =?,vat =? WHERE mid = " + $scope.RawMaterial.mid;
 
             // $cordovaSQLite.execute(DATABASE, query, [$scope.RawMaterial.mname, $scope.RawMaterial.mtype, $scope.RawMaterial.mprice, $scope.RawMaterial.mdescription, $scope.RawMaterial.vat]).then(function (res) {
-          DATABASE.database().ref('rawmaterials').child($scope.RawMaterial.mid)
-                                .set($scope.RawMaterial).then(function (res) {
-                $ionicLoading.hide();
-                $ionicPopup.alert({
-                    title: 'Updated.....',
-                    template: 'Data Updated successfully'
-                });
+          // DATABASE.database().ref('rawmaterials').child($scope.RawMaterial.mid)
+                                // .set($scope.RawMaterial).then(function (res) {
+                // $ionicLoading.hide();
+                // $ionicPopup.alert({
+                    // title: 'Updated.....',
+                    // template: 'Data Updated successfully'
+                // });
 
-                $state.go('app.material_list', {}, {
+                // $state.go('app.material_list', {}, {
 
-                });
-            });
-        };
-    }
-});
+                // });
+            // // });
+        
+    // }
+	$scope.Update =  function (rawmaterialForm) {
+	    if (rawmaterialForm.$valid) {
+	        $ionicLoading.show({
+	            content: 'Loading',
+	            animation: 'fade-in',
+	            showBackdrop: true,
+	            maxWidth: 200,
+	            showDelay: 0
+	        });
+			
+			DATABASE.database().ref('rawmaterials').child($stateParams.rawid)
+			.set($scope.RawMaterial).then(function(e){
+			$ionicLoading.hide();
+	             $ionicPopup.alert({
+	            title: 'Updated.....',
+	                template: 'Data Updated successfully'
+	            });
+
+	             $state.go('app.material_list', {}, {
+
+	           });
+			 })
+			
+	        
+	    }
+  };
+ });

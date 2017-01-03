@@ -148,17 +148,22 @@ DATABASE.database().ref('products').on('value',function(snap){
 
     /*Start Edit Button*/
     $scope.Edit = function () {
+	DATABASE.database().ref('products').child($stateParams.productid).on('value',function(snapshot){
+    $scope.Products = snapshot.val();
+  
+  
+  });
         // alert("Ganesh");
-        debugger;
-        var query = "SELECT * FROM ProductsMaster where pid = " + $stateParams.productid; // where $stateParams.productid
-        $cordovaSQLite.execute(DATABASE, query).then(function (res) {
+        // debugger;
+        // var query = "SELECT * FROM ProductsMaster where pid = " + $stateParams.productid; // where $stateParams.productid
+        // $cordovaSQLite.execute(DATABASE, query).then(function (res) {
 
-            for (var i = 0; i < res.rows.length; i++) {
-                $scope.Products = res.rows.item(i);
-            }
-        }, function (err) {
-            console.error(err);
-        });
+            // for (var i = 0; i < res.rows.length; i++) {
+                // $scope.Products = res.rows.item(i);
+            // }
+        // }, function (err) {
+            // console.error(err);
+        // });
 
     };
 
@@ -175,20 +180,32 @@ DATABASE.database().ref('products').on('value',function(snap){
                 maxWidth: 200,
                 showDelay: 0
             });
-            var query = "UPDATE ProductsMaster SET pname =?, pdescription =?, pprice =?, vat =? WHERE pid = " + $scope.Products.pid;
+            // var query = "UPDATE ProductsMaster SET pname =?, pdescription =?, pprice =?, vat =? WHERE pid = " + $scope.Products.pid;
 
-            $cordovaSQLite.execute(DATABASE, query, [$scope.Products.pname, $scope.Products.pdescription, $scope.Products.pprice, $scope.Products.vat]).then(function (res) {
+            // $cordovaSQLite.execute(DATABASE, query, [$scope.Products.pname, $scope.Products.pdescription, $scope.Products.pprice, $scope.Products.vat]).then(function (res) {
 
-                $ionicLoading.hide();
-                $ionicPopup.alert({
-                    title: 'Updated.....',
-                    template: 'Data Updated successfully'
-                });
+                // $ionicLoading.hide();
+                // $ionicPopup.alert({
+                    // title: 'Updated.....',
+                    // template: 'Data Updated successfully'
+                // });
 
-                $state.go('app.product_list', {}, {
-                    reload: true
-                });
-            });
+                // $state.go('app.product_list', {}, {
+                    // reload: true
+                // });
+            // });
+			DATABASE.database().ref('products').child($stateParams.productid)
+			.set($scope.Products).then(function(e){
+			$ionicLoading.hide();
+	             $ionicPopup.alert({
+	            title: 'Updated.....',
+	                template: 'Data Updated successfully'
+	            });
+
+	             $state.go('app.product_list', {}, {
+
+	           });
+			 })
         };
     }
     /*End Update Button*/
