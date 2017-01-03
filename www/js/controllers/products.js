@@ -1,9 +1,10 @@
 angular.module('starter.controllers.products', [])
 
-.controller('products', function ($scope, $cordovaSQLite, DATABASE, $stateParams, $ionicPopup, $ionicLoading, $state) {
+.controller('products', function ($scope, $cordovaSQLite, SharedDataService,DATABASE, $stateParams, $ionicPopup, $ionicLoading, $state) {
 
-
-    $scope.Products = new Object();
+$scope.products = SharedDataService.product;
+    $scope.Product= new Object();
+	$scope.Products= new Object();
     $scope.ProductslList = new Array();
     $scope.EditId = $stateParams.productid;
     /*	New Code	*/
@@ -11,18 +12,40 @@ angular.module('starter.controllers.products', [])
     //	"INSERT INTO ProductsMaster (pname, pprice, pdescription, vat) VALUES (?,?,?,?)";
 
     $scope.SelectProducts = function () {
+$ionicLoading.show({
+                content: 'Loading',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 200,
+                showDelay: 0
+            });
+        // var query = "SELECT * FROM ProductsMaster"; // where $stateParams.rawid
 
-        var query = "SELECT * FROM ProductsMaster"; // where $stateParams.rawid
+        // $cordovaSQLite.execute(DATABASE, query).then(function (res) {
+            // for (var i = 0; i < res.rows.length; i++) {
+                // $scope.ProductslList.push(res.rows.item(i));
+            // }}
+        // , function (err) {
+            // console.error(err);
+        // });
+debugger;
+$scope.products  = [];
 
-        $cordovaSQLite.execute(DATABASE, query).then(function (res) {
-            for (var i = 0; i < res.rows.length; i++) {
-                $scope.ProductslList.push(res.rows.item(i));
-            }
-        }, function (err) {
-            console.error(err);
-        });
+DATABASE.database().ref('products').on('value',function(snap){
 
-    };
+  snap.forEach(function(s){
+     var a = new Object();
+	 a.pid = s.key;
+	 a.val = s.val();
+    $scope.products.push(a);
+  
+  }).then
+  $ionicLoading.hide();
+  
+  SharedDataService.product = $scope.products;
+});
+};
+    
 
 
     /* old code */
@@ -38,10 +61,11 @@ angular.module('starter.controllers.products', [])
                 showDelay: 0
             });
             debugger;
-            var query = "INSERT INTO ProductsMaster (pname, pprice, pdescription, vat) VALUES (?,?,?,?)";
+            // var query = "INSERT INTO ProductsMaster (pname, pprice, pdescription, vat) VALUES (?,?,?,?)";
             // alert("Ganesh");
-            $cordovaSQLite.execute(DATABASE, query, [$scope.Products.pname, $scope.Products.pprice, $scope.Products.pdescription, $scope.Products.vat]).then(function (res) {
-
+            // $cordovaSQLite.execute(DATABASE, query, [$scope.Products.pname, $scope.Products.pprice, $scope.Products.pdescription, $scope.Products.vat]).then(function (res) {
+                DATABASE.database().ref('products')
+                                .push($scope.Products).then(function (res) {
                 console.log("insertId: " + res.insertId);
 
                 $ionicLoading.hide();
@@ -91,9 +115,11 @@ angular.module('starter.controllers.products', [])
         });
         confirmPopup.then(function (res) {
             if (res) {
-                var query = "DELETE FROM ProductsMaster WHERE pid = ?";
+                // var query = "DELETE FROM ProductsMaster WHERE pid = ?";
 
-                $cordovaSQLite.execute(DATABASE, query, [pid]).then(function (res) {
+                // $cordovaSQLite.execute(DATABASE, query, [pid])
+				DATABASE.database().ref('products').child(pid).remove()
+				.then(function (res) {
 
                     console.log("Deleted");
                     $state.go('app.product_list', {}, { reload: true });

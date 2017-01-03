@@ -3,6 +3,7 @@ app.factory('SharedDataService', function () {
         //UserDetails: '',
         User: new Object(),
         RawMaterial: [],
+		vendors: []
 		// customer : [],
 		// product : [],
 		// transaction: [],

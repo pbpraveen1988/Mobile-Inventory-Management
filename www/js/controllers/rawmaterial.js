@@ -97,15 +97,15 @@ DATABASE.database().ref('rawmaterials').on('value',function(snap){
   
   });
   
-	 var query = "SELECT * FROM RawMaterial where mid = " + $stateParams.rawid  ; // where $stateParams.rawid
-	    $cordovaSQLite.execute(DATABASE, query).then(function(res) {
+	 // var query = "SELECT * FROM RawMaterial where mid = " + $stateParams.rawid  ; // where $stateParams.rawid
+	    // $cordovaSQLite.execute(DATABASE, query).then(function(res) {
 		
-		for(var i = 0; i < res.rows.length; i++){
-			$scope.RawMaterial =  res.rows.item(i);
-		} 
-    }, function (err) {
-      console.error(err);
-    });
+		// for(var i = 0; i < res.rows.length; i++){
+			// $scope.RawMaterial =  res.rows.item(i);
+		// } 
+    // }, function (err) {
+      // console.error(err);
+    // });
 	
   };
   
@@ -123,9 +123,10 @@ DATABASE.database().ref('rawmaterials').on('value',function(snap){
                         });
                         confirmPopup.then(function (res) {
                             if (res) {
-                                var query = "DELETE FROM RawMaterial WHERE mid = ?";
+                                // var query = "DELETE FROM RawMaterial WHERE mid = ?";
 								
-								$cordovaSQLite.execute(DATABASE, query, [mid]).then(function(res) {
+								// $cordovaSQLite.execute(DATABASE, query, [mid])
+								DATABASE.database().ref('rawmaterials').child(mid).remove().then(function(res) {
 									
 									console.log("Deleted");
 									$state.go('app.material_list',{},{reload:true});
@@ -152,10 +153,11 @@ DATABASE.database().ref('rawmaterials').on('value',function(snap){
                 maxWidth: 200,
                 showDelay: 0
             });
-            var query = "UPDATE RawMaterial SET mname =?,mtype =?,mprice =?,mdescription =?,vat =? WHERE mid = " + $scope.RawMaterial.mid;
+            // var query = "UPDATE RawMaterial SET mname =?,mtype =?,mprice =?,mdescription =?,vat =? WHERE mid = " + $scope.RawMaterial.mid;
 
-            $cordovaSQLite.execute(DATABASE, query, [$scope.RawMaterial.mname, $scope.RawMaterial.mtype, $scope.RawMaterial.mprice, $scope.RawMaterial.mdescription, $scope.RawMaterial.vat]).then(function (res) {
-
+            // $cordovaSQLite.execute(DATABASE, query, [$scope.RawMaterial.mname, $scope.RawMaterial.mtype, $scope.RawMaterial.mprice, $scope.RawMaterial.mdescription, $scope.RawMaterial.vat]).then(function (res) {
+          DATABASE.database().ref('rawmaterials').child($scope.RawMaterial.mid)
+                                .set($scope.RawMaterial).then(function (res) {
                 $ionicLoading.hide();
                 $ionicPopup.alert({
                     title: 'Updated.....',
