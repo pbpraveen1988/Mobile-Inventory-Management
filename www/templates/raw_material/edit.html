@@ -6,14 +6,14 @@
         <button  class="button button-icon button-clear ion-trash-b" ng-click="Delete({{EditId}})"></button>
     </ion-nav-buttons>
   <ion-content>
-	<h1 ng-model= "RawMaterial.mname" style="text-align: center;"> {{RawMaterial.mname}}</h1>
+	<h1 ng-model= "RawMaterial.name" style="text-align: center;"> {{RawMaterial.name}}</h1>
       <form name="rawmaterialForm" novalidate="" ng-submit="Update(rawmaterialForm)">
           <div class="list">
-              <label class="item item-input" ng-class="{ 'has-errors' : rawmaterialForm.mname.$invalid && rawmaterialForm.$submitted, 'no-errors' : rawmaterialForm.mname.$valid && rawmaterialForm.$submitted}">
+              <label class="item item-input" ng-class="{ 'has-errors' : rawmaterialForm.name.$invalid && rawmaterialForm.$submitted, 'no-errors' : rawmaterialForm.name.$valid && rawmaterialForm.$submitted}">
                   <span class="input-label">Name </span>
-                  <input type="text" placeholder="Raw Material Name" name="mname" ng-minlength="5" ng-model="RawMaterial.mname" required>
+                  <input type="text" placeholder="Raw Material Name" name="name" ng-minlength="5" ng-model="RawMaterial.name" required>
               </label>
-              <div class="error-container" ng-show="rawmaterialForm.mname.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.mname.$error">
+              <div class="error-container" ng-show="rawmaterialForm.name.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.name.$error">
                   <div class="error" ng-message="required">
                       <i class="ion-information-circled"></i>
                       This field is required!
@@ -25,9 +25,9 @@
               </div>
               <label class="item item-input">
                   <span class="input-label">Material Type</span>
-                  <input type="text" placeholder="Raw Material Type" name="mtype" ng-model="RawMaterial.mtype" required>
+                  <input type="text" placeholder="Raw Material Type" name="type" ng-model="RawMaterial.type" required>
               </label>
-              <div class="error-container" ng-show="rawmaterialForm.mtype.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.mtype.$error">
+              <div class="error-container" ng-show="rawmaterialForm.type.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.type.$error">
                   <div class="error" ng-message="required">
                       <i class="ion-information-circled"></i>
                       This field is required!
@@ -35,9 +35,9 @@
               </div>
               <label class="item item-input">
                   <span class="input-label">Price</span>
-                  <input type="number" placeholder="Purchase Price" name="mprice" required ng-model="RawMaterial.mprice">
+                  <input type="number" placeholder="Purchase Price" name="price" required ng-model="RawMaterial.price">
               </label>
-              <div class="error-container" ng-show="rawmaterialForm.mprice.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.mprice.$error">
+              <div class="error-container" ng-show="rawmaterialForm.price.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.price.$error">
                   <div class="error" ng-message="required">
                       <i class="ion-information-circled"></i>
                       This field is required!
@@ -49,9 +49,9 @@
               </div>
               <label class="item item-input">
                   <span class="input-label">Description</span>
-                  <input type="text" name="mdescription" required placeholder="Material Description" ng-minlength="5" ng-model="RawMaterial.mdescription">
+                  <input type="text" name="description" required placeholder="Material Description" ng-minlength="5" ng-model="RawMaterial.description">
               </label>
-              <div class="error-container" ng-show="rawmaterialForm.mdescription.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.mdescription.$error">
+              <div class="error-container" ng-show="rawmaterialForm.description.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.description.$error">
                   <div class="error" ng-message="required">
                       <i class="ion-information-circled"></i>
                       This field is required!
@@ -61,12 +61,26 @@
                       Minimum length of this field is 5 characters!
                   </div>
               </div>
+			  <label class="item item-input">
+                  <span class="input-label">Material Unit</span>
+                  <input type="text" name="unit" required placeholder="Material Unit" " ng-model="RawMaterial.unit">
+              </label>
+              <div class="error-container" ng-show="rawmaterialForm.unit.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.unit.$error">
+                  <div class="error" ng-message="required">
+                      <i class="ion-information-circled"></i>
+                      This field is required!
+                  </div>
+                  <!-- <div class="error" ng-message="minlength">
+                      <i class="ion-information-circled"></i>
+                      Minimum length of this field is 5 characters!
+                  </div> -->
+              </div>
 
               <label class="item item-input">
                   <span class="input-label">Vat (in %)</span>
-                  <input type="number" name="mvat" placeholder="Vat (in %)" ng-model="RawMaterial.mvat" required>
+                  <input type="number" name="vat" placeholder="Vat (in %)" ng-model="RawMaterial.vat" required>
               </label>
-              <div class="error-container" ng-show="rawmaterialForm.mvat.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.mvat.$error">
+              <div class="error-container" ng-show="rawmaterialForm.vat.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.vat.$error">
                   <div class="error" ng-message="required">
                       <i class="ion-information-circled"></i>
                       This field is required!

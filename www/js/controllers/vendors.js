@@ -2,7 +2,7 @@ angular.module('starter.controllers.vendors', [])
 
 .controller('vendors', function($scope, $cordovaSQLite,SharedDataService, DATABASE, $stateParams, $ionicPopup, $ionicLoading, $state) {
 	
-	
+	$scope.CheckVendor = new Object();
 	$scope.Vendors = new Object();
 	$scope.VendorsList = new Array();
 	$scope.EditId = $stateParams.vendorid;
@@ -21,27 +21,73 @@ angular.module('starter.controllers.vendors', [])
           // var query = "INSERT INTO VenderMaster (cname, caddress, ccity, cstate, ccontact, cpincode, cemail, openbalance) VALUES (?,?,?,?,?,?,?,?)";
 
           // $cordovaSQLite.execute(DATABASE, query, [$scope.Vendors.cname, $scope.Vendors.caddress, $scope.Vendors.ccity, $scope.Vendors.cstate, $scope.Vendors.ccontact.toString(), $scope.Vendors.cpincode, $scope.Vendors.cemail, $scope.Vendors.openbalance])
-		  DATABASE.database().ref('Vendors')
+		  // DATABASE.database().ref('Vendors')
+                                // .push($scope.Vendors)
+		  // .then(function (res) {
+
+              // console.log("insertId: " + res.insertId);
+
+              // $ionicLoading.hide();
+              // $ionicPopup.alert({
+                  // title: 'Saved.',
+                  // template: 'Data Saved successfully'
+              // });
+
+              // $scope.Vendors = null;
+              // $state.go('app.vender_list', {}, {
+
+              // });
+
+          // }, function (err) {
+              // console.error(err);
+          // });
+      // }
+	  debugger;
+	  if($scope.Vendors.CheckVendor)
+			 {
+                 $scope.Vendors.CheckVendor = null;
+			      DATABASE.database().ref('Vendors')
                                 .push($scope.Vendors)
-		  .then(function (res) {
+								.then(function () {	
+								debugger;
+								DATABASE.database().ref('Customers')
+                                .push($scope.Vendors)
+								
+								
+                              $ionicLoading.hide();
+                              $ionicPopup.alert({
+                                  title: 'Saved.',
+                                  template: 'Data Saved successfully'
+                              });
 
-              console.log("insertId: " + res.insertId);
+                              $scope.Vendors = null;
+                              $scope.Vendors = new Object();
+                              $state.go('app.vender_list', {}, { reload: true });	
+							  
+			        
+						   
+			 })}
+			 else
+			 {
+			    $scope.Vendors.CheckVendor = null;
+			      DATABASE.database().ref('Vendors')
+                                .push($scope.Vendors)
+								.then(function () {	console.log("fdfdfd");
+                              $ionicLoading.hide();
+                              $ionicPopup.alert({
+                                  title: 'Saved.',
+                                  template: 'Data Saved successfully'
+                              });
 
-              $ionicLoading.hide();
-              $ionicPopup.alert({
-                  title: 'Saved.',
-                  template: 'Data Saved successfully'
-              });
-
-              $scope.Vendors = null;
-              $state.go('app.vender_list', {}, {
-
-              });
-
-          }, function (err) {
-              console.error(err);
-          });
-      }
+                              $scope.Vendors = null;
+                              $scope.Vendors = new Object();
+                              $state.go('app.vender_list', {}, { reload: true });							
+			 }).catch(function(er){
+			 
+			 
+			 });
+			 
+			 }}
   };
 /*End Save Button.*/
 

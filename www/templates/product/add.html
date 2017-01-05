@@ -6,11 +6,11 @@
 
         <form name="productsForm" novalidate="" ng-submit="Save(productsForm)">
             <div class="list list-inset">      
-                <label class="item item-input" ng-class="{ 'has-errors' : productsForm.pname.$invalid && productsForm.$submitted, 'no-errors' : productsForm.pname.$valid && productsForm.$submitted}">
-                    <input type="text" placeholder="Product Name" name="pname" ng-minlength="5" ng-model="Products.pname" required>
+                <label class="item item-input" ng-class="{ 'has-errors' : productsForm.name.$invalid && productsForm.$submitted, 'no-errors' : productsForm.name.$valid && productsForm.$submitted}">
+                    <input type="text" placeholder="Product Name" name="name" ng-minlength="5" ng-model="Products.name" required>
                 </label>
             </div>
-            <div class="error-container" ng-show="productsForm.pname.$error && productsForm.$submitted" ng-messages="productsForm.pname.$error">
+            <div class="error-container" ng-show="productsForm.name.$error && productsForm.$submitted" ng-messages="productsForm.name.$error">
                 <div class="error" ng-message="required">
                     <i class="ion-information-circled"></i>
                     This field is required!
@@ -23,11 +23,11 @@
 
 
             <div class="list list-inset">
-                <label class="item item-input" ng-class="{ 'has-errors' : productsForm.pdescription.$invalid && productsForm.$submitted, 'no-errors' : productsForm.pdescription.$valid && productsForm.$submitted}">
-                    <input type="text" placeholder="Product Description" name="pdescription" ng-minlength="5" ng-model="Products.pdescription" required>
+                <label class="item item-input" ng-class="{ 'has-errors' : productsForm.description.$invalid && productsForm.$submitted, 'no-errors' : productsForm.description.$valid && productsForm.$submitted}">
+                    <input type="text" placeholder="Product Description" name="description" ng-minlength="5" ng-model="Products.description" required>
                 </label>
             </div>
-            <div class="error-container" ng-show="productsForm.pdescription.$error && productsForm.$submitted" ng-messages="productsForm.pdescription.$error">
+            <div class="error-container" ng-show="productsForm.description.$error && productsForm.$submitted" ng-messages="productsForm.description.$error">
                 <div class="error" ng-message="required">
                     <i class="ion-information-circled"></i>
                     This field is required!
@@ -37,12 +37,27 @@
                     Minimum length of this field is 5 characters!
                 </div>
             </div>
-            <div class="list list-inset">
-                <label class="item item-input" ng-class="{ 'has-errors' : productsForm.pprice.$invalid && productsForm.$submitted, 'no-errors' : productsForm.pprice.$valid && productsForm.$submitted}">
-                    <input type="number" name="pprice" placeholder="Sale Price" ng-model="Products.pprice" required>
+			 <div class="list list-inset">
+                <label class="item item-input" ng-class="{ 'has-errors' : productsForm.unit.$invalid && productsForm.$submitted, 'no-errors' : productsForm.punit.$valid && productsForm.$submitted}">
+                    <input type="text" placeholder="Product Unit" name="unit"  ng-model="Products.unit" required>
                 </label>
             </div>
-            <div class="error-container" ng-show="productsForm.pprice.$error && productsForm.$submitted" ng-messages="productsForm.pprice.$error">
+            <div class="error-container" ng-show="productsForm.unit.$error && productsForm.$submitted" ng-messages="productsForm.unit.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i>
+                    This field is required!
+                </div>
+                <!-- <div class="error" ng-message="minlength">
+                    <i class="ion-information-circled"></i>
+                    Minimum length of this field is 5 characters!
+                </div> -->
+            </div>
+            <div class="list list-inset">
+                <label class="item item-input" ng-class="{ 'has-errors' : productsForm.price.$invalid && productsForm.$submitted, 'no-errors' : productsForm.price.$valid && productsForm.$submitted}">
+                    <input type="number" name="price" placeholder="Sale Price" ng-model="Products.price" required>
+                </label>
+            </div>
+            <div class="error-container" ng-show="productsForm.price.$error && productsForm.$submitted" ng-messages="productsForm.price.$error">
                 <div class="error" ng-message="required">
                     <i class="ion-information-circled"></i>
                     This field is required!

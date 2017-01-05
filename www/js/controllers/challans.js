@@ -1,6 +1,6 @@
 angular.module('starter.controllers.challans', [])
 
-.controller('challans', function ($scope, $cordovaSQLite, DATABASE, $stateParams, $ionicPopup, $ionicLoading, $state, $ionicModal, $cordovaDialogs) {
+.controller('challans', function ($scope, $cordovaSQLite, DATABASE, $stateParams,SharedDataService, $ionicPopup, $ionicLoading, $state, $ionicModal, $cordovaDialogs) {
 
 
     //CUSTOMERS
@@ -10,7 +10,9 @@ angular.module('starter.controllers.challans', [])
     $scope.CheckVendor = false;
     $scope.Vendormodal = new Object();   // To open the Modal (popup)
     $scope.FormValues = new Object();
-
+  $scope.VendorsList = SharedDataService.Vendors;
+  $scope.CompanyList = SharedDataService.Company;
+  $scope.ProductList = SharedDataService.Product;
     // select customer event
     $scope.ModalForVendorsList = function () {
 debugger;
@@ -29,18 +31,43 @@ debugger;
 
     //Load Customers for Modal
     $scope.LoadVendors = function () {
-        $scope.VendorsList = [];
-        var query_vendor = "SELECT * FROM VenderMaster";
-        $cordovaSQLite.execute(DATABASE, query_vendor, []).then(function (res) {
-            for (var i = 0; i < res.rows.length; i++) {
-                $scope.VendorsList.push(res.rows.item(i));
-            }
-        }, function (err) {
-            console.error(err);
-        });
+        // $scope.VendorsList = [];
+        // var query_vendor = "SELECT * FROM VenderMaster";
+        // $cordovaSQLite.execute(DATABASE, query_vendor, []).then(function (res) {
+            // for (var i = 0; i < res.rows.length; i++) {
+                // $scope.VendorsList.push(res.rows.item(i));
+            // }
+        // }, function (err) {
+            // console.error(err);
+        // });
 
-    };
+    // };
+{
+$ionicLoading.show({
+                content: 'Loading',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 200,
+                showDelay: 0
+            });
+debugger;
+$scope.VendorsList  = [];
 
+DATABASE.database().ref('Vendors').on('value',function(snap){
+
+  snap.forEach(function(s){
+     var a = new Object();
+	 a.cid = s.key;
+	 a.val = s.val();
+    $scope.VendorsList.push(a);
+  
+  }).then
+  $ionicLoading.hide();
+  
+  SharedDataService.Vendors = $scope.VendorsList;
+});
+}
+  };
 
 
 
@@ -59,7 +86,7 @@ debugger;
 
     // COMPANIES
 
-    $scope.CompaniesList = new Array(); // Companies List
+    // $scope.CompanyList = new Array(); // Companies List
     $scope.Company = new Object(); // Selected Company
     $scope.CheckCompany = false;
     $scope.CompanyModal = new Object();  // To Open the Comapny Modal
@@ -78,17 +105,40 @@ debugger;
 
     //Load Companies for Modal
     $scope.LoadCompaniesList = function () {
-        $scope.CompaniesList = [];
-        var query_customer = "SELECT * FROM CompanyInfo";
-        $cordovaSQLite.execute(DATABASE, query_customer).then(function (res) {
-            for (var i = 0; i < res.rows.length; i++) {
-                $scope.CompaniesList.push(res.rows.item(i));
-            }
-        }, function (err) {
-            console.error(err);
-        });
-    }
+        // $scope.CompaniesList = [];
+        // var query_customer = "SELECT * FROM CompanyInfo";
+        // $cordovaSQLite.execute(DATABASE, query_customer).then(function (res) {
+            // for (var i = 0; i < res.rows.length; i++) {
+                // $scope.CompaniesList.push(res.rows.item(i));
+            // }
+        // }, function (err) {
+            // console.error(err);
+        // });
+    // }
+$ionicLoading.show({
+                content: 'Loading',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 200,
+                showDelay: 0
+            });
+debugger;
+$scope.CompanyList  = [];
 
+DATABASE.database().ref('Company').on('value',function(snap){
+
+  snap.forEach(function(s){
+     var a = new Object();
+	 a.id = s.key;
+	 a.val = s.val();
+    $scope.CompanyList.push(a);
+  
+  }).then
+  $ionicLoading.hide();
+  
+  SharedDataService.Company = $scope.CompanyList;
+});
+    };
     //select Company from Modal
     $scope.SelectCompany = function (company) {
 
@@ -129,17 +179,42 @@ debugger;
     // Load Products 
     $scope.LoadProducts = function () {
 
-        $scope.ProductList = [];
-        var query_customer = "SELECT * FROM RawMaterial";
-        $cordovaSQLite.execute(DATABASE, query_customer).then(function (res) {
-            for (var i = 0; i < res.rows.length; i++) {
+        // $scope.ProductList = [];
+        // var query_customer = "SELECT * FROM RawMaterial";
+        // $cordovaSQLite.execute(DATABASE, query_customer).then(function (res) {
+            // for (var i = 0; i < res.rows.length; i++) {
 
-                $scope.ProductList.push(res.rows.item(i));
-            }
-        }, function (err) {
-            console.error(err);
-        });
-    }
+                // $scope.ProductList.push(res.rows.item(i));
+            // }
+        // }, function (err) {
+            // console.error(err);
+        // });
+    // }
+	$ionicLoading.show({
+                content: 'Loading',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 200,
+                showDelay: 0
+            });
+        
+debugger;
+$scope.ProductList  = [];
+$scope.Product = new Object();
+DATABASE.database().ref('products').on('value',function(snap){
+
+  snap.forEach(function(s){
+     var a = new Object();
+	 a.pid = s.key;
+	 a.val = s.val();
+    $scope.ProductList.push(a);
+  
+  }).then
+  $ionicLoading.hide();
+  
+  SharedDataService.Product = $scope.ProductList;
+});
+};
 
     //  Quantity Modal
     $scope.SelectProduct = function (product) {

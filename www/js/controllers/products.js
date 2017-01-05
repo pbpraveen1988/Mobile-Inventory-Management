@@ -32,7 +32,7 @@ debugger;
 $scope.products  = [];
 
 DATABASE.database().ref('products').on('value',function(snap){
-
+$scope.products  = [];
   snap.forEach(function(s){
      var a = new Object();
 	 a.pid = s.key;
@@ -66,7 +66,7 @@ DATABASE.database().ref('products').on('value',function(snap){
             // $cordovaSQLite.execute(DATABASE, query, [$scope.Products.pname, $scope.Products.pprice, $scope.Products.pdescription, $scope.Products.vat]).then(function (res) {
                 DATABASE.database().ref('products')
                                 .push($scope.Products).then(function (res) {
-                console.log("insertId: " + res.insertId);
+                 console.log("insertId: " + res.insertId);
 
                 $ionicLoading.hide();
                 $ionicPopup.alert({

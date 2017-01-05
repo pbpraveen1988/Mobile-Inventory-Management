@@ -6,10 +6,10 @@
         <form name="rawmaterialForm" novalidate="" ng-submit="Save(rawmaterialForm)">
             <div class="list">             
 
-                <label class="item item-input" ng-class="{ 'has-errors' : rawmaterialForm.mname.$invalid && rawmaterialForm.$submitted, 'no-errors' : rawmaterialForm.mname.$valid && rawmaterialForm.$submitted}">
-                    <input type="text" placeholder="Raw Material Name" name="mname" ng-minlength="5" ng-model="RawMaterial.mname" required>
+                <label class="item item-input" ng-class="{ 'has-errors' : rawmaterialForm.name.$invalid && rawmaterialForm.$submitted, 'no-errors' : rawmaterialForm.name.$valid && rawmaterialForm.$submitted}">
+                    <input type="text" placeholder="Raw Material Name" name="name" ng-minlength="5" ng-model="RawMaterial.name" required>
                 </label>
-                <div class="error-container" ng-show="rawmaterialForm.mname.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.mname.$error">
+                <div class="error-container" ng-show="rawmaterialForm.name.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.name.$error">
                     <div class="error" ng-message="required">
                         <i class="ion-information-circled"></i>
                         This field is required!
@@ -20,18 +20,18 @@
                     </div>
                 </div>
                 <label class="item item-input">
-                    <input type="text" placeholder="Raw Material Type" name="mtype"  ng-model="RawMaterial.mtype" required>
+                    <input type="text" placeholder="Raw Material Type" name="type"  ng-model="RawMaterial.type" required>
                 </label>
-                <div class="error-container" ng-show="rawmaterialForm.mtype.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.mtype.$error">
+                <div class="error-container" ng-show="rawmaterialForm.type.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.type.$error">
                     <div class="error" ng-message="required">
                         <i class="ion-information-circled"></i>
                         This field is required!
                     </div>                   
                 </div>
                 <label class="item item-input">
-                    <input type="number" placeholder="Purchase Price" name="mprice" required ng-model="RawMaterial.mprice">
+                    <input type="number" placeholder="Purchase Price" name="price" required ng-model="RawMaterial.price">
                 </label>
-                <div class="error-container" ng-show="rawmaterialForm.mprice.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.mprice.$error">
+                <div class="error-container" ng-show="rawmaterialForm.price.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.price.$error">
                     <div class="error" ng-message="required">
                         <i class="ion-information-circled"></i>
                         This field is required!
@@ -42,9 +42,10 @@
                     </div>
                 </div>
                 <label class="item item-input">
-                    <input type="text" name="mdescription" required placeholder="Material Description" ng-minlength="5" ng-model="RawMaterial.mdescription">
+                    <input type="text" name="description" required placeholder="Material Description" ng-minlength="5" ng-model="RawMaterial.description">
                 </label>
-                <div class="error-container" ng-show="rawmaterialForm.mdescription.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.mdescription.$error">
+				
+                <div class="error-container" ng-show="rawmaterialForm.description.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.description.$error">
                     <div class="error" ng-message="required">
                         <i class="ion-information-circled"></i>
                         This field is required!
@@ -54,15 +55,36 @@
                         Minimum length of this field is 5 characters!
                     </div>
                 </div>
-                <label class="item item-input">
-                    <input type="number" name="mvat" placeholder="Vat (in %)" ng-model="RawMaterial.mvat" required>
+				<label class="item item-input">
+                    <input type="text" name="unit" required placeholder="Material Unit"  ng-model="RawMaterial.unit">
                 </label>
-                <div class="error-container" ng-show="rawmaterialForm.mvat.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.mvat.$error">
+				
+                <div class="error-container" ng-show="rawmaterialForm.unit.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.unit.$error">
+                    <div class="error" ng-message="required">
+                        <i class="ion-information-circled"></i>
+                        This field is required!
+                    </div>
+                    <!-- <div class="error" ng-message="minlength">
+                        <i class="ion-information-circled"></i>
+                        Minimum length of this field is 5 characters!
+                    </div> -->
+                </div>
+                <label class="item item-input">
+                    <input type="number" name="vat" placeholder="Vat (in %)" ng-model="RawMaterial.vat" required>
+                </label>
+                <div class="error-container" ng-show="rawmaterialForm.vat.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.vat.$error">
                     <div class="error" ng-message="required">
                         <i class="ion-information-circled"></i>
                         This field is required!
                     </div>                  
                 </div>
+				<ion-list>
+
+  <ion-checkbox ng-model="RawMaterial.checkProducts">Save this as Finished Product</ion-checkbox>
+  
+
+</ion-list>
+
                 <label class="item">
                     <button class="button button-block button-positive" type="submit">Submit</button>
                 </label>

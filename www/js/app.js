@@ -10,6 +10,7 @@ var app = angular.module('starter',
 						 'starter.controllers.invoices',
 						 'starter.controllers.company',
 						 'starter.controllers.Purchase',
+						 'starter.controllers.stock',
                          'starter.controllers.Sale','chart.js',
 						'ngCordova', 'ngMessages']
 						);

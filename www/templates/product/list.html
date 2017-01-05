@@ -11,7 +11,7 @@
 	 No Records Found!
 	 </ion-item>
       <ion-item ng-repeat="list in products" class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#/app/product_details/{{list.pid}}">
-          <h2>{{list.val.pname}}</h2>
+          <h2>{{list.val.name}}</h2>
 		   <i class="icon ion-chevron-right icon-accessory" style="color:black;"></i>
 		  <div class="button-bar">
 			<ion-option-button class="ion-edit icon-left button-positive" ng-click="Selectid(list.pid)">

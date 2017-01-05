@@ -43,8 +43,9 @@ app.config(function ($stateProvider,
   //purchase
    .state('app.purchase_list', { url: '/purchase_list', cache: false, views: { 'menuContent': { templateUrl: 'templates/purchase/list.html' } } })
    .state('app.purchase_add', { url: '/purchase_add', cache: false, views: { 'menuContent': { templateUrl: 'templates/purchase/add.html' } } })
-
- //sale
+  // stock
+   .state('app.stock_list', { url: '/stock_list', cache: false, views: { 'menuContent': { templateUrl: 'templates/stock/list.html' } } })
+  //sale
    .state('app.sale', { url: '/sale_list', cache: false, views: { 'menuContent': { templateUrl: 'templates/sale/list.html' } } })
    .state('app.sales', { url: '/sales_add', cache: false, views: { 'menuContent': { templateUrl: 'templates/sale/add.html' } } })
 

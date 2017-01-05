@@ -9,6 +9,9 @@ angular.module('starter.controllers.rawmaterial', [])
 	$scope.RawMaterials = SharedDataService.RawMaterial;
 /* Insert data in RawMaterial */	
 	$scope.Save = function (rawmaterialForm) {
+	
+	
+	
 	    if (rawmaterialForm.$valid) {
 	        $ionicLoading.show({
 	            content: 'Loading',
@@ -17,11 +20,18 @@ angular.module('starter.controllers.rawmaterial', [])
 	            maxWidth: 200,
 	            showDelay: 0
 	        });
-	        DATABASE.database().ref('rawmaterials')
+			
+             if($scope.RawMaterial.checkProducts)
+			 {
+                 $scope.RawMaterial.checkProducts = null;
+			      DATABASE.database().ref('rawmaterials')
                                 .push($scope.RawMaterial)
-	        
-			        .then(function () {
-                               console.log("fdfdfd");
+								.then(function () {	
+								
+								DATABASE.database().ref('products')
+                                .push($scope.RawMaterial)
+								
+								
                               $ionicLoading.hide();
                               $ionicPopup.alert({
                                   title: 'Saved.',
@@ -30,12 +40,46 @@ angular.module('starter.controllers.rawmaterial', [])
 
                               $scope.RawMaterial = null;
                               $scope.RawMaterial = new Object();
-                              $state.go('app.material_list', {}, { reload: true });
-                          }, function (err) {
-                              console.error(err);
-                          });
+                              $state.go('app.material_list', {}, { reload: true });	
+							  
+			        
+						   
+			 })}
+			 else
+			 {
+			    $scope.RawMaterial.checkProducts = null;
+			      DATABASE.database().ref('rawmaterials')
+                                .push($scope.RawMaterial)
+								.then(function () {	console.log("fdfdfd");
+                              $ionicLoading.hide();
+                              $ionicPopup.alert({
+                                  title: 'Saved.',
+                                  template: 'Data Saved successfully'
+                              });
+
+                              $scope.RawMaterial = null;
+                              $scope.RawMaterial = new Object();
+                              $state.go('app.material_list', {}, { reload: true });							
+			 }).catch(function(er){
+			 
+			 
+			 });
+			 
+			 }
+			 
 	    }
   };
+			
+	      
+	        
+			      
+					
+					      
+						   
+					
+					
+                             
+                          
   
   
 /* Select data in RawMaterial */  
@@ -91,10 +135,13 @@ DATABASE.database().ref('rawmaterials').on('value',function(snap){
   
   
   $scope.DisplayData = function(){
+  debugger;
   DATABASE.database().ref('rawmaterials').child($stateParams.rawid).on('value',function(snapshot){
+  
+  debugger;
     $scope.RawMaterial = snapshot.val();
   
-  
+  debugger;
   });
   
 	 // var query = "SELECT * FROM RawMaterial where mid = " + $stateParams.rawid  ; // where $stateParams.rawid

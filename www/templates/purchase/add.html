@@ -16,15 +16,15 @@
                                 <span style="background-color: lightgoldenrodyellow">
                                     <u><b>Vendor Detail</b></u>
                                 </span>
-                                <p style="margin-bottom: -24px;">{{Vendor.cname}}</p>
+                                <p style="margin-bottom: -24px;">{{Vendor.val.cname}}</p>
                                 <p style="margin-bottom: -24px;">
-                                    {{Vendor.caddress}} , {{Vendor.cstate}}
+                                    {{Vendor.val.caddress}} , {{Vendor.val.cstate}}
                                 </p>
                                 <p style="margin-bottom: -24px;">
-                                    {{Vendor.ccontact}}
+                                    {{Vendor.val.ccontact}}
                                 </p>
                                 <p style="margin-bottom: -24px;">
-                                    {{Vendor.cemail}}
+                                    {{Vendor.val.cemail}}
                                 </p>
                             </div>
                         </button>
@@ -45,15 +45,15 @@
                                 <span style="background-color: lightgoldenrodyellow">
                                     <u><b>Company Detail</b></u>
                                 </span>
-                                <p style="margin-bottom: -24px;"><b>{{Company.name}}</b></p>
+                                <p style="margin-bottom: -24px;"><b>{{Company.val.name}}</b></p>
                                 <p style="margin-bottom: -24px;">
-                                    {{Company.address}} , {{Company.dist}}
+                                    {{Company.val.address}} , {{Company.val.dist}}
                                 </p>
                                 <p style="margin-bottom: -24px;">
-                                    {{Company.contact}}
+                                    {{Company.val.contact}}
                                 </p>
                                 <p style="margin-bottom: -24px;">
-                                    {{Company.email}}
+                                    {{Company.val.email}}
                                 </p>
                             </div>
                         </button>
@@ -225,7 +225,7 @@
                         <button class="button button-full button-positive" ng-click="Vendormodal.hide()">Close</button>
                         <ion-list>
                             <ion-item ng-repeat="vendor in VendorsList" ng-click="SelectVendor(vendor)">
-                                {{vendor.cname}}
+                                {{vendor.val.cname}}
                             </ion-item>
                         </ion-list>
                     </ion-content>
@@ -241,7 +241,7 @@
                         <button class="button button-full button-positive" ng-click="ProductModal.hide()">Close</button>
                         <ion-list>
                             <ion-item ng-repeat="list in ProductList" ng-click="SelectProduct(list)">
-                                {{list.mname}}
+                                {{list.val.pname}}
                             </ion-item>
                         </ion-list>
                     </ion-content>
@@ -289,8 +289,8 @@
                     <ion-content class="padding">
                         <button class="button button-full button-positive" ng-click="CompanyModal.hide()">Close</button>
                         <ion-list>
-                            <ion-item ng-repeat="customer in CompaniesList" ng-click="SelectCompany(customer)">
-                                {{customer.name}}
+                            <ion-item ng-repeat="customer in CompanyList" ng-click="SelectCompany(customer)">
+                                {{customer.val.name}}
                             </ion-item>
                         </ion-list>
                     </ion-content>

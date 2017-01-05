@@ -8,25 +8,30 @@
 	
 	
   <ion-content>
-	<h1 ng-model= "Products.pname" style="text-align: center;"> {{Products.pname}}</h1>
+	<h1 ng-model= "Products.name" style="text-align: center;"> {{Products.name}}</h1>
 		<div class="list">
 		  <label class="item item-input">
 			<span class="input-label">Product Name</span>
-			<label  ng-model= "Products.pname">{{Products.pname}}</label>
+			<label  ng-model= "Products.name">{{Products.name}}</label>
 		  </label>
 		</div>  
 		  
 		<div class="list">
 		  <label class="item item-input">
 			<span class="input-label">Product Description</span>
-			<label  ng-model= "Products.pdescription">{{Products.pdescription}}</label>
+			<label  ng-model= "Products.description">{{Products.description}}</label>
 		  </label>
 		</div>  
-		  
+		  <div class="list">
+		  <label class="item item-input">
+			<span class="input-label">Product Unit</span>
+			<label  ng-model= "Products.unit">{{Products.unit}}</label>
+		  </label>
+		</div>  
 		<div class="list">
 		  <label class="item item-input">
 			<span class="input-label">Sale Price</span>
-			<label  ng-model= "Products.pprice">{{Products.pprice}}</label>
+			<label  ng-model= "Products.price">{{Products.price}}</label>
 		  </label>
 		</div>  
 		
