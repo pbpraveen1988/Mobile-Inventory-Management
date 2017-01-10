@@ -11,7 +11,7 @@
 	  No Records Found!
 	  </ion-item>
       <ion-item ng-repeat="list in VendorsList" class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#/app/vender_details/{{list.cid}}">
-          <h2>{{list.val.cname}}</h2>
+          <h2>{{list.val.name}}</h2>
 		  <i class="icon ion-chevron-right icon-accessory"></i>
 		  <div class="button-bar">
 			<ion-option-button class="ion-edit icon-left button-positive" ng-click="Selectid(list.cid)" >

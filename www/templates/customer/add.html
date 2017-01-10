@@ -6,11 +6,11 @@
         <form name="customersForm" novalidate="" ng-submit="Save(customersForm)">
 
             <div class="list list-inset">
-                <label class="item item-input" ng-class="{ 'has-errors' : customersForm.cname.$invalid && customersForm.$submitted, 'no-errors' : customersForm.cname.$valid && customersForm.$submitted}">
-                    <input required type="text" name="cname" ng-minlength="5" placeholder="Customer Name" ng-model="Customers.cname">
+                <label class="item item-input" ng-class="{ 'has-errors' : customersForm.name.$invalid && customersForm.$submitted, 'no-errors' : customersForm.name.$valid && customersForm.$submitted}">
+                    <input required type="text" name="name" ng-minlength="5" placeholder="Customer Name" ng-model="Customers.name">
                 </label>
             </div>
-            <div class="error-container" ng-show="customersForm.cname.$error && customersForm.$submitted" ng-messages="customersForm.cname.$error">
+            <div class="error-container" ng-show="customersForm.name.$error && customersForm.$submitted" ng-messages="customersForm.name.$error">
                 <div class="error" ng-message="required">
                     <i class="ion-information-circled"></i>
                     This field is required!
@@ -22,11 +22,11 @@
             </div>    
 
             <div class="list list-inset">
-                <label class="item item-input" ng-class="{ 'has-errors' : customersForm.ccontact.$invalid && customersForm.$submitted, 'no-errors' : customersForm.ccontact.$valid && customersForm.$submitted}">
-                    <input required type="number" maxlength="10" placeholder="Mobile" ng-model="Customers.ccontact" name="ccontact">
+                <label class="item item-input" ng-class="{ 'has-errors' : customersForm.contact.$invalid && customersForm.$submitted, 'no-errors' : customersForm.contact.$valid && customersForm.$submitted}">
+                    <input required type="number" maxlength="10" placeholder="Mobile" ng-model="Customers.contact" name="contact">
                 </label>
             </div>
-            <div class="error-container" ng-show="customersForm.ccontact.$error && customersForm.$submitted" ng-messages="customersForm.ccontact.$error">
+            <div class="error-container" ng-show="customersForm.contact.$error && customersForm.$submitted" ng-messages="customersForm.contact.$error">
                 <div class="error" ng-message="required">
                     <i class="ion-information-circled"></i>
                     This field is required!
@@ -38,11 +38,11 @@
             </div>    
             
             <div class="list list-inset">
-                <label class="item item-input" ng-class="{ 'has-errors' : customersForm.cemail.$invalid && customersForm.$submitted, 'no-errors' : customersForm.cemail.$valid && customersForm.$submitted}">
-                    <input required type="email" placeholder="Email" ng-minlength="5" ng-model="Customers.cemail" name="cemail">
+                <label class="item item-input" ng-class="{ 'has-errors' : customersForm.email.$invalid && customersForm.$submitted, 'no-errors' : customersForm.email.$valid && customersForm.$submitted}">
+                    <input required type="email" placeholder="Email" ng-minlength="5" ng-model="Customers.email" name="email">
                 </label>
             </div>
-            <div class="error-container" ng-show="customersForm.cemail.$error && customersForm.$submitted" ng-messages="customersForm.cemail.$error">
+            <div class="error-container" ng-show="customersForm.email.$error && customersForm.$submitted" ng-messages="customersForm.email.$error">
                 <div class="error" ng-message="required">
                     <i class="ion-information-circled"></i>
                     This field is required!
@@ -55,11 +55,11 @@
          
 
             <div class="list list-inset">
-                <label class="item item-input" ng-class="{ 'has-errors' : customersForm.caddress.$invalid && customersForm.$submitted, 'no-errors' : customersForm.caddress.$valid && customersForm.$submitted}">
-                    <input required type="text" placeholder="billing_address" ng-minlength="5" ng-model="Customers.caddress" name="caddress">
+                <label class="item item-input" ng-class="{ 'has-errors' : customersForm.address.$invalid && customersForm.$submitted, 'no-errors' : customersForm.address.$valid && customersForm.$submitted}">
+                    <input required type="text" placeholder="billing_address" ng-minlength="5" ng-model="Customers.address" name="address">
                 </label>
             </div>
-            <div class="error-container" ng-show="customersForm.caddress.$error && customersForm.$submitted" ng-messages="customersForm.caddress.$error">
+            <div class="error-container" ng-show="customersForm.address.$error && customersForm.$submitted" ng-messages="customersForm.address.$error">
                 <div class="error" ng-message="required">
                     <i class="ion-information-circled"></i>
                     This field is required!
@@ -72,11 +72,11 @@
 
          
             <div class="list list-inset">
-                <label class="item item-input" ng-class="{ 'has-errors' : customersForm.ccity.$invalid && customersForm.$submitted, 'no-errors' : customersForm.ccity.$valid && customersForm.$submitted}">
-                    <input required type="text" placeholder="billing_city" ng-model="Customers.ccity" ng-minlength="5" name="ccity">
+                <label class="item item-input" ng-class="{ 'has-errors' : customersForm.city.$invalid && customersForm.$submitted, 'no-errors' : customersForm.city.$valid && customersForm.$submitted}">
+                    <input required type="text" placeholder="billing_city" ng-model="Customers.city" ng-minlength="5" name="city">
                 </label>
             </div>
-            <div class="error-container" ng-show="customersForm.ccity.$error && customersForm.$submitted" ng-messages="customersForm.ccity.$error">
+            <div class="error-container" ng-show="customersForm.city.$error && customersForm.$submitted" ng-messages="customersForm.city.$error">
                 <div class="error" ng-message="required">
                     <i class="ion-information-circled"></i>
                     This field is required!
@@ -90,11 +90,11 @@
             
             
             <div class="list list-inset">
-                <label class="item item-input" ng-class="{ 'has-errors' : customersForm.cstate.$invalid && customersForm.$submitted, 'no-errors' : customersForm.cstate.$valid && customersForm.$submitted}">
-                    <input required type="text" placeholder="billing_state" ng-model="Customers.cstate" name="cstate">
+                <label class="item item-input" ng-class="{ 'has-errors' : customersForm.state.$invalid && customersForm.$submitted, 'no-errors' : customersForm.state.$valid && customersForm.$submitted}">
+                    <input required type="text" placeholder="billing_state" ng-model="Customers.state" name="state">
                 </label>
             </div>
-            <div class="error-container" ng-show="customersForm.cstate.$error && customersForm.$submitted" ng-messages="customersForm.cstate.$error">
+            <div class="error-container" ng-show="customersForm.state.$error && customersForm.$submitted" ng-messages="customersForm.state.$error">
                 <div class="error" ng-message="required">
                     <i class="ion-information-circled"></i>
                     This field is required!
@@ -103,7 +103,7 @@
 
             <div class="list list-inset">
                 <label class="item item-input">
-                    <input required type="number" placeholder="pincode" ng-model="Customers.cpincode">
+                    <input required type="number" placeholder="pincode" ng-model="Customers.pincode">
                 </label>
             </div>
 

@@ -7,7 +7,7 @@
             <button  class="button button-full button-positive" ng-click="ModalForCompaniesList()" value="company">
                 Select Company
             </button>
-            <ion-item  style="background-color: White; importent">
+            <ion-item  style="background-color: White; important">
                     <div >
                         <u><b>Company Name : {{Company.val.name}}</b></u>
                                 
@@ -19,18 +19,40 @@
 			
 			</div>
 			<div class="item item-body">
-            <button  class="button button-full button-positive" ng-click="ModalForStockType()" value="company">
+            <button  class="button button-full button-positive" ng-click="ModalForStockType()" value="products">
                 Select Stock Type
             </button>
-            <ion-item  style="background-color: White; importent">
+            <ion-item  style="background-color: White; important">
                     <div >
-                        <u><b>Stock Type : {{Product.val.name}}</b></u>
+                        <u><b>Stock Type : {{StockType}}</b></u>
                                 
                                 
                     </div>
 
                 </ion-item>    
-            </ion-list>
+            </ion-list> 
+			</div>
+			<div class="list">
+
+   <label class="item item-input item-select">
+    <div class="input-label" >
+      Stock Name
+    </div>
+    <select ng-model="data.selectedstock" ng-change="GetStock()">
+      <option  value="{{stock.id}}"  ng-repeat="stock in stocks"  >{{stock.val.name}}</option>
+      
+    </select>
+	</label>
+	 <label class="item item-input">
+    <div class="input-label" >
+	Stock Value</div>
+	
+<input type="number" ng-model="StockValue" />
+</label>
+<button  class="button button-full button-positive" ng-click="updatestock(StockValue)" >
+               Update Stock
+            </button>
+</div>
 			
 			</div>
 			<script id="my-company.html" type="text/ng-template">
@@ -53,19 +75,17 @@
                     <ion-content class="padding">
                         <button class="button button-full button-positive" ng-click="StockModal.hide()">Close</button>
                         <ion-list>
-                            <ion-item  >
-							<ion-list ng-repeat="product in products" ng-click="Selectstock(stock)">
-                                <b >{{product.val.pname}}</b>
+                            <ion-item ng-click="Selectstock1('products')"  >
 							
-							</ion-list>
+                                <b>Finished Products</b>
+							
+						
                             </ion-item>
-                        </ion-list>
-						<ion-list>
-                            <ion-item  >
-							<ion-list ng-click="Selectstock(stock)">
+                        
+                            <ion-item ng-click="Selectstock1('raw')">
                               <b >RawMaterials</b>
 							
-							</ion-list>
+							
                             </ion-item>
                         </ion-list>
 
