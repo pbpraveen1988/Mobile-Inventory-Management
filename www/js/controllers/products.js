@@ -61,13 +61,14 @@ $scope.products  = [];
                 showDelay: 0
             });
             debugger;
-            // var query = "INSERT INTO ProductsMaster (pname, pprice, pdescription, vat) VALUES (?,?,?,?)";
-            // alert("Ganesh");
-            // $cordovaSQLite.execute(DATABASE, query, [$scope.Products.pname, $scope.Products.pprice, $scope.Products.pdescription, $scope.Products.vat]).then(function (res) {
-                DATABASE.database().ref('products')
-                                .push($scope.Products).then(function (res) {
-                 console.log("insertId: " + res.insertId);
-
+			
+			var StockValue = $scope.Products.openstock;
+			$scope.Products.openstock = null;
+			
+            DATABASE.database().ref('products')
+            .push($scope.Products).then(function (res) {
+                
+                  DATABASE.database().ref('stock').child('products').child(res.key).set(StockValue);
                 $ionicLoading.hide();
                 $ionicPopup.alert({
                     title: 'Saved.',

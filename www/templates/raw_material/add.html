@@ -78,6 +78,16 @@
                         This field is required!
                     </div>                  
                 </div>
+				<label class="item item-input">
+                    <input type="number" name="openingStock" placeholder="Opening Stock" ng-model="RawMaterial.openstock" required>
+                </label>
+                <div class="error-container" ng-show="rawmaterialForm.openingStock.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.openingStock.$error">
+                    <div class="error" ng-message="required">
+                        <i class="ion-information-circled"></i>
+                        This field is required!
+                    </div>                  
+                </div>
+				
 				<ion-list>
 
   <ion-checkbox ng-model="RawMaterial.checkProducts">Save this as Finished Product</ion-checkbox>

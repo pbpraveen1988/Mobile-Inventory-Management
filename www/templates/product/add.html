@@ -68,6 +68,16 @@
                     <input type="number" placeholder="Vat (in %)" ng-model="Products.vat">
                 </label>
             </div>
+			<label class="item item-input">
+                    <input type="number" name="openingStock" placeholder="Opening Stock" ng-model="Products.openstock" required>
+                </label>
+                <div class="error-container" ng-show="productsForm.openingStock.$error && productsForm.$submitted" ng-messages="productsForm.openingStock.$error">
+                    <div class="error" ng-message="required">
+                        <i class="ion-information-circled"></i>
+                        This field is required!
+                    </div>                  
+                </div>
+			
 
             <label class="item">
                 <button class="button button-block button-positive" type="submit">Submit</button>

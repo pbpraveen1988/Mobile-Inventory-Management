@@ -47,9 +47,9 @@
     <div class="input-label" >
 	Stock Value</div>
 	
-<input type="number" ng-model="StockValue" />
+<input type="number" ng-model="data.StockValue" />
 </label>
-<button  class="button button-full button-positive" ng-click="updatestock(StockValue)" >
+<button  class="button button-full button-positive" ng-click="updatestock()" >
                Update Stock
             </button>
 </div>
@@ -70,7 +70,7 @@
             </ion-modal-view>
         </script>
 		<script id="my-stocktype.html" type="text/ng-template">
-            <ion-modal-view class="ion-nifty-modal" ng-init="SelectProducts()" >
+            <ion-modal-view class="ion-nifty-modal"  >
                 <div class="ion-modal-content-custom">
                     <ion-content class="padding">
                         <button class="button button-full button-positive" ng-click="StockModal.hide()">Close</button>

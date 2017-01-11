@@ -24,16 +24,20 @@ angular.module('starter.controllers.rawmaterial', [])
              if($scope.RawMaterial.checkProducts)
 			 {
                  $scope.RawMaterial.checkProducts = null;
-			      DATABASE.database().ref('rawmaterials')
+				 var stockValue = $scope.RawMaterial.openstock;
+				 $scope.RawMaterial.openstock = null;
+				 DATABASE.database().ref('rawmaterials')
                                 .push($scope.RawMaterial)
-								.then(function () {	
-								
+								.then(function (snap) {	
+				                 DATABASE.database().ref('stock').child('rawmaterials')
+								 .child(snap.key).set(stockValue);
 								DATABASE.database().ref('products')
-                                .push($scope.RawMaterial)
-								
-								
-                              $ionicLoading.hide();
-                              $ionicPopup.alert({
+                                .push($scope.RawMaterial).then(function(snapshot){
+								DATABASE.database().ref('stock').child('products')
+								 .child(snapshot.key).set(stockValue);
+								});
+								$ionicLoading.hide();
+                                 $ionicPopup.alert({
                                   title: 'Saved.',
                                   template: 'Data Saved successfully'
                               });
@@ -47,10 +51,17 @@ angular.module('starter.controllers.rawmaterial', [])
 			 })}
 			 else
 			 {
+ 
+				 var stockValue = $scope.RawMaterial.openstock;
+				  $scope.RawMaterial.openstock = null;
+				 
 			    $scope.RawMaterial.checkProducts = null;
 			      DATABASE.database().ref('rawmaterials')
                                 .push($scope.RawMaterial)
-								.then(function () {	console.log("fdfdfd");
+								.then(function (snap) {debugger;
+                    DATABASE.database().ref('stock').child('rawmaterials')
+				   .child(snap.key).set(stockValue);
+								console.log("fdfdfd");
                               $ionicLoading.hide();
                               $ionicPopup.alert({
                                   title: 'Saved.',
