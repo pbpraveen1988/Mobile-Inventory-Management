@@ -13,6 +13,7 @@ angular.module('starter.controllers.challans', [])
   $scope.VendorsList = SharedDataService.Vendors;
   $scope.CompanyList = SharedDataService.Company;
   $scope.ProductList = SharedDataService.Product;
+  $scope.stocks = SharedDataService.stock;
     // select customer event
     $scope.ModalForVendorsList = function () {
 debugger;
@@ -405,5 +406,31 @@ DATABASE.database().ref('products').on('value',function(snap){
         $scope.LoadVendors();
         $scope.LoadCompaniesList();
     };
+	 $scope.SelectStock = function () {
+$ionicLoading.show({
+                content: 'Loading',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 200,
+                showDelay: 0
+            });
+       
+debugger;
+$scope.stocks  = [];
+
+DATABASE.database().ref('stock').on('value',function(snap){
+
+  snap.forEach(function(s){
+     var a = new Object();
+	 a.pid = s.key;
+	 a.val = s.val();
+    $scope.stocks.push(a);
+  
+  }).then
+  $ionicLoading.hide();
+  
+  SharedDataService.stock = $scope.stocks;
+});
+};
 });
 

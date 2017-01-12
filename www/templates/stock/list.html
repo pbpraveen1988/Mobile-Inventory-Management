@@ -45,10 +45,18 @@
 	</label>
 	 <label class="item item-input">
     <div class="input-label" >
-	Stock Value</div>
+	Stock Value </div>
 	
 <input type="number" ng-model="data.StockValue" />
 </label>
+	 <label class="item item-input">
+    <div class="input-label" >
+	Stock Unit </div>
+	{{data.Stock.val.unit}}
+
+</label>
+
+
 <button  class="button button-full button-positive" ng-click="updatestock()" >
                Update Stock
             </button>

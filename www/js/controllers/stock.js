@@ -32,7 +32,7 @@ angular.module('starter.controllers.stock', [])
 				showDelay: 0
 		    });
 			DATABASE.database().ref('products')
-			.on('value',function(snap){
+			.on('value',function(snap){$scope.stocks  = [];
 				  snap.forEach(function(s){
 					 var a = new Object();
 					 a.id = s.key;
@@ -58,7 +58,7 @@ angular.module('starter.controllers.stock', [])
 			debugger;
 			$scope.stocks  = [];
 			DATABASE.database().ref('rawmaterials').on('value',function(snap){
-
+            $scope.stocks  = [];
 			  snap.forEach(function(s){
 				 var a = new Object();
 				 a.id = s.key;
@@ -129,55 +129,21 @@ angular.module('starter.controllers.stock', [])
     };
   
 	$scope.GetStock = function() {
-		$ionicLoading.show({
-						content: 'Loading',
-						animation: 'fade-in',
-						showBackdrop: true,
-						maxWidth: 200,
-						showDelay: 0
-					});
- if($scope.StockType == "Raw Materials")
-  {
-  $scope.StockValue = 0;
-  DATABASE.database().ref('stock').child("rawmaterials")
-  .child($scope.data.selectedstock).on('value',function(snap){
-  var s = snap.val();
-  $ionicLoading.hide();
-  if(s == null || s == undefined)
-  {
-		$scope.data.StockValue = 0;
-  }
-  else 
-  {
-        $scope.data.StockValue =  s;
-  }
-  });
-  
-  }
-  else if($scope.StockType == "Products")
-  {
-  DATABASE.database().ref('stock').child("products").child($scope.data.selectedstock).on('value',function(snap){
-  debugger;
-  var s = snap.val();
-  $ionicLoading.hide();
-  if(s == null || s == undefined)
-  {
-   $scope.data.StockValue = 0;
-   
-   debugger;
-  }
-  else 
-  {
-   $scope.data.StockValue =  s;
-    
-  }
-  });
-  }
+	debugger;
+		
+					
+		$scope.data.Stock = Enumerable.From($scope.stocks)
+					  .Where(function (x) { return x.id == $scope.data.selectedstock })
+					  .SingleOrDefault();
+					$scope.data.StockValue = $scope.data.Stock.val.stock;  
+					
+ 
   }
    
    
    $scope.updatestock = function()
-   {debugger;
+   {
+   debugger;
 		$ionicLoading.show({
 						content: 'Loading',
 						animation: 'fade-in',
@@ -186,11 +152,16 @@ angular.module('starter.controllers.stock', [])
 						showDelay: 0
 					});
 
-
+$scope.data.Stock = Enumerable.From($scope.stocks)
+					  .Where(function (x) { return x.id == $scope.data.selectedstock })
+					  .SingleOrDefault();
+					   $scope.data.Stock.val.stock = $scope.data.StockValue;
 if($scope.StockType == "Raw Materials")
   {
-  DATABASE.database().ref('stock').child("rawmaterials")
-  .child($scope.data.selectedstock).set($scope.data.StockValue)
+ 
+  
+  DATABASE.database().ref('rawmaterials')
+  .child($scope.data.selectedstock).set($scope.data.Stock.val)
   .then(function(e){
   
   $ionicPopup.alert({
@@ -203,8 +174,9 @@ if($scope.StockType == "Raw Materials")
   
   }else
   {  
-   DATABASE.database().ref('stock').child("products").child($scope.data.selectedstock)
-   .set($scope.data.StockValue).then(function(e){
+   
+  DATABASE.database().ref('products')
+  .child($scope.data.selectedstock).set($scope.data.Stock.val).then(function(e){
            $ionicLoading.hide();
                 $ionicPopup.alert({
                                   title: 'Saved.',

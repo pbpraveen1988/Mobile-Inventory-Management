@@ -16,15 +16,15 @@
                                 <span style="background-color: lightgoldenrodyellow">
                                     <u><b>Vendor Detail</b></u>
                                 </span>
-                                <p style="margin-bottom: -24px;">{{Vendor.val.cname}}</p>
+                                <p style="margin-bottom: -24px;">{{Vendor.val.name}}</p>
                                 <p style="margin-bottom: -24px;">
-                                    {{Vendor.val.caddress}} , {{Vendor.val.cstate}}
+                                    {{Vendor.val.address}} , {{Vendor.val.state}}
                                 </p>
                                 <p style="margin-bottom: -24px;">
-                                    {{Vendor.val.ccontact}}
+                                    {{Vendor.val.contact}}
                                 </p>
                                 <p style="margin-bottom: -24px;">
-                                    {{Vendor.val.cemail}}
+                                    {{Vendor.val.email}}
                                 </p>
                             </div>
                         </button>
@@ -66,21 +66,21 @@
         <ion-list>
             <div class="list list-inset">
                 <div class="row" style="background-color: ghostwhite">
-                    <div class="col col-33">Created Date</div>
+                    <div class="col col-33">Purchase Date</div>
                     <div class="col col">
                         <label class="item item-input" style="background-color: white">
                             <input type="date" placeholder="Date" ng-model="FormValues.datenew" ng-required="true">
                         </label>
                     </div>
                 </div>
-                <div class="row" style="background-color: ghostwhite">
+                <!-- <div class="row" style="background-color: ghostwhite">
                     <div class="col col-33">Due Date</div>
                     <div class="col col">
                         <label class="item item-input" style="background-color: white">
                             <input type="date" placeholder="Date" ng-model="FormValues.datedue" ng-required="true">
                         </label>
                     </div>
-                </div>
+                </div> -->
 
 
             </div>
@@ -98,14 +98,14 @@
                     </select>
                 </label>
             </div>
-            <div class="list list-inset">
+           <!--  <div class="list list-inset">
                 <div class="list">
                     <label class="item item-input ">
                         <span class="input-label">Currency</span>
                         INR
                     </label>
                 </div>
-            </div>
+            </div> -->
             <div class="list list-inset">
                 <div class="list">
                     <label class="item item-input ">
@@ -225,7 +225,7 @@
                         <button class="button button-full button-positive" ng-click="Vendormodal.hide()">Close</button>
                         <ion-list>
                             <ion-item ng-repeat="vendor in VendorsList" ng-click="SelectVendor(vendor)">
-                                {{vendor.val.cname}}
+                                {{vendor.val.name}}
                             </ion-item>
                         </ion-list>
                     </ion-content>
@@ -241,7 +241,7 @@
                         <button class="button button-full button-positive" ng-click="ProductModal.hide()">Close</button>
                         <ion-list>
                             <ion-item ng-repeat="list in ProductList" ng-click="SelectProduct(list)">
-                                {{list.val.pname}}
+                                {{list.val.name}}
                             </ion-item>
                         </ion-list>
                     </ion-content>
@@ -264,8 +264,11 @@
                                             <label class="item item-input">
                                                 <input type="number" min='0' placeholder="Quantity" ng-model="nos" name="nos" required>
                                             </label>
+											<label >
+                                                available stock {{Product.val.stock}}{{Product.val.unit}}
+                                            </label>
                                             <label class="item item-input">
-                                                <input type="number" min='0' placeholder="Price" ng-model="Product.mprice" name="mprince" required>
+                                                <input type="number" min='0' placeholder="Price" ng-model="Product.price" name="mprince" required>
                                             </label>
                                             <label class="item item-input">
                                                 <input type="number" placeholder="Tax(%)" min='0' ng-model="Product.vat" name="tax" required step="0.01">
