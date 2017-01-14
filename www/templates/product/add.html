@@ -42,6 +42,11 @@
                     <input type="text" placeholder="Product Unit" name="unit"  ng-model="Products.unit" required>
                 </label>
             </div>
+			<div class="list list-inset">
+                <label class="item item-input" ng-class="{ 'has-errors' : productsForm.openingstock.$invalid && productsForm.$submitted, 'no-errors' : productsForm.openingstock.$valid && productsForm.$submitted}">
+                    <input type="text" placeholder="Opening Stock" name="Opening Stock"  ng-model="Products.openingstock" required>
+                </label>
+            </div>
             <div class="error-container" ng-show="productsForm.unit.$error && productsForm.$submitted" ng-messages="productsForm.unit.$error">
                 <div class="error" ng-message="required">
                     <i class="ion-information-circled"></i>

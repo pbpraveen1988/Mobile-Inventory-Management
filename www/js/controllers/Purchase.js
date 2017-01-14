@@ -17,25 +17,25 @@ angular.module('starter.controllers.Purchase', [])
     });
     
 
-    $scope.List = function () {
-      //  $state.go($state.current, {}, { reload: true });
+    // $scope.List = function () {
+      // //  $state.go($state.current, {}, { reload: true });
 
-        var query = "SELECT * FROM ChallanInfo as CI,VenderMaster as VM WHERE CI.vend_id == VM.cid";
-        debugger;
-        $cordovaSQLite.execute(DATABASE, query).then(function (res) {
-            debugger;
-            var pur = []; var ven = [];
-            for (var i = 0; i < res.rows.length; i++) {
-                $scope.PurchaseList.push(res.rows.item(i));
-            }
-            debugger;
+        // var query = "SELECT * FROM ChallanInfo as CI,VenderMaster as VM WHERE CI.vend_id == VM.cid";
+        // debugger;
+        // $cordovaSQLite.execute(DATABASE, query).then(function (res) {
+            // debugger;
+            // var pur = []; var ven = [];
+            // for (var i = 0; i < res.rows.length; i++) {
+                // $scope.PurchaseList.push(res.rows.item(i));
+            // }
+            // debugger;
 
-            debugger;
+            // debugger;
 
-        }, function (err) {
-            console.error(err);
-        });
-    }
+        // }, function (err) {
+            // console.error(err);
+        // });
+    // }
     $scope.InvoiceItems = new Object();
     $scope.CreateInvoice = function (chalanid) {
 
@@ -151,6 +151,23 @@ angular.module('starter.controllers.Purchase', [])
        // alert("praveen");
     }
 
+	$scope.List = function()
+{
+debugger;
+
+DATABASE.database().ref('PurchaseTransactions').child($scope.key).on('value',function(snap){
+
+  snap.forEach(function(s){
+     var a = new Object();
+	 a.Id = s.key;
+	 a.val = s.val();
+    $scope.PurchaseList.push(a);
+  
+  });
+  
+  // SharedDataService.customer = $scope.customers;
+});
+ }
 })
 
 

@@ -12,7 +12,7 @@
             </ion-item>
             <ion-item ng-repeat="list in PurchaseList" class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
                 <div class="item item-button-right">
-                    <h2>{{list.cname}}  -- {{list.challanid}}</h2>
+                    <h2>{{list.val.name}}  -- {{list.id}}</h2>
                     <button ng-click="CreateInvoice(list.challanid)" class="button button-positive">
                         Invoice
                     </button>

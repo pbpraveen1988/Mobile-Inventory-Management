@@ -10,13 +10,14 @@ angular.module('starter.controllers.challans', [])
     $scope.CheckVendor = false;
     $scope.Vendormodal = new Object();   // To open the Modal (popup)
     $scope.FormValues = new Object();
-  $scope.VendorsList = SharedDataService.Vendors;
-  $scope.CompanyList = SharedDataService.Company;
-  $scope.ProductList = SharedDataService.Product;
-  $scope.stocks = SharedDataService.stock;
+    $scope.VendorsList = SharedDataService.Vendors;
+    $scope.CompanyList = SharedDataService.Company;
+    $scope.ProductList = SharedDataService.Product;
+    $scope.stocks = SharedDataService.stock;
+	
     // select customer event
     $scope.ModalForVendorsList = function () {
-debugger;
+    debugger;
         $ionicModal.fromTemplateUrl('my-modal.html', {
             scope: $scope,
             unfocusOnHide: false
@@ -26,49 +27,36 @@ debugger;
         });
     };
 
-
-
-
-
     //Load Customers for Modal
     $scope.LoadVendors = function () {
-        // $scope.VendorsList = [];
-        // var query_vendor = "SELECT * FROM VenderMaster";
-        // $cordovaSQLite.execute(DATABASE, query_vendor, []).then(function (res) {
-            // for (var i = 0; i < res.rows.length; i++) {
-                // $scope.VendorsList.push(res.rows.item(i));
-            // }
-        // }, function (err) {
-            // console.error(err);
-        // });
+	debugger;
+	if($scope.VendorsList.length == 0)
+	{
+		$ionicLoading.show({
+						content: 'Loading',
+						animation: 'fade-in',
+						showBackdrop: true,
+						maxWidth: 200,
+						showDelay: 0
+					});
+				debugger;
+			$scope.VendorsList  = [];
 
-    // };
-{
-$ionicLoading.show({
-                content: 'Loading',
-                animation: 'fade-in',
-                showBackdrop: true,
-                maxWidth: 200,
-                showDelay: 0
-            });
-debugger;
-$scope.VendorsList  = [];
+          DATABASE.database().ref('Vendors').on('value',function(snap){
 
-DATABASE.database().ref('Vendors').on('value',function(snap){
-
-  snap.forEach(function(s){
-     var a = new Object();
-	 a.cid = s.key;
-	 a.val = s.val();
-    $scope.VendorsList.push(a);
-  
-  }).then
-  $ionicLoading.hide();
-  
-  SharedDataService.Vendors = $scope.VendorsList;
+			  snap.forEach(function(s){
+				 var a = new Object();
+				 a.id = s.key;
+				 a.val = s.val();
+				$scope.VendorsList.push(a);
+			  
+			  });
+              $ionicLoading.hide();
+              SharedDataService.Vendors = $scope.VendorsList;
 });
 }
-  };
+}
+ 
 
 
 
@@ -180,17 +168,7 @@ DATABASE.database().ref('Company').on('value',function(snap){
     // Load Products 
     $scope.LoadProducts = function () {
 
-        // $scope.ProductList = [];
-        // var query_customer = "SELECT * FROM RawMaterial";
-        // $cordovaSQLite.execute(DATABASE, query_customer).then(function (res) {
-            // for (var i = 0; i < res.rows.length; i++) {
-
-                // $scope.ProductList.push(res.rows.item(i));
-            // }
-        // }, function (err) {
-            // console.error(err);
-        // });
-    // }
+      
 	$ionicLoading.show({
                 content: 'Loading',
                 animation: 'fade-in',
@@ -198,23 +176,23 @@ DATABASE.database().ref('Company').on('value',function(snap){
                 maxWidth: 200,
                 showDelay: 0
             });
-        
-debugger;
-$scope.ProductList  = [];
-$scope.Product = new Object();
-DATABASE.database().ref('products').on('value',function(snap){
+						
+				debugger;
+				$scope.ProductList  = [];
+				$scope.Product = new Object();
+				DATABASE.database().ref('products').on('value',function(snap){
 
-  snap.forEach(function(s){
-     var a = new Object();
-	 a.pid = s.key;
-	 a.val = s.val();
-    $scope.ProductList.push(a);
-  
-  }).then
-  $ionicLoading.hide();
-  
-  SharedDataService.Product = $scope.ProductList;
-});
+				  snap.forEach(function(s){
+					 var a = new Object();
+					 a.pid = s.key;
+					 a.val = s.val();
+					$scope.ProductList.push(a);
+				  
+				  }).then
+				  $ionicLoading.hide();
+				  
+				  SharedDataService.Product = $scope.ProductList;
+				});
 };
 
     //  Quantity Modal
@@ -233,13 +211,13 @@ DATABASE.database().ref('products').on('value',function(snap){
     // Insert items after selection 
     $scope.addListItem = function (form) {
         debugger;
-        var total = (form.mprince.$modelValue * form.nos.$modelValue) + (((form.mprince.$modelValue * form.nos.$modelValue) * form.tax.$modelValue) / 100);
+        var total = (form.price.$modelValue * form.nos.$modelValue) + (((form.price.$modelValue * form.nos.$modelValue) * form.tax.$modelValue) / 100);
         // var total = ($scope.Product.mprice * form.nos.$modelValue);
         $scope.TotalAmount = $scope.TotalAmount + total;
         $scope.SelectedProducts.push
             ({
-                name: $scope.Product.mname,
-                price: $scope.Product.mprice,
+                name: $scope.Product.val.name,
+                price: $scope.Product.val.price,
                 tax: form.tax.$modelValue,
                 Qty: form.nos.$modelValue,
                 total: total
@@ -263,8 +241,8 @@ DATABASE.database().ref('products').on('value',function(snap){
     $scope.LastSubmit = function () {
         debugger;
         var grandtotal = (($scope.TotalAmount + $scope.FormValues.Shipping - $scope.FormValues.Discount + (($scope.TotalAmount + $scope.FormValues.Shipping - $scope.FormValues.Discount) * $scope.FormValues.Salestax / 100)));
-        alert(grandtotal);
-        if ($scope.Vendor.cid == undefined) {
+       
+        if ($scope.Vendor.id == undefined) {
             $ionicPopup.alert({
                 title: 'Alert',
                 template: 'Please Select Vendor'
@@ -273,10 +251,10 @@ DATABASE.database().ref('products').on('value',function(snap){
         }
         if ($scope.SelectedProducts.length == 0) {
             $ionicPopup.alert({
-                title: 'Alert',
-                template: 'Please Select Products'
-            });
-            return false;
+                 title: 'Alert',
+                 template: 'Please Select Products'
+             });
+             return false;
         }
 
         if ($scope.FormValues.challansno == undefined || $scope.FormValues.challansno == '') {
@@ -286,98 +264,109 @@ DATABASE.database().ref('products').on('value',function(snap){
             });
             return false;
         }
+debugger;
 
+DATABASE.database().ref('Purchase')
+            .push($scope.FormValues).then(function(response){
+		  for(var i = 0 ;i < $scope.SelectedProducts.length;i++)
+		  {
+		  debugger;
+		  var child = angular.copy($scope.SelectedProducts[i]);
+		  
+		   DATABASE.database().ref('PurchaseTransactions').child(response.key).push(child);
+		  }
+		});
 
+        // var CheckQuery = 'SELECT * FROM ChallanInfo WHERE challanid = ?';;
+        // $cordovaSQLite.execute(DATABASE, CheckQuery, [$scope.FormValues.challansno]).then(function (checkres) {
+            // if (checkres.rows.length > 0) {
+                // $ionicLoading.hide();
+                // $ionicPopup.alert({
+                    // title: 'Error.',
+                    // template: 'Challan Number Already Exists'
+                // });
 
-        var CheckQuery = 'SELECT * FROM ChallanInfo WHERE challanid = ?';;
-        $cordovaSQLite.execute(DATABASE, CheckQuery, [$scope.FormValues.challansno]).then(function (checkres) {
-            if (checkres.rows.length > 0) {
-                $ionicLoading.hide();
-                $ionicPopup.alert({
-                    title: 'Error.',
-                    template: 'Challan Number Already Exists'
-                });
+                // return false;
+            // } else {
 
-                return false;
-            } else {
+                // var query = "INSERT INTO ChallanInfo (challanid ,vend_id,comp_id,c_date,d_date, tax,ship,discount,grandtotal,payment,status,term,paidamt) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-                var query = "INSERT INTO ChallanInfo (challanid ,vend_id,comp_id,c_date,d_date, tax,ship,discount,grandtotal,payment,status,term,paidamt) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                // $cordovaSQLite.execute(DATABASE, query, [
+                                                        // $scope.FormValues.challansno,
+                                                        // $scope.Vendor.cid,
+                                                        // $scope.Company.id,
+                                                        // $scope.FormValues.datenew,
+                                                        // $scope.FormValues.datedue,
+                                                        // $scope.FormValues.Salestax,
+                                                        // $scope.FormValues.Shipping,
+                                                        // $scope.FormValues.Discount,
+                                                        // grandtotal,
+                                                        // $scope.FormValues.optionSelected,
+                                                        // $scope.FormValues.status,
+                                                        // $scope.FormValues.term,
+                                                         // $scope.FormValues.PaidAmt
+                // ])
+                // .then(function (res) {
 
-                $cordovaSQLite.execute(DATABASE, query, [
-                                                        $scope.FormValues.challansno,
-                                                        $scope.Vendor.cid,
-                                                        $scope.Company.id,
-                                                        $scope.FormValues.datenew,
-                                                        $scope.FormValues.datedue,
-                                                        $scope.FormValues.Salestax,
-                                                        $scope.FormValues.Shipping,
-                                                        $scope.FormValues.Discount,
-                                                        grandtotal,
-                                                        $scope.FormValues.optionSelected,
-                                                        $scope.FormValues.status,
-                                                        $scope.FormValues.term,
-                                                         $scope.FormValues.PaidAmt
-                ])
-                .then(function (res) {
+                    // //CREATE TABLE "SaleProducts" (saleid,pname,price,tax,nos,total)
 
-                    //CREATE TABLE "SaleProducts" (saleid,pname,price,tax,nos,total)
+                    // var querySP = "INSERT INTO ChallanProducts ( challanid ,materialname ,price ,tax ,nos ,total ) VALUES (?,?,?,?,?,?)";
+                    // for (var i = 0; i < $scope.SelectedProducts.length; i++) {
+                        // $cordovaSQLite.execute(DATABASE, querySP, [
 
-                    var querySP = "INSERT INTO ChallanProducts ( challanid ,materialname ,price ,tax ,nos ,total ) VALUES (?,?,?,?,?,?)";
-                    for (var i = 0; i < $scope.SelectedProducts.length; i++) {
-                        $cordovaSQLite.execute(DATABASE, querySP, [
+                                    // $scope.FormValues.challansno,
+                                    // $scope.SelectedProducts[i].name,
+                                    // $scope.SelectedProducts[i].price,
+                                    // $scope.SelectedProducts[i].tax,
+                                    // $scope.SelectedProducts[i].Qty,
+                                    // $scope.SelectedProducts[i].total
 
-                                    $scope.FormValues.challansno,
-                                    $scope.SelectedProducts[i].name,
-                                    $scope.SelectedProducts[i].price,
-                                    $scope.SelectedProducts[i].tax,
-                                    $scope.SelectedProducts[i].Qty,
-                                    $scope.SelectedProducts[i].total
+                        // ]).then(function (res) {
+                            // console.log("insertId: " + res.insertId);
+                        // }, function (err) {
+                            // console.error(err);
+                        // });
 
-                        ]).then(function (res) {
-                            console.log("insertId: " + res.insertId);
-                        }, function (err) {
-                            console.error(err);
-                        });
+                    // };
+                    // if ($scope.FormValues.optionSelected == "check") {
+                        // // BankInfo (id ,bank_name,name,accountno,checkno)
+                        // var query_bank = "INSERT INTO ChallanBankInfo (challanno, bank_name, name, accountno, checkno) VALUES (?,?,?,?,?)";
 
-                    };
-                    if ($scope.FormValues.optionSelected == "check") {
-                        // BankInfo (id ,bank_name,name,accountno,checkno)
-                        var query_bank = "INSERT INTO ChallanBankInfo (challanno, bank_name, name, accountno, checkno) VALUES (?,?,?,?,?)";
+                        // var str = $scope.FormValues.bankname;
+                        // var res = str.toUpperCase();
 
-                        var str = $scope.FormValues.bankname;
-                        var res = str.toUpperCase();
+                        // $cordovaSQLite.execute(DATABASE, query_bank, [
+                                    // $scope.FormValues.challansno,
+                                    // res,
+                                    // $scope.FormValues.name,
+                                    // $scope.FormValues.accountno,
+                                    // $scope.FormValues.checkno
 
-                        $cordovaSQLite.execute(DATABASE, query_bank, [
-                                    $scope.FormValues.challansno,
-                                    res,
-                                    $scope.FormValues.name,
-                                    $scope.FormValues.accountno,
-                                    $scope.FormValues.checkno
+                        // ])
+						// .then(function (res) {
+                            // console.log("insertId: " + res.insertId);
+                        // }, function (err) {
+                            // console.error(err);
+                        // });
+                    // };
+                    // $ionicLoading.hide();
+                    // $ionicPopup.alert({
+                        // title: 'Saved.',
+                        // template: 'Data Saved successfully'
+                    // });
 
-                        ]).then(function (res) {
-                            console.log("insertId: " + res.insertId);
-                        }, function (err) {
-                            console.error(err);
-                        });
-                    };
-                    $ionicLoading.hide();
-                    $ionicPopup.alert({
-                        title: 'Saved.',
-                        template: 'Data Saved successfully'
-                    });
+                    // $scope.Vendors = null;
+                    // $state.go('app.purchase_list', {}, {
+                    // });
 
-                    $scope.Vendors = null;
-                    $state.go('app.purchase_list', {}, {
-                    });
+                // }, function (err) {
+                    // console.error(err);
+                // });
 
-                }, function (err) {
-                    console.error(err);
-                });
+            // }
 
-            }
-
-        });
-
+        // });
+// end of fucntuion
 
     }
 
