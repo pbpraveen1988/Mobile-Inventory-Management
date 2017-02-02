@@ -195,6 +195,7 @@ DATABASE.database().ref('Company').on('value',function(snap){
 				});
 };
 
+
     //  Quantity Modal
     $scope.SelectProduct = function (product) {
         $scope.Product = product;
@@ -265,7 +266,7 @@ DATABASE.database().ref('Company').on('value',function(snap){
             return false;
         }
 debugger;
-
+$scope.FormValues.Date = $scope.FormValues.datenew.toString();
 DATABASE.database().ref('Purchase')
             .push($scope.FormValues).then(function(response){
 		  for(var i = 0 ;i < $scope.SelectedProducts.length;i++)

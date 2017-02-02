@@ -122,9 +122,9 @@ angular.module('starter.controllers.stock', [])
     };
 
 	
-	$scope.SelectCompany = function (customer) {
+	$scope.SelectCompany = function (company) {
 
-        $scope.Company = customer;
+        $scope.Company = company;
          $scope.CompanyModal.hide();
     };
   

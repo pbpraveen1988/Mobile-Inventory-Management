@@ -17,15 +17,15 @@
                                     <span style="background-color: lightgoldenrodyellow">
                                         <u><b>Customer Detail</b></u>
                                     </span>
-                                    <p style="margin-bottom: -24px;">{{Customer.cname}}</p>
+                                    <p style="margin-bottom: -24px;">{{Customer.val.name}}</p>
                                     <p style="margin-bottom: -24px;">
-                                        {{Customer.caddress}} , {{Customer.cstate}}
+                                        {{Customer.val.address}} , {{Customer.val.state}}
                                     </p>
                                     <p style="margin-bottom: -24px;">
-                                        {{Customer.ccontact}}
+                                        {{Customer.val.contact}}
                                     </p>
                                     <p style="margin-bottom: -24px;">
-                                        {{Customer.cemail}}
+                                        {{Customer.val.email}}
                                     </p>
                                 </div>
                             </button>
@@ -47,15 +47,15 @@
                                     <span style="background-color: lightgoldenrodyellow">
                                         <u><b>Company Detail</b></u>
                                     </span>
-                                    <p style="margin-bottom: -24px;"><b>{{Company.name}}</b></p>
+                                    <p style="margin-bottom: -24px;"><b>{{Company.val.name}}</b></p>
                                     <p style="margin-bottom: -24px;">
-                                        {{Company.address}} , {{Company.dist}}
+                                        {{Company.val.address}} , {{Company.val.city}}
                                     </p>
                                     <p style="margin-bottom: -24px;">
-                                        {{Company.contact}}
+                                        {{Company.val.contact}}
                                     </p>
                                     <p style="margin-bottom: -24px;">
-                                        {{Company.email}}
+                                        {{Company.val.email}}
                                     </p>
                                 </div>
                             </button>
@@ -124,7 +124,7 @@
                         <div class="row responsive-sm">
                             <div class="list">
                                 <div class="row">
-                                    <div class="col"><b>{{list.name}}</b></div>
+                                    <div class="col"><b>{{list.val.name}}</b></div>
                                     <div class="col">
                                         <button class="ion-close-circled" data-pack="default" data-tags="delete, trash, kill, x" ng-click="RemoveProductCount(list)"></button>
                                     </div>
@@ -139,7 +139,7 @@
                     </ion-item>
                 </ion-list>
             </div>
-            <!-- CREATE TABLE "RawMaterial" ("mid" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "mname" VARCHAR, "mtype" VARCHAR,"mprice" FLOAT, "mdescription" TEXT, "vat" FLOAT)')	 -->
+           	
 
             <div class="list list-inset">
                 <div class="row">
@@ -244,7 +244,7 @@
                     <button class="button button-full button-positive" ng-click="Customermodal.hide()">Close</button>
                     <ion-list>
                         <ion-item ng-repeat="customer in CustomersList" ng-click="SelectCustomer(customer)">
-                            {{customer.cname}}
+                            {{customer.val.name}}
                         </ion-item>
                     </ion-list>
                 </ion-content>
@@ -260,7 +260,7 @@
                     <button class="button button-full button-positive" ng-click="ProductModal.hide()">Close</button>
                     <ion-list>
                         <ion-item ng-repeat="list in ProductList" ng-click="SelectProduct(list)">
-                            {{list.pname}}
+                            {{list.val.name}}
                         </ion-item>
                     </ion-list>
                 </ion-content>
@@ -283,7 +283,7 @@
                                         <label class="item item-input">
                                             <input type="number" min='0' placeholder="Quantity" ng-model="nos" name="nos" required>
                                         </label>
-                                        <label class="item item-input" ng-model="Product2.pprice">{{Product.pprice}}</label>
+                                        <label class="item item-input" ng-model="Product2.price">{{Product.price}}</label>
                                         <label class="item item-input">
                                             <input type="number" placeholder="Tax(%)" min='0' ng-model="tax" name="tax" required step="0.01">
                                         </label>
@@ -306,8 +306,8 @@
                 <ion-content class="padding">
                     <button class="button button-full button-positive" ng-click="CompanyModal.hide()">Close</button>
                     <ion-list>
-                        <ion-item ng-repeat="customer in CompaniesList" ng-click="SelectCompany(customer)">
-                            {{customer.name}}
+                        <ion-item ng-repeat="customer in CompanyList" ng-click="SelectCompany(customer)">
+                            {{customer.val.name}}
                         </ion-item>
                     </ion-list>
                 </ion-content>

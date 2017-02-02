@@ -69,8 +69,8 @@
                     <ion-content class="padding">
                         <button class="button button-full button-positive" ng-click="CompanyModal.hide()">Close</button>
                         <ion-list>
-                            <ion-item ng-repeat="customer in CompanyList" ng-click="SelectCompany(customer)">
-                                {{customer.val.name}}
+                            <ion-item ng-repeat="company in CompanyList" ng-click="SelectCompany(company)">
+                                {{company.val.name}}
                             </ion-item>
                         </ion-list>
                     </ion-content>

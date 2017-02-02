@@ -173,7 +173,7 @@ DATABASE.database().ref('rawmaterials').on('value',function(snap){
 
 //	DELETE FROM table_name WHERE some_column=some_value;
 
-    $scope.Delete = function(mid) {
+    $scope.Delete = function(audi) {
 		 
 		var confirmPopup = $ionicPopup.confirm({
                             title: 'Delete...',
@@ -184,7 +184,7 @@ DATABASE.database().ref('rawmaterials').on('value',function(snap){
                                 // var query = "DELETE FROM RawMaterial WHERE mid = ?";
 								
 								// $cordovaSQLite.execute(DATABASE, query, [mid])
-								DATABASE.database().ref('rawmaterials').child(mid).remove().then(function(res) {
+								DATABASE.database().ref('rawmaterials').child(audi).remove().then(function(res) {
 									
 									console.log("Deleted");
 									$state.go('app.material_list',{},{reload:true});
