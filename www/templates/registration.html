@@ -1,0 +1,30 @@
+<ion-view view-title="Registration" >
+  <ion-content class="padding">
+  
+  <div class= "list" style="text-align:center;  margin-top:100px"><img src="img/stack.png" alt="Mountain View"></div>
+      <div class="card">
+          <div class="list">
+  <label class="item item-input item-stacked-label">
+    <span class="input-label">First Name</span>
+    <input type="text" placeholder="First Name" ng-model="data.firstname">
+  </label>
+  <label class="item item-input item-stacked-label">
+    <span class="input-label">Last Name</span>
+    <input type="text" placeholder="Last Name" ng-model="data.lastname">
+  </label>
+  <label class="item item-input item-stacked-label">
+    <span class="input-label">Email</span>
+    <input type="text" placeholder="Email" ng-model="data.email">
+  </label>
+  <label class="item item-input item-stacked-label">
+    <span class="input-label">Password</span>
+    <input type="text" placeholder="Email" ng-model="data.password">
+  </label>
+</div>
+      </div>
+      <button type="button" class="button button-block button-calm" ng-click="register()">Create Account </button>
+	  <div style="text-align:center; margin-top:20px">
+	  <h4>Powered By-Stack Infotech Pvt.Ltd.</h4>
+	  <a target="_blank" href="https://stackinfotech.com"><h4>www.stackinfotech.com</h4></a></div>
+  </ion-content>
+</ion-view>

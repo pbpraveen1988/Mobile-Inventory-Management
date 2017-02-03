@@ -155,7 +155,7 @@ angular.module('starter.controllers.Purchase', [])
 {
 debugger;
 
-DATABASE.database().ref('PurchaseTransactions').child($scope.key).on('value',function(snap){
+   DATABASE.database().ref('Customers').child($scope.key).orderByChild('name').on('value',function(snap){
 
   snap.forEach(function(s){
      var a = new Object();
