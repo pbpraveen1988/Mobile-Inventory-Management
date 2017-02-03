@@ -262,16 +262,22 @@
                                     <div class="item item-input-inset">
                                         <div class="list">
                                             <label class="item item-input">
-                                                <input type="number" min='0' placeholder="Quantity" ng-model="nos" name="nos" required>
+											<div class="input-label" >
+	                                      Quantity </div>
+                                                <input type="number" min='0'  ng-model="nos" name="nos" required>
                                             </label>
 											<label >
                                                 available stock {{Product.val.stock}} {{Product.val.unit}}
                                             </label>
                                             <label class="item item-input">
-                                                <input type="number" min='0' placeholder="Price" ng-model="Product.val.price" name="price" required>
+											<div class="input-label" >
+	                                      Price </div>
+                                                <input type="number" min='0'  ng-model="Product.val.price" name="price" required>
                                             </label>
                                             <label class="item item-input">
-                                                <input type="number" placeholder="Tax(%)" min='0' ng-model="Product.val.vat" name="tax" required step="0.01">
+											<div class="input-label" >
+	                                      Tax% </div>
+                                                <input type="number"  min='0' ng-model="Product.val.vat" name="tax" required step="0.01">
                                             </label>
                                         </div>
                                     </div>

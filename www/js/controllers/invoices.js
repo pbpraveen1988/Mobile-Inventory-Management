@@ -209,13 +209,13 @@ DATABASE.database().ref('Company').on('value',function(snap){
     // Insert items after selection 
     $scope.addListItem = function (form) {
         debugger;
-        var total = ($scope.Product.pprice * form.nos.$modelValue) + ((($scope.Product.pprice * form.nos.$modelValue) * form.tax.$modelValue) / 100);
+        var total = ($scope.Product.val.price * form.nos.$modelValue) + ((($scope.Product.val.price * form.nos.$modelValue) * form.tax.$modelValue) / 100);
         // var total = ($scope.Product.mprice * form.nos.$modelValue);
         $scope.TotalAmount = $scope.TotalAmount + total;
         $scope.SelectedProducts.push
             ({
-                name: $scope.Product.pname,
-                price: $scope.Product.pprice,
+                name: $scope.Product.val.name,
+                price: $scope.Product.val.price,
                 tax: form.tax.$modelValue,
                 Qty: form.nos.$modelValue,
                 total: total.toFixed(2)
@@ -314,6 +314,9 @@ DATABASE.database().ref('Company').on('value',function(snap){
          }
 		 debugger;
 $scope.FormValues.Date = $scope.FormValues.datenew.toString();
+$scope.FormValues.dueDate = $scope.FormValues.datedue.toString();
+$scope.FormValues.ShippingDate = $scope.FormValues.shippingdate.toString();
+
 DATABASE.database().ref('Sales')
             .push($scope.FormValues).then(function(response){
 		  for(var i = 0 ;i < $scope.SelectedProducts.length;i++)

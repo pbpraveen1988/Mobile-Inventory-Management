@@ -124,7 +124,7 @@
                         <div class="row responsive-sm">
                             <div class="list">
                                 <div class="row">
-                                    <div class="col"><b>{{list.val.name}}</b></div>
+                                    <div class="col"><b>{{list.name}}</b></div>
                                     <div class="col">
                                         <button class="ion-close-circled" data-pack="default" data-tags="delete, trash, kill, x" ng-click="RemoveProductCount(list)"></button>
                                     </div>
@@ -281,11 +281,21 @@
                                 <div class="item item-input-inset">
                                     <div class="list">
                                         <label class="item item-input">
-                                            <input type="number" min='0' placeholder="Quantity" ng-model="nos" name="nos" required>
+										<div class="input-label" >
+	                                      Quantity </div>
+                                            <input type="number" min='0'  ng-model="nos" name="nos" required>
                                         </label>
-                                        <label class="item item-input" ng-model="Product2.price">{{Product.price}}</label>
+                                        <!-- <label class="item item-input" ng-model="Product2.price">{{Product.val.price}}</label> -->
+										 <label class="item item-input">
+                                         <div class="input-label" >
+	                                      Product Price </div>
+	
+                                         <input type="number" ng-model="Product.val.price" />
+                                         </label>
                                         <label class="item item-input">
-                                            <input type="number" placeholder="Tax(%)" min='0' ng-model="tax" name="tax" required step="0.01">
+										<div class="input-label" >
+	                                      Tax% </div>
+                                            <input type="number"  min='0' ng-model="tax" name="tax" required step="0.01">
                                         </label>
                                     </div>
                                 </div>
