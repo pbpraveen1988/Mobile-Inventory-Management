@@ -12,10 +12,10 @@
  
   <div class="list">
  
-    <label class="item item-input" ng-class="{ 'has-errors' : authorizationForm.username.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.username.$valid && authorizationForm.$submitted}">
-      <input type="text" name="username"  ng-model="User.UserName" ng-minlength="5" ng-maxlength="20" required placeholder="UserName">
+    <label class="item item-input" ng-class="{ 'has-errors' : authorizationForm.email.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.email.$valid && authorizationForm.$submitted}">
+      <input type="text" name="email"  ng-model="User.email"  required placeholder="Email">
     </label>
-  <div class="error-container" ng-show="authorizationForm.username.$error && authorizationForm.$submitted" ng-messages="authorizationForm.username.$error">
+  <div class="error-container" ng-show="authorizationForm.email.$error && authorizationForm.$submitted" ng-messages="authorizationForm.email.$error">
               <div class="error" ng-message="required">
                 <i class="ion-information-circled"></i> 
                 This field is required!

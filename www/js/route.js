@@ -8,6 +8,7 @@ app.config(function ($stateProvider,
   .state('login', { url: '/login', templateUrl: 'templates/login.html', controller: 'AccountController', cache: false })
   .state('app.list', { url: '/list', cache: false, views: { 'menuContent': { templateUrl: 'templates/list.html' } } })
   .state('registration', { url: '/registration', templateUrl: 'templates/registration.html', controller: 'AccountController', cache: false })
+  .state('forgetpassword', { url: '/forgetpassword', templateUrl: 'templates/forgetpassword.html', controller: 'AccountController', cache: false })
   //Raw Material
 
   .state('app.material_list', { url: '/material_list', cache: false, views: { 'menuContent': { templateUrl: 'templates/raw_material/list.html' } } })
