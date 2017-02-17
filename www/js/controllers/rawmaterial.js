@@ -4,6 +4,7 @@ angular.module('starter.controllers.rawmaterial', [])
 	
 	
 	$scope.RawMaterial = new Object();
+	$scope.CompaniesList = new Array();
 	$scope.RawMaterialList = new Array();
 	$scope.EditId = $stateParams.rawid;
 	$scope.RawMaterials = SharedDataService.RawMaterial;
@@ -130,6 +131,32 @@ DATABASE.database().ref('rawmaterials').on('value',function(snap){
   $ionicLoading.hide();
   
   SharedDataService.RawMaterial = $scope.RawMaterials;
+});
+}
+$scope.SelectCompany = function()
+{
+$ionicLoading.show({
+                content: 'Loading',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 200,
+                showDelay: 0
+            });
+debugger;
+
+
+DATABASE.database().ref('Company').on('value',function(snap){
+
+  snap.forEach(function(s){
+     var a = new Object();
+	 a.mid = s.key;
+	 a.val = s.val();
+    $scope.CompaniesList.push(a);
+  
+  }).then
+  $ionicLoading.hide();
+  
+ 
 });
 }
 

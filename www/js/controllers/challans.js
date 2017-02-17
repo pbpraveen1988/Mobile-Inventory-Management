@@ -198,6 +198,8 @@ DATABASE.database().ref('Company').on('value',function(snap){
 
     //  Quantity Modal
     $scope.SelectProduct = function (product) {
+	debugger;
+	console.log(product);
         $scope.Product = product;
         $ionicModal.fromTemplateUrl('nos.html', {
             scope: $scope,
@@ -217,6 +219,7 @@ DATABASE.database().ref('Company').on('value',function(snap){
         $scope.TotalAmount = $scope.TotalAmount + total;
         $scope.SelectedProducts.push
             ({
+			    pid  : $scope.Product.pid,
                 name: $scope.Product.val.name,
                 price: $scope.Product.val.price,
                 tax: form.tax.$modelValue,
@@ -243,13 +246,38 @@ DATABASE.database().ref('Company').on('value',function(snap){
         debugger;
         var grandtotal = (($scope.TotalAmount + $scope.FormValues.Shipping - $scope.FormValues.Discount + (($scope.TotalAmount + $scope.FormValues.Shipping - $scope.FormValues.Discount) * $scope.FormValues.Salestax / 100)));
        
-        if ($scope.Vendor.id == undefined) {
+        if ($scope.FormValues.Vendor == undefined) {
             $ionicPopup.alert({
                 title: 'Alert',
                 template: 'Please Select Vendor'
             });
             return false;
         }
+		
+		if ($scope.Company == undefined) {
+            $ionicPopup.alert({
+                title: 'Alert',
+                template: 'Please Select Company'
+            });
+            return false;
+        }
+		
+		
+		if ($scope.FormValues.datenew == undefined || $scope.FormValues.datenew == '') {
+            $ionicPopup.alert({
+                title: 'Alert',
+                template: 'Please Enter Purchase Date'
+            });
+            return false;
+        }
+		if ($scope.FormValues.status == undefined || $scope.FormValues.status == '') {
+            $ionicPopup.alert({
+                title: 'Alert',
+                template: 'Please Enter Status'
+            });
+            return false;
+        }
+		
         if ($scope.SelectedProducts.length == 0) {
             $ionicPopup.alert({
                  title: 'Alert',
@@ -265,6 +293,20 @@ DATABASE.database().ref('Company').on('value',function(snap){
             });
             return false;
         }
+		 if ($scope.FormValues.PaidAmt == undefined || $scope.FormValues.PaidAmt == '') {
+            $ionicPopup.alert({
+                title: 'Alert',
+                template: 'Please Enter Paid Amount'
+            });
+            return false;
+        }
+		 if ($scope.FormValues.optionSelected == undefined || $scope.FormValues.optionSelected == '') {
+            $ionicPopup.alert({
+                title: 'Alert',
+                template: 'Please Enter Payment Option'
+            });
+            return false;
+        }
 debugger;
 $scope.FormValues.Date = $scope.FormValues.datenew.toString();
 DATABASE.database().ref('Purchase')
@@ -277,98 +319,6 @@ DATABASE.database().ref('Purchase')
 		   DATABASE.database().ref('PurchaseTransactions').child(response.key).push(child);
 		  }
 		});
-
-        // var CheckQuery = 'SELECT * FROM ChallanInfo WHERE challanid = ?';;
-        // $cordovaSQLite.execute(DATABASE, CheckQuery, [$scope.FormValues.challansno]).then(function (checkres) {
-            // if (checkres.rows.length > 0) {
-                // $ionicLoading.hide();
-                // $ionicPopup.alert({
-                    // title: 'Error.',
-                    // template: 'Challan Number Already Exists'
-                // });
-
-                // return false;
-            // } else {
-
-                // var query = "INSERT INTO ChallanInfo (challanid ,vend_id,comp_id,c_date,d_date, tax,ship,discount,grandtotal,payment,status,term,paidamt) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
-                // $cordovaSQLite.execute(DATABASE, query, [
-                                                        // $scope.FormValues.challansno,
-                                                        // $scope.Vendor.cid,
-                                                        // $scope.Company.id,
-                                                        // $scope.FormValues.datenew,
-                                                        // $scope.FormValues.datedue,
-                                                        // $scope.FormValues.Salestax,
-                                                        // $scope.FormValues.Shipping,
-                                                        // $scope.FormValues.Discount,
-                                                        // grandtotal,
-                                                        // $scope.FormValues.optionSelected,
-                                                        // $scope.FormValues.status,
-                                                        // $scope.FormValues.term,
-                                                         // $scope.FormValues.PaidAmt
-                // ])
-                // .then(function (res) {
-
-                    // //CREATE TABLE "SaleProducts" (saleid,pname,price,tax,nos,total)
-
-                    // var querySP = "INSERT INTO ChallanProducts ( challanid ,materialname ,price ,tax ,nos ,total ) VALUES (?,?,?,?,?,?)";
-                    // for (var i = 0; i < $scope.SelectedProducts.length; i++) {
-                        // $cordovaSQLite.execute(DATABASE, querySP, [
-
-                                    // $scope.FormValues.challansno,
-                                    // $scope.SelectedProducts[i].name,
-                                    // $scope.SelectedProducts[i].price,
-                                    // $scope.SelectedProducts[i].tax,
-                                    // $scope.SelectedProducts[i].Qty,
-                                    // $scope.SelectedProducts[i].total
-
-                        // ]).then(function (res) {
-                            // console.log("insertId: " + res.insertId);
-                        // }, function (err) {
-                            // console.error(err);
-                        // });
-
-                    // };
-                    // if ($scope.FormValues.optionSelected == "check") {
-                        // // BankInfo (id ,bank_name,name,accountno,checkno)
-                        // var query_bank = "INSERT INTO ChallanBankInfo (challanno, bank_name, name, accountno, checkno) VALUES (?,?,?,?,?)";
-
-                        // var str = $scope.FormValues.bankname;
-                        // var res = str.toUpperCase();
-
-                        // $cordovaSQLite.execute(DATABASE, query_bank, [
-                                    // $scope.FormValues.challansno,
-                                    // res,
-                                    // $scope.FormValues.name,
-                                    // $scope.FormValues.accountno,
-                                    // $scope.FormValues.checkno
-
-                        // ])
-						// .then(function (res) {
-                            // console.log("insertId: " + res.insertId);
-                        // }, function (err) {
-                            // console.error(err);
-                        // });
-                    // };
-                    // $ionicLoading.hide();
-                    // $ionicPopup.alert({
-                        // title: 'Saved.',
-                        // template: 'Data Saved successfully'
-                    // });
-
-                    // $scope.Vendors = null;
-                    // $state.go('app.purchase_list', {}, {
-                    // });
-
-                // }, function (err) {
-                    // console.error(err);
-                // });
-
-            // }
-
-        // });
-// end of fucntuion
-
     }
 
 

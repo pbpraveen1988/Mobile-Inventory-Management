@@ -6,7 +6,26 @@
         <a href="#/app/material_add" class="button button-icon button-clear ion-plus"></a>
     </ion-nav-buttons>
 <ion-content>
-	 <ion-list>
+
+
+<div class="list">
+		<label class="item item-input item-select">
+    <div class="input-label" >
+     Select Comapany
+    </div>
+    <select  ng-init="SelectCompany()" >
+      <option   ng-repeat="Company in CompaniesList"  >{{Company.val.name}}</option>
+      
+    </select>
+	</label>
+	</div>
+	<div class="list list-inset">
+  <label class="item item-input">
+    <i class="icon ion-search placeholder-icon"></i>
+    <input type="text" placeholder="Search">
+  </label>
+</div>
+	<!--  <ion-list>
 	 <ion-item class="item-remove-animate item-avatar item-icon-right" ng-if="RawMaterials.length == 0">
 	 	  No Records Found !
 	 </ion-item>	 
@@ -23,6 +42,6 @@
 		   </ion-option-button>
 		  </div>
       </ion-item>
-    </ion-list>
+    </ion-list> -->
   </ion-content>
 </ion-view>

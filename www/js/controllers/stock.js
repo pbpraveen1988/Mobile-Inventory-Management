@@ -10,20 +10,21 @@ angular.module('starter.controllers.stock', [])
      $scope.CompanyModal = new Object();
 	 $scope.StockModal = new Object();
 	 $scope.data = {};
-	 $scope.CompanyList = SharedDataService.Company;
+	 $scope.CompanyList = SharedDataService.Company; // HOW TO USE SHAREDATASERVICES//
 	 $scope.products = SharedDataService.product;
 	 $scope.stocks = SharedDataService.stock;
 	 $scope.stocks = SharedDataService.stock;	
+	 
 	 $scope.RawMaterials = SharedDataService.RawMaterial;	
-	 $scope.StockValue = 0;
+	 $scope.StockValue = 0; // WHY WE HAVE ASSIGNED II TO ZERO.// 
 	$scope.Selectstock1 = function(type)
 	{
 		if(type == 'products')
 		{
 			$scope.StockType = "Products";
 			debugger;
-			$scope.stocks  = [];
-			$scope.stocktype = new Object();
+			// $scope.stocks  = [];
+			// $scope.stocktype = new Object();
             $ionicLoading.show({
 				content: 'Loading',
 				animation: 'fade-in',
@@ -57,7 +58,7 @@ angular.module('starter.controllers.stock', [])
 		 });
 			debugger;
 			$scope.stocks  = [];
-			DATABASE.database().ref('rawmaterials').on('value',function(snap){
+			DATABASE.database().ref('rawmaterials').on('value',function(snap){ //???????//
             $scope.stocks  = [];
 			  snap.forEach(function(s){
 				 var a = new Object();
@@ -136,7 +137,7 @@ angular.module('starter.controllers.stock', [])
 					  .Where(function (x) { return x.id == $scope.data.selectedstock })
 					  .SingleOrDefault();
 					$scope.data.StockValue = $scope.data.Stock.val.stock;  
-					
+			// SUPPOSE I PUSH ANY DATA IN $SCOPE.DATA.STOCK; CAN I USE THAT $SCOPE.DATA.STOCK ANYWHERE IN ASSOCIATEDSD HTML//		
  
   }
    
@@ -162,7 +163,7 @@ if($scope.StockType == "Raw Materials")
   
   DATABASE.database().ref('rawmaterials')
   .child($scope.data.selectedstock).set($scope.data.Stock.val)
-  .then(function(e){
+  .then(function(e){          //??????//
   
   $ionicPopup.alert({
                                   title: 'Saved.',

@@ -248,6 +248,13 @@ DATABASE.database().ref('Company').on('value',function(snap){
              });
              return false;
          }
+		 if ($scope.FormValues.datenew == undefined || $scope.FormValues.datenew == '') {
+            $ionicPopup.alert({
+                title: 'Alert',
+                template: 'Please Enter Purchase Date'
+            });
+            return false;
+        }
          if ($scope.SelectedProducts.length == 0) {
              $ionicPopup.alert({
                  title: 'Alert',
@@ -255,6 +262,7 @@ DATABASE.database().ref('Company').on('value',function(snap){
              });
              return false;
          }
+		 
 
          if ($scope.FormValues.challansno == undefined || $scope.FormValues.challansno == '') {
              $ionicPopup.alert({

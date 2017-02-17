@@ -1,4 +1,4 @@
-<ion-view ng-controller="stock" title="Stock">
+   <ion-view ng-controller="stock" title="Stock">
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
     </ion-nav-buttons>
@@ -38,8 +38,8 @@
     <div class="input-label" >
       Stock Name
     </div>
-    <select ng-model="data.selectedstock" ng-change="GetStock()">
-      <option  value="{{stock.id}}"  ng-repeat="stock in stocks"  >{{stock.val.name}}</option>
+    <select ng-model="data.selectedstock" ng-change="GetStock()"><!-- WHAT IS NG-CHANGE -->
+      <option  value="{{stock.id}}"  ng-repeat="stock in stocks"  >{{stock.val.name}}</option> <!-- WHAT IS VALUE -->
       
     </select>
 	</label>

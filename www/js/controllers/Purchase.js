@@ -4,6 +4,8 @@ angular.module('starter.controllers.Purchase', [])
     debugger;
     $scope.PurchaseList = new Array();
     $scope.Purchase = new Object();
+	$scope.VendorsList  = [];
+	$scope.CompanyList  = [];
     var vm = this;
     setDefaultsForPdfViewer($scope);
     $scope.pdfUrl = null;
@@ -154,8 +156,8 @@ angular.module('starter.controllers.Purchase', [])
 	$scope.List = function()
 {
 debugger;
-
-   DATABASE.database().ref('Customers').child($scope.key).orderByChild('name').on('value',function(snap){
+// $scope.data.Vendorname = DATABASE.database().currentUser.uid;
+   DATABASE.database().ref('Purchase').on('value',function(snap){
 
   snap.forEach(function(s){
      var a = new Object();
@@ -168,6 +170,91 @@ debugger;
   // SharedDataService.customer = $scope.customers;
 });
  }
+ 
+ // $scope.LoadVendorslist = function () {
+        
+			// $ionicLoading.show({
+							// content: 'Loading',
+							// animation: 'fade-in',
+							// showBackdrop: true,
+							// maxWidth: 200,
+							// showDelay: 0
+						// });
+			// debugger;
+			// $scope.CompanyList  = [];
+			// DATABASE.database().ref('Vendors').on('value',function(snap){
+			  // snap.forEach(function(s){
+				 // var a = new Object();
+				 // a.id = s.key;
+				 // a.val = s.val();
+				// $scope.VendorsList.push(a);
+			  
+			  // })
+			  
+			    // $ionicLoading.hide();
+			// })
+			  
+			  
+    // };
+	
+	$scope.LoadCompanylist = function () {
+        
+		
+			$ionicLoading.show({
+							content: 'Loading',
+							animation: 'fade-in',
+							showBackdrop: true,
+							maxWidth: 200,
+							showDelay: 0
+						});
+			debugger;
+			
+			DATABASE.database().ref('Company').on('value',function(snap){
+			  snap.forEach(function(s){
+				 var a = new Object();
+				 a.id = s.key;
+				 a.val = s.val();
+			$scope.CompanyList.push(a);
+			
+			  })
+			  
+			})
+			  DATABASE.database().ref('Vendors').on('value',function(snap){
+			  snap.forEach(function(s1){
+				 var a1 = new Object();
+				 a1.id = s1.key;
+				 a1.val = s1.val();
+				$scope.VendorsList.push(a1);
+			  
+			   })
+			  
+			    
+			})			 
+			 $ionicLoading.hide(); 
+    };
+	
+	$scope.viewvendor = function () {
+            debugger;
+			
+			
+            $scope.Vendor = Enumerable.From($scope.VendorsList)
+                  .Where(function (x) { return x.Id == $stateParams.Vendorid })
+                  .FirstOrDefault();
+				  
+				 
+				  }
+				  
+				  $scope.GetVendor = function() {
+	debugger;
+		
+					
+		$scope.data.Vendor = Enumerable.From($scope.VendorList)
+					  .Where(function (x) { return x.id == $scope.Vendor.id })
+					  .SingleOrDefault();
+					// $scope.data.StockValue = $scope.data.Stock.val.stock;  
+					
+ 
+  }
 })
 
 
