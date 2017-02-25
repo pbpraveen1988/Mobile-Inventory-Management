@@ -137,7 +137,7 @@ angular.module('starter.controllers.stock', [])
 					  .Where(function (x) { return x.id == $scope.data.selectedstock })
 					  .SingleOrDefault();
 					$scope.data.StockValue = $scope.data.Stock.val.stock;  
-			// SUPPOSE I PUSH ANY DATA IN $SCOPE.DATA.STOCK; CAN I USE THAT $SCOPE.DATA.STOCK ANYWHERE IN ASSOCIATEDSD HTML//		
+					
  
   }
    
