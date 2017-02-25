@@ -1,0 +1,51 @@
+<ion-view title="Product Details" ng-controller="products" ng-init="Edit()">
+<ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
+    </ion-nav-buttons>
+	<ion-nav-buttons side="right">
+        <a class="button button-icon button-clear ion-edit" href="#/app/product_edit/{{EditId}}"></a>
+    </ion-nav-buttons>
+	
+	
+  <ion-content>
+	<h1 ng-model= "Products.name" style="text-align: center;"> {{Products.name}}</h1>
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">Product Name</span>
+			<label  ng-model= "Products.name">{{Products.name}}</label>
+		  </label>
+		</div>  
+		  
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">Product Description</span>
+			<label  ng-model= "Products.description">{{Products.description}}</label>
+		  </label>
+		</div>  
+		  <div class="list">
+		  <label class="item item-input">
+			<span class="input-label">Product Unit</span>
+			<label  ng-model= "Products.unit">{{Products.unit}}</label>
+		  </label>
+		</div>  
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">Sale Price</span>
+			<label  ng-model= "Products.price">{{Products.price}}</label>
+		  </label>
+		</div>  
+		
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">Vat (in %)</span>
+			<label  ng-model= "Products.vat">{{Products.vat}}</label>
+		  </label>
+		</div>
+		
+	<!--
+		<label class="item">
+			<button class="button button-block button-positive" type="submit" >Update</button>
+		</label>
+	-->
+  </ion-content>
+</ion-view>

@@ -1,0 +1,62 @@
+<ion-view title="Customer Details" ng-controller="customers" ng-init="Edit()">
+<ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
+    </ion-nav-buttons>
+	
+	<ion-nav-buttons side="right">
+        <a href="#/app/customer_edit/{{EditId}}" class="button button-icon button-clear ion-edit"></a>
+    </ion-nav-buttons>
+	
+  <ion-content>
+	<h1 ng-model= "Customers.name" style="text-align: center;"> {{Customers.name}}</h1>
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">Customer Name</span>
+			<label  ng-model="Customers.name">{{Customers.name}}</label>
+		  </label>
+		</div>  
+		  
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">Mobile</span>
+			<label  ng-model= "Products.description">{{Customers.contact}}</label>
+		  </label>
+		</div>  
+		  
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">Email</span>
+			<label  ng-model= "Products.price">{{Customers.email}}</label>
+		  </label>
+		</div>  
+		
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">billing_address</span>
+			<label  ng-model= "Products.vat">{{Customers.address}}</label>
+		  </label>
+		</div>
+		
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">billing_city</span>
+			<label  ng-model= "Products.vat">{{Customers.city}}</label>
+		  </label>
+		</div>
+		
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">billing_state</span>
+			<label  ng-model= "Products.vat">{{Customers.state}}</label>
+		  </label>
+		</div>
+		
+		<div class="list">
+		  <label class="item item-input">
+			<span class="input-label">pincode</span>
+			<label  ng-model= "Products.vat">{{Customers.pincode}}</label>
+		  </label>
+		</div>
+
+  </ion-content>
+</ion-view>

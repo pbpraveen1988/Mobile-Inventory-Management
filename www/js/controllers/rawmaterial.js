@@ -11,8 +11,6 @@ angular.module('starter.controllers.rawmaterial', [])
 /* Insert data in RawMaterial */	
 	$scope.Save = function (rawmaterialForm) {
 	
-	
-	
 	    if (rawmaterialForm.$valid) {
 	        $ionicLoading.show({
 	            content: 'Loading',
@@ -82,32 +80,23 @@ angular.module('starter.controllers.rawmaterial', [])
 	    }
   };
 			
-	      
-	        
-			      
-					
-					      
-						   
-					
-					
-                             
-                          
-  
-  
-/* Select data in RawMaterial */  
-    // $scope.Select = function() { 
+	 $scope.ShowStock = function()
+{
+    debugger;
+  DATABASE.database().child("stock")
+  .orderByChild('raw')
+ on("value",function(snap){
+debugger;
+  var s =  snap.val();
+s.forEach(function(sss){});
+debugger;
+  }).catch(function(evt){
+      alert(evt);
+  });
 
-    // var query = "SELECT * FROM RawMaterial"; // where $stateParams.rawid
-    // $scope.RawMaterialList = new Array();
-	// $cordovaSQLite.execute(DATABASE, query).then(function(res) {
-		// for(var i = 0; i < res.rows.length; i++){			
-			// $scope.RawMaterialList.push(res.rows.item(i));
-		// }
-    // }, function (err) {
-      // console.error(err);
-    // });
-  // };
-  $scope.Select = function()
+}     
+
+$scope.Select = function()
 {
 $ionicLoading.show({
                 content: 'Loading',
@@ -133,6 +122,7 @@ DATABASE.database().ref('rawmaterials').on('value',function(snap){
   SharedDataService.RawMaterial = $scope.RawMaterials;
 });
 }
+
 $scope.SelectCompany = function()
 {
 $ionicLoading.show({
@@ -172,33 +162,23 @@ DATABASE.database().ref('Company').on('value',function(snap){
 
   
   
-  $scope.DisplayData = function(){
+  $scope.DisplayData = function()
+  {
   debugger;
-  DATABASE.database().ref('rawmaterials').child($stateParams.rawid).on('value',function(snapshot){
+  DATABASE.database().ref('rawmaterials')
+  .child($stateParams.rawid).on('value',
+  function(snapshot){
   
-  debugger;
+ 
     $scope.RawMaterial = snapshot.val();
   
-  debugger;
+  
   });
   
-	 // var query = "SELECT * FROM RawMaterial where mid = " + $stateParams.rawid  ; // where $stateParams.rawid
-	    // $cordovaSQLite.execute(DATABASE, query).then(function(res) {
-		
-		// for(var i = 0; i < res.rows.length; i++){
-			// $scope.RawMaterial =  res.rows.item(i);
-		// } 
-    // }, function (err) {
-      // console.error(err);
-    // });
-	
-  };
-  
-  
-  
-/* Delete data in RawMaterial */
 
-//	DELETE FROM table_name WHERE some_column=some_value;
+	
+  }
+
 
     $scope.Delete = function(audi) {
 		 
@@ -221,56 +201,13 @@ DATABASE.database().ref('Company').on('value',function(snap){
 								});
                             }
                         })
-  };
+  }
   
   
   
   
   
-/* Update data in RawMaterial */
-    
-    // $scope.Update = function (rawmaterialForm) {
-        // if (rawmaterialForm.$valid) {
-            // $ionicLoading.show({
-                // content: 'Loading',
-                // animation: 'fade-in',
-                // showBackdrop: true,
-                // maxWidth: 200,
-                // showDelay: 0
-            // });
-			// DATABASE.database().ref('Customers').child($stateParams.customerid)
-			// .set($scope.Customers).then(function(e){
-			// $ionicLoading.hide();
-	            // $ionicPopup.alert({
-	                // title: 'Updated.....',
-	                // template: 'Data Updated successfully'
-	            // });
 
-	            // $state.go('app.customer_list', {}, {
-
-	            // });
-			// })
-			
-	        
-	    // }
-  // };
-             // var query = "UPDATE RawMaterial SET mname =?,mtype =?,mprice =?,mdescription =?,vat =? WHERE mid = " + $scope.RawMaterial.mid;
-
-            // $cordovaSQLite.execute(DATABASE, query, [$scope.RawMaterial.mname, $scope.RawMaterial.mtype, $scope.RawMaterial.mprice, $scope.RawMaterial.mdescription, $scope.RawMaterial.vat]).then(function (res) {
-          // DATABASE.database().ref('rawmaterials').child($scope.RawMaterial.mid)
-                                // .set($scope.RawMaterial).then(function (res) {
-                // $ionicLoading.hide();
-                // $ionicPopup.alert({
-                    // title: 'Updated.....',
-                    // template: 'Data Updated successfully'
-                // });
-
-                // $state.go('app.material_list', {}, {
-
-                // });
-            // // });
-        
-    // }
 	$scope.Update =  function (rawmaterialForm) {
 	    if (rawmaterialForm.$valid) {
 	        $ionicLoading.show({
@@ -296,5 +233,10 @@ DATABASE.database().ref('Company').on('value',function(snap){
 			
 	        
 	    }
-  };
+  }
+
+
+
+
+
  });

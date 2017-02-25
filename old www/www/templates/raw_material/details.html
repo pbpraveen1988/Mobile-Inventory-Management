@@ -1,0 +1,39 @@
+<ion-view title="Raw Material Details" ng-controller="rawmaterial" ng-init="DisplayData()">
+<ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
+    </ion-nav-buttons>
+	<ion-nav-buttons side="right">
+        <a href="#/app/material_edit/{{EditId}}" class="button button-icon button-clear ion-edit"></a>
+    </ion-nav-buttons>
+  <ion-content>
+	<h1 ng-model= "RawMaterial.name" style="text-align: center;"> {{RawMaterial.name}}</h1>
+	
+		  <label class="item item-input row ">
+			<span class="col input-label">RawMaterial Name</span>
+			<label  class="col" ng-model= "RawMaterial.name">{{RawMaterial.name}}</label>
+		  </label>
+	        <div class="row"></div>
+		    <label class="item item-input row">
+			<span class="col input-label">RawMaterial Type</span>
+			<label class="col"  ng-model= "RawMaterial.type">{{RawMaterial.type}}</label>
+		  </label>
+		   <label class="item row item-input">
+			<span class="col input-label">Purchase Price</span>
+			<label class="col"  ng-model= "RawMaterial.price">{{RawMaterial.price}}</label>
+		  </label>
+		   <label class="item  row item-input">
+			<span class="col input-label">Description</span>
+			<label  class="col" ng-model= "RawMaterial.price">{{RawMaterial.description}}</label>
+		  </label>
+		  <label class="item  row item-input">
+			<span class="col input-label">Unit</span>
+			<label  class="col" ng-model= "RawMaterial.unit">{{RawMaterial.unit}}</label>
+		  </label>
+		   <label class="item row item-input">
+			<span class="col input-label">Vat (in %)</span>
+			<label  class="col" ng-model= "RawMaterial.vat">{{RawMaterial.vat}}</label>
+		  </label>
+		
+		
+  </ion-content>
+</ion-view>

@@ -9,27 +9,17 @@
 
 
 <div class="list">
-		<label class="item item-input item-select">
-    <div class="input-label" >
-     Select Comapany
-    </div>
-    <select  ng-init="SelectCompany()" >
-      <option   ng-repeat="Company in CompaniesList"  >{{Company.val.name}}</option>
-      
-    </select>
-	</label>
-	</div>
-	<div class="list list-inset">
+	
   <label class="item item-input">
     <i class="icon ion-search placeholder-icon"></i>
-    <input type="text" placeholder="Search">
+    <input type="text" placeholder="Search" ng-model="search">
   </label>
-</div>
-	<!--  <ion-list>
+
+	  <ion-list>
 	 <ion-item class="item-remove-animate item-avatar item-icon-right" ng-if="RawMaterials.length == 0">
 	 	  No Records Found !
 	 </ion-item>	 
-      <ion-item ng-repeat="list in RawMaterials"
+      <ion-item ng-repeat="list in RawMaterials | filter:search"
 	  class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#/app/material_details/{{list.mid}}" style="padding-left: 7%;">
           <h2>{{list.val.name}}</h2>
 		  <i class="icon ion-chevron-right icon-accessory" style="color:black;"></i>
@@ -42,6 +32,6 @@
 		   </ion-option-button>
 		  </div>
       </ion-item>
-    </ion-list> -->
+    </ion-list> 
   </ion-content>
 </ion-view>

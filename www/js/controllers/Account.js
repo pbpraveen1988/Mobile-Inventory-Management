@@ -1,139 +1,34 @@
 angular.module('starter.controllers.Account', [])
 
-  .controller('AccountController', function ($scope, $state, $ionicPopup, $ionicModal, $ionicLoading, DATABASE) {
+  .controller('AccountController', function ($scope, $state, $ionicPopup, $ionicModal, $ionicLoading, DATABASE,SharedDataService) {
+
+
+//we have to uncomment on publish
+// debugger;
+// $ionicLoading.hide();
+//   if(SharedDataService.alreadyLoggedIn)   
+//   {
+//      if($state.current.name  != 'app.list')
+//      {
+//       $state.go('app.list', {}, {
+//           reload: true
+//         });
+//      }
+//   }else
+//   {
+//     debugger 
+//       if($state.current.name  != 'login')
+//       {
+//          $state.go('login', {}, {
+//           reload: true
+//         });
+
+//       }
+//   }
+
+
     $scope.User = new Object();
-    // $scope.User.email = 'abhishek';
     $scope.data = new Object();
-    $scope.signIn = function (form) {
-      if ($scope.User.email == '' || $scope.User.email == undefined) {
-
-        $ionicPopup.alert({
-          title: 'Error.',
-          template: "Please enter email"
-        });
-        return false;
-      }
-
-      if ($scope.User.Password == '' || $scope.User.Password == undefined) {
-
-        $ionicPopup.alert({
-          title: 'Error',
-          template: "Please enter password"
-        });
-        return false;
-      }
-
-      // if($scope.data.email == 'suraj' && $scope.User.Password == 'suraj')
-
-      //  $state.go('app.playlists', {}, { reload: true });
-      // }else 
-      //{/
-
-      //$ionicPopup.alert({
-      //title: 'Alert',
-      //template: 'Invalid Credentials'
-      //    });
-      //};
-
-
-      $ionicLoading.show({
-        content: 'Loading',
-        animation: 'fade-in',
-        showBackdrop: true,
-        maxWidth: 200,
-        showDelay: 0
-      });
-      var pp = $scope.User.email;
-      var pwd = $scope.User.Password;
-
-      DATABASE.auth().signInWithemailAndPassword($scope.User.email, $scope.User.Password)
-        .then(function (authData) {
-
-
-          if (authData.emailVerified) {
-            DATABASE.database().ref().child("users").child(authData.uid)
-              .on('value', function (snapshot) {
-
-                var val = snapshot.val();
-
-                $scope.User = val;
-                debugger;
-                $ionicLoading.hide();
-                $state.go('app.list', {}, {
-                  reload: true
-                });
-
-              });
-
-          } else {
-            $ionicPopup.alert({
-              title: 'Invalid',
-              template: 'Please Activate your Account, we sent an email to You'
-            });
-            $ionicLoading.hide();
-            return false;
-          }
-        }).catch(function (error) {
-          $ionicPopup.alert({
-            title: 'Invalid',
-            template: error.message
-          });
-          $ionicLoading.hide();
-          return false;
-        });
-
-    }
-    // $scope.signIn = function(form)
-    // {
-
-    // $ionicLoading.show({
-    // content: 'Loading',
-    // animation: 'fade-in',
-    // showBackdrop: true,
-    // maxWidth: 200,
-    // showDelay: 0
-    // });
-
-
-
-    // DATABASE.auth().createUserWithemailAndPassword($scope.data.email, $scope.User.Password)
-    // .then(function (userData) {
-
-    // DATABASE.database().ref().child("users").child(userData.uid).set({
-    // firstname: $scope.data.firstname,
-    // lastname: $scope.data.lastname
-    // });
-
-    // DATABASE.auth().currentUser.sendemailVerification();
-
-    // $ionicLoading.hide();
-    // alert("User created successfully! Please Login");
-    // $scope.data.email = '';
-    // $scope.User.Password = '';
-    // $scope.data.firstname = '';
-    // $scope.data.lastname = '';
-    // $state.go("loginmain",{});
-    // }).catch(function (error) {
-    // alert("Error: " + error);
-    // $ionicLoading.hide();
-    // })
-    // // if(form.email.$modelValue == "" && form.password.$modelValue == undefiend)
-    // // {
-    // // $state.go('app.list');
-    // // }else
-    // // {
-    // // $ionicPopup.alert({
-    // // title: 'Alert',
-    // // template: 'Please Check the Credentails'
-    // // });
-
-    // // }
-    // // }
-    // // }
-
-    // }
-
-
     $scope.register = function () {
       debugger;
 
@@ -251,26 +146,10 @@ angular.module('starter.controllers.Account', [])
 
 
     $scope.signIn = function (form) {
-      if ($scope.User.email == '' || $scope.User.email == undefined) {
-
-        $ionicPopup.alert({
-          title: 'Error.',
-          template: "Please enter Email"
-        });
-        return false;
-      }
-
-      if ($scope.User.Password == '' || $scope.User.Password == undefined) {
-
-        $ionicPopup.alert({
-          title: 'Error',
-          template: "Please enter password"
-        });
-        return false;
-      }
-
-
-
+      if(!form.$valid)
+    {
+    return false;
+    }
 
       $ionicLoading.show({
         content: 'Loading',
@@ -284,20 +163,17 @@ angular.module('starter.controllers.Account', [])
 
       DATABASE.auth().signInWithEmailAndPassword($scope.User.email, $scope.User.Password)
         .then(function (authData) {
-
-
           if (authData.emailVerified) {
             DATABASE.database().ref().child("users").child(authData.uid)
               .on('value', function (snapshot) {
-
                 var val = snapshot.val();
                 $scope.User = val;
                 debugger;
                 $ionicLoading.hide();
+                SharedDataService.alreadyLoggedIn = true;
                 $state.go('app.list', {}, {
                   reload: true
                 });
-
               });
 
           } else {
@@ -319,9 +195,8 @@ angular.module('starter.controllers.Account', [])
 
     }
     $scope.logout = function () {
-
-
       DATABASE.auth().signOut().then(function (evt) {
+        SharedDataService.alreadyLoggedIn = false;
         $scope.User.email = '';
         $scope.User.password = '';
         $scope.data.firstname = '';

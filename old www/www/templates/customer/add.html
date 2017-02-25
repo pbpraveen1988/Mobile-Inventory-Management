@@ -1,0 +1,117 @@
+<ion-view title="Add Customer" ng-controller="customers">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-content>
+        <form name="customersForm" novalidate="" ng-submit="Save(customersForm)">
+
+            <div class="list list-inset">
+                <label class="item item-input" ng-class="{ 'has-errors' : customersForm.name.$invalid && customersForm.$submitted, 'no-errors' : customersForm.name.$valid && customersForm.$submitted}">
+                    <input required type="text" name="name" ng-minlength="5" placeholder="Customer Name" ng-model="Customers.name">
+                </label>
+            </div>
+            <div class="error-container" ng-show="customersForm.name.$error && customersForm.$submitted" ng-messages="customersForm.name.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i>
+                    This field is required!
+                </div>
+                <div class="error" ng-message="minlength">
+                    <i class="ion-information-circled"></i>
+                    Minimum length of this field is 5 characters!
+                </div>
+            </div>    
+
+            <div class="list list-inset">
+                <label class="item item-input" ng-class="{ 'has-errors' : customersForm.contact.$invalid && customersForm.$submitted, 'no-errors' : customersForm.contact.$valid && customersForm.$submitted}">
+                    <input required type="number" maxlength="10" placeholder="Mobile" ng-model="Customers.contact" name="contact">
+                </label>
+            </div>
+            <div class="error-container" ng-show="customersForm.contact.$error && customersForm.$submitted" ng-messages="customersForm.contact.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i>
+                    This field is required!
+                </div>
+                <div class="error" ng-message="maxlength">
+                    <i class="ion-information-circled"></i>
+                    Minimum length of this field is 10 characters!
+                </div>
+            </div>    
+            
+            <div class="list list-inset">
+                <label class="item item-input" ng-class="{ 'has-errors' : customersForm.email.$invalid && customersForm.$submitted, 'no-errors' : customersForm.email.$valid && customersForm.$submitted}">
+                    <input required type="email" placeholder="Email" ng-minlength="5" ng-model="Customers.email" name="email">
+                </label>
+            </div>
+            <div class="error-container" ng-show="customersForm.email.$error && customersForm.$submitted" ng-messages="customersForm.email.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i>
+                    This field is required!
+                </div>
+                <div class="error" ng-message="maxlength">
+                    <i class="ion-information-circled"></i>
+                    Minimum length of this field is 10 characters!
+                </div>
+            </div>    
+         
+
+            <div class="list list-inset">
+                <label class="item item-input" ng-class="{ 'has-errors' : customersForm.address.$invalid && customersForm.$submitted, 'no-errors' : customersForm.address.$valid && customersForm.$submitted}">
+                    <input required type="text" placeholder="billing_address" ng-minlength="5" ng-model="Customers.address" name="address">
+                </label>
+            </div>
+            <div class="error-container" ng-show="customersForm.address.$error && customersForm.$submitted" ng-messages="customersForm.address.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i>
+                    This field is required!
+                </div>
+                <div class="error" ng-message="minlength">
+                    <i class="ion-information-circled"></i>
+                    Minimum length of this field is 5 characters!
+                </div>
+            </div>                
+
+         
+            <div class="list list-inset">
+                <label class="item item-input" ng-class="{ 'has-errors' : customersForm.city.$invalid && customersForm.$submitted, 'no-errors' : customersForm.city.$valid && customersForm.$submitted}">
+                    <input required type="text" placeholder="billing_city" ng-model="Customers.city" ng-minlength="5" name="city">
+                </label>
+            </div>
+            <div class="error-container" ng-show="customersForm.city.$error && customersForm.$submitted" ng-messages="customersForm.city.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i>
+                    This field is required!
+                </div>
+                <div class="error" ng-message="minlength">
+                    <i class="ion-information-circled"></i>
+                    Minimum length of this field is 5 characters!
+                </div>
+            </div>          
+            
+            
+            
+            <div class="list list-inset">
+                <label class="item item-input" ng-class="{ 'has-errors' : customersForm.state.$invalid && customersForm.$submitted, 'no-errors' : customersForm.state.$valid && customersForm.$submitted}">
+                    <input required type="text" placeholder="billing_state" ng-model="Customers.state" name="state">
+                </label>
+            </div>
+            <div class="error-container" ng-show="customersForm.state.$error && customersForm.$submitted" ng-messages="customersForm.state.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i>
+                    This field is required!
+                </div>             
+            </div>             
+
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <input required type="number" placeholder="pincode" ng-model="Customers.pincode">
+                </label>
+            </div>
+
+            <label class="item">
+                <button class="button button-block button-positive" type="submit">Submit</button>
+            </label>
+        </form>
+
+    </ion-content>
+
+</ion-view>

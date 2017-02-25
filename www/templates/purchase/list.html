@@ -1,4 +1,4 @@
-<ion-view title="Purchases List" ng-controller="PurchaseController as vm" >
+<ion-view title="Purchases List" ng-controller="PurchaseController as vm" ng-init="LoadCompanylist()">
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
     </ion-nav-buttons>
@@ -17,73 +17,50 @@
                         Invoice
                     </button>
                 </div>
-            </ion-item> style="margin-left:70%;"
+            </ion-item>
         </ion-list> -->
-		
 		<ion-list>
-<div class="row">
-  <ion-checkbox classs="col" ng-model="data.Company" ng-change="LoadCompanylist()" >
-   </ion-checkbox>
-	<label class="item item-input item-select col">
+
+  <ion-checkbox ng-model="filter.red"><label class="item item-input item-select">
     <div class="input-label" >
      Select Comapany
     </div>
-    <select  >
-      <option   value="Company.id" ng-repeat="Company in CompanyList"  >{{Company.val.name}}</option>
+    <select   >
+      <option   ng-repeat="Company in CompanyList"  >{{Company.val.name}}</option>
       
     </select>
-	</label>
-	</div>
-<!-- <div class="row">
-  <ion-checkbox classs="col" ng-model="data.Vendors" ng-change="LoadVendorslist()" >
-   </ion-checkbox>
-	<label class="item item-input item-select col">
-    <div class="input-label" >
-     Select Vendors
-    </div>
-    <select  >
-      <option  value="Vendor.id" ng-repeat="Vendor in VendorsList"  >{{Vendor.val.name}}</option>
-      
-    </select>
-	</label>
-	</div> -->
-	<div class="row">
-  <ion-checkbox classs="col" ng-model="data.Vendor" ng-change="LoadVendors()" >
-   </ion-checkbox>
-	<label class="item item-input item-select col">
-    <div class="input-label" >
-     Select Vendors
-    </div>
-    <select  >
-      <option  value="Vendor.id" ng-repeat="Vendor in VendorsList"  >{{Vendor.val.name}}</option>
-      
-    </select>
-	</label>
-	</div>
-	<div class="row">
-  <ion-checkbox classs="col" ng-model="data.Product" ng-change="CheckProducts()" >
-   </ion-checkbox>
-	<label class="item item-input item-select col">
-    <div class="input-label" >
-     Select Product
-    </div>
-    <select  >
-      <option  value="Product.id" ng-repeat="Product in ProductsList"  >{{Product.val.name}}</option>
-      
-    </select>
-	</label>
-	</div>
-	
-</ion-list>
-		
-		
+	</label></ion-checkbox>
+  <ion-checkbox ng-model="filter.yellow">Yellow</ion-checkbox>
+  <ion-checkbox ng-model="filter.pink">Pink</ion-checkbox>
 
+</ion-list>
+		<div class="list">
+		<label class="item item-input item-select">
+    <div class="input-label" >
+     Select Comapany
+    </div>
+    <select   >
+      <option   ng-repeat="Company in CompanyList"  >{{Company.val.name}}</option>
+      
+    </select>
+	</label>
+
+  <label class="item item-input item-select">
+    <div class="input-label" >
+     Select Vendors
+    </div>
+    <select   >
+      <option   ng-repeat="Vendor in VendorsList"  >{{Vendor.val.name}}</option>
+      
+    </select>
+	</label>
+<a  class="button button-full button-positive" href="#/app/purchase_ListofTransaction/{{Vendor.id}}" >
+              Show
+            </a>
 </div>
-<!--  <div class="list ">
- 
-                <div class="row" >
-				<ion-checkbox classs="col"  >
-   </ion-checkbox>
+ <div class="list ">
+ <ion-radio ng-model="choice" ng-value="'A'">Datewise</ion-radio>
+                <div class="row" style="background-color: ghostwhite">
                     <div class="col col-33">From Date</div>
                     <div class="col col">
                         <label class="item item-input" style="background-color: white">
@@ -92,9 +69,10 @@
                     </div>
                 </div>
                
-            
-                <div class="row" >
-                    <div class="col col-43">To Date</div>
+            </div>
+			<div class="list ">
+                <div class="row" style="background-color: ghostwhite">
+                    <div class="col col-33">To Date</div>
                     <div class="col col">
                         <label class="item item-input" style="background-color: white">
                             <input type="date" placeholder="Date" ng-model="FormValues.datenew" ng-required="true">
@@ -102,12 +80,8 @@
                     </div>
                 </div>
                
-            </div> -->
-		 <div class="button-bar">
-  <a class="button button-positive" href="#/app/purchase_ListofTransaction/{{Vendor.id}}/{{data.Product}}/{{data.Vendor}}">Show</a>
-
-  </div>
-  
+            </div>
+		
         <script id="pdf-viewer.html" type="text/ng-template">
             <ion-modal-view cache-view="false" >
                 <ion-header-bar>

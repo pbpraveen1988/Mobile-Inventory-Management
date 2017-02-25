@@ -1,0 +1,258 @@
+<ion-view  ng-controller="challans" title="Add New Purchase">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
+    </ion-nav-buttons>
+
+    <ion-content >
+	
+	<div class="list">
+	<label class="item item-input item-select">
+    <div class="input-label" >
+     Select Company
+    </div>
+    <select  ng-init="LoadCompaniesList()" >
+      <option   ng-repeat="Company in CompanyList"  >{{Company.val.name}}</option>
+      
+    </select>
+	</label>
+	 <label class="item item-input item-select">
+    <div class="input-label" >
+     Select Vendors
+    </div>
+    <select  ng-init="LoadVendors()" ng-model="FormValues.Vendor" >
+      <option   ng-repeat="Vendor in VendorsList" value="{{Vendor.id}}"  >{{Vendor.val.name}}</option>
+      
+    </select>
+	</label>
+                        <label class="item item-input" >
+						<span class="input-label">purchase Name</span>
+                            <input type="date" placeholder="Date" ng-model="FormValues.datenew" ng-required="true">
+                        </label>
+     
+            
+					<label class="item item-input item-select" >
+						<span class="input-label">Status</span>
+                    <select ng-model="FormValues.status">
+                        <option>Processing</option>
+                        <option selected>Pending</option>
+                        <option>Complete</option>
+                    </select>
+                </label>
+            
+                    <label class="item item-input ">
+                        <span class="input-label">Challan No.</span>
+                        <input type="text" placeholder="Challan No." ng-model="FormValues.challansno" name="challansno">
+                    </label>
+               </div>
+           <div  class="list" style="margin-top:-25px">
+                <button class="button button-full button-positive" ng-click="ModalForProductsList()">
+                    Add Product
+                </button>
+                <ion-list>
+                    <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" style="background-color: White !important" ng-repeat="list in SelectedProducts">
+                        <div >
+                            <div class="list" style="margin-top:-20px">
+                                <div class="row">
+                                    <div class="col"><b> Name {{list.name}}</b></div>
+                                    <div class="right">
+                                        <button class="ion-close-circled "  data-pack="default" data-tags="delete, trash, kill, x" ng-click="RemoveProductCount(list)"></button>
+                                    </div>
+                                </div>
+								<div class="row" >
+								     <div class="col">Amt</div>
+                                    <div class="col">Qty</div>
+                                    <div class="col">Tax</div>
+									<div class="col">Total</div>
+								
+                                </div>
+                                <div class="row" style="margin-bottom:-20px" >
+							
+                                    <div class="col">{{list.price}}</div>
+									<div class="col">{{list.Qty}}</div>
+                                    <div class="col">{{list.tax}}</div>
+                                    <div class="col">{{list.total}}</div>
+									
+                                </div>
+                            </div>
+                        </div>
+                    </ion-item>
+                </ion-list>
+            </div> 
+            
+
+            <div class="list list-inset">
+                <div class="row">
+                    <div class="col">Sub Total	:	</div>
+                    <div class="col">Rs : {{TotalAmount}}</div>
+                </div>
+                <div class="row">
+                    <div class="col">Shipping :	</div>
+                    <div class="col"> <input type="number" min="0" style="background: gainsboro;" ng-model="FormValues.Shipping" value="0"></div>
+                </div>
+                <div class="row">
+                    <div class="col">Discount :	</div>
+                    <div class="col">  <input type="number" min="0" style="background: gainsboro;" ng-model="FormValues.Discount" value="0"></div>
+                </div>
+                <div class="row">
+                    <div class="col">Sales Tax(%) :	</div>
+                    <div class="col"> <input type="number" min="0" style="background: gainsboro;" ng-model="FormValues.Salestax" value="0"></div>
+                </div>
+                <div class="row">
+                    <div class="col">Grand Total :	</div>
+                    <div class="col">   Rs : {{TotalAmount + FormValues.Shipping - FormValues.Discount + ((TotalAmount + FormValues.Shipping - FormValues.Discount) * FormValues.Salestax / 100)}}</div>
+                </div>
+            </div>
+<label class="item item-input ">
+                        <span class="input-label">Paid Amount</span>
+                        <input type="number" placeholder="Challan No." ng-model="FormValues.PaidAmt"name="challansno">
+                    </label>
+
+            <!-- <div >
+                <div >
+                    <div class="row">
+                        <div class="col">Paid Amount :	</div>
+                        <div class="col"> <input type="number" min="0" style="background: gainsboro;" ng-model="FormValues.PaidAmt" value="0"></div>
+                    </div>
+                </div>
+            </div> -->
+
+
+
+
+            <div >
+                <div >
+                    <div class="list" >
+                        <label class="item item-input item-select">
+                            <span class="input-label">
+                                Payment Option
+                            </span>
+                            <select ng-model="FormValues.optionSelected" ng-change="selectpayment(optionSelected)" id="payment">
+                                <option value="cash">Cash</option>
+                                <option value="check">Check</option>
+                            </select>
+                        </label>
+
+                        <div class="animate-switch-container" ng-switch on="FormValues.optionSelected">
+                            <div class="animate-switch" ng-switch-when="check">
+                                <h4 style="text-align: center;"><b>Bank's Details</b></h4>
+                                <div class="list">
+                                    <label class="item item-input">
+                                        <input type="text" placeholder="Name of Bank" ng-model="FormValues.bankname" ng-required="true">
+                                    </label>
+                                    <label class="item item-input">
+                                        <input type="text" placeholder="Name of Person" ng-model="FormValues.name" ng-required="true">
+                                    </label>
+                                    <label class="item item-input">
+                                        <input type="text" placeholder="Bank Account Number" ng-model="FormValues.accountno" ng-required="true">
+                                    </label>
+                                    <label class="item item-input">
+                                        <input type="text" placeholder="Check Number" ng-model="FormValues.checkno" ng-required="true">
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </ion-list>
+        <button class="button button-block button-positive" type="button" ng-click="LastSubmit()">Submit</button>
+
+
+
+        <script id="my-modal.html" type="text/ng-template">
+            <ion-modal-view class="ion-nifty-modal" ng-init="LoadVendors()">
+                <div class="ion-modal-content-custom">
+                    <ion-content class="padding">
+                        <button class="button button-full button-positive" ng-click="Vendormodal.hide()">Close</button>
+                        <ion-list>
+                            <ion-item ng-repeat="vendor in VendorsList" ng-click="SelectVendor(vendor)">
+                                {{vendor.val.name}}
+                            </ion-item>
+                        </ion-list>
+                    </ion-content>
+                </div>
+            </ion-modal-view>
+        </script>
+
+
+        <script id="product.html" type="text/ng-template">
+            <ion-modal-view class="ion-nifty-modal" ng-init="LoadProducts()">
+                <div class="ion-modal-content-custom">
+                    <ion-content class="padding">
+                        <button class="button button-full button-positive" ng-click="ProductModal.hide()">Close</button>
+                        <ion-list>
+                            <ion-item ng-repeat="list in ProductList" ng-click="SelectProduct(list)">
+                                {{list.val.name}}
+                            </ion-item>
+                        </ion-list>
+                    </ion-content>
+                </div>
+            </ion-modal-view>
+        </script>
+
+        <!-- for Product Quantity	-->
+
+        <script id="nos.html" type="text/ng-template">
+            <ion-modal-view class="ion-nifty-modal">
+                <div class="ion-modal-content-custom">
+                    <ion-content class="padding">
+                        <button class="button button-full button-positive" ng-click="ProductNos.hide()">Close</button>
+                        <ion-list>
+                            <ion-item>
+                                <form ng-submit="addListItem(customQuoteForm)" name="customQuoteForm">
+                                    <div class="item item-input-inset">
+                                        <div class="list">
+                                            <label class="item item-input">
+											<div class="input-label" >
+	                                      Quantity </div>
+                                                <input type="number" min='0'  ng-model="nos" name="nos" required>
+                                            </label>
+											<label >
+                                                available stock {{Product.val.stock}} {{Product.val.unit}}
+                                            </label>
+                                            <label class="item item-input">
+											<div class="input-label" >
+	                                      Price </div>
+                                                <input type="number" min='0'  ng-model="Product.val.price" name="price" required>
+                                            </label>
+                                            <label class="item item-input">
+											<div class="input-label" >
+	                                      Tax% </div>
+                                                <input type="number"  min='0' ng-model="Product.val.vat" name="tax" required step="0.01">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <button class="button button-small">
+                                        Submit
+                                    </button>
+                                </form>
+                            </ion-item>
+                        </ion-list>
+                    </ion-content>
+                </div>
+            </ion-modal-view>
+        </script>
+
+        <script id="my-company.html" type="text/ng-template">
+            <ion-modal-view class="ion-nifty-modal" ng-init="LoadCompaniesList()">
+                <div class="ion-modal-content-custom">
+                    <ion-content class="padding">
+                        <button class="button button-full button-positive" ng-click="CompanyModal.hide()">Close</button>
+                        <ion-list>
+                            <ion-item ng-repeat="customer in CompanyList" ng-click="SelectCompany(customer)">
+                                {{customer.val.name}}
+                            </ion-item>
+                        </ion-list>
+                    </ion-content>
+                </div>
+            </ion-modal-view>
+        </script>
+
+
+    </ion-content>
+
+
+</ion-view>
+

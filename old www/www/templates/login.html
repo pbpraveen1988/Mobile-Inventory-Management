@@ -1,0 +1,62 @@
+<ion-view view-title="BILLING">
+		<ion-content style="margin-top:15%;">
+		 <a  class=" button button-positive" side="right"  href="#/registration">Create Account</a>
+  <a  class=" button button-positive" side="left"  href="#/forgetpassword">Forget Password</a>
+		<div class="hero no-header flat">
+            <div class="content">
+                <div class="app-icon" style="padding-top:70px";></div>
+                <h1 style="text-align:center";><b>Inventory Management</b></h1>
+            </div>
+        </div>		
+		  <form style="margin-top:10%;"  name="authorizationForm" novalidate="" ng-submit="signIn(authorizationForm)">
+ 
+  <div class="list">
+ 
+    <label class="item item-input" ng-class="{ 'has-errors' : authorizationForm.email.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.email.$valid && authorizationForm.$submitted}">
+      <input type="text" name="email"  ng-model="User.email"  required placeholder="Email">
+    </label>
+  <div class="error-container" ng-show="authorizationForm.email.$error && authorizationForm.$submitted" ng-messages="authorizationForm.email.$error">
+              <div class="error" ng-message="required">
+                <i class="ion-information-circled"></i> 
+                This field is required!
+            </div>
+            <div class="error" ng-message="minlength">
+                <i class="ion-information-circled"></i> 
+                Minimum length of this field is 5 characters!
+            </div>
+            <div class="error" ng-message="maxlength">
+                <i class="ion-information-circled"></i> 
+                Maximum length of this field is 20 characters!
+            </div>
+    </div>
+   
+ 
+    <label class="item item-input" ng-class="{ 'has-errors' : authorizationForm.password.$invalid  && authorizationForm.$submitted, 'no-errors' : authorizationForm.password.$valid  && authorizationForm.$submitted}">
+      
+      <input type="password" name="password" ng-model="User.Password" ng-minlength="8" ng-maxlength="20" required placeholder="Password">
+    </label>
+ 
+    <div class="error-container last-error-container" ng-show="authorizationForm.password.$error && authorizationForm.$submitted" ng-messages="authorizationForm.password.$error">
+       <div class="error" ng-message="required">
+                <i class="ion-information-circled"></i> 
+                This field is required!
+            </div>
+            <div class="error" ng-message="minlength">
+                <i class="ion-information-circled"></i> 
+                Minimum length of this field is 8 characters!
+            </div>
+    </div>
+ 
+  </div>
+ 
+   
+
+
+  <button name="submit" class="button button-full button-assertive ink" type="submit">
+    Sign In
+  </button>
+ 
+</form>
+			
+	</ion-content>
+</ion-view>

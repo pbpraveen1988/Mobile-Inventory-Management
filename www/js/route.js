@@ -2,7 +2,7 @@ app.config(function ($stateProvider,
    $urlRouterProvider) {
     $stateProvider
 
-  .state('app', { url: "/app", abstract: true, templateUrl: "templates/sidemenu.html", controller: 'AccountController' })
+  .state('app', { url: "/app", cache: false,abstract: true, templateUrl: "templates/sidemenu.html", controller: 'AccountController' })
 
   //login
   .state('login', { url: '/login', templateUrl: 'templates/login.html', controller: 'AccountController', cache: false })
@@ -44,7 +44,7 @@ app.config(function ($stateProvider,
   //purchase
    .state('app.purchase_list', { url: '/purchase_list', cache: false, views: { 'menuContent': { templateUrl: 'templates/purchase/list.html' } } })
    .state('app.purchase_add', { url: '/purchase_add', cache: false, views: { 'menuContent': { templateUrl: 'templates/purchase/add.html' } } })
-   .state('app.purchase_ListofTransaction', { url: '/purchase_ListofTransaction/:Companyid/:Vendorid/:Productid', cache: false, views: { 'menuContent': { templateUrl: 'templates/purchase/ListofTransaction.html' } } })
+   .state('app.purchase_ListofTransaction', { url: '/purchase_ListofTransaction/:Vendorid', cache: false, views: { 'menuContent': { templateUrl: 'templates/purchase/ListofTransaction.html' } } })
   // stock
    .state('app.stock_list', { url: '/stock_list', cache: false, views: { 'menuContent': { templateUrl: 'templates/stock/list.html' } } })
   //sale

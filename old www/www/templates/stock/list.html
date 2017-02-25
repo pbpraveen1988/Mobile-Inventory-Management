@@ -1,0 +1,106 @@
+   <ion-view ng-controller="stock" title="Stock">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-content>
+	<div class="item item-body">
+            <button  class="button button-full button-positive" ng-click="ModalForCompaniesList()" value="company">
+                Select Company
+            </button>
+            <ion-item  style="background-color: White; important">
+                    <div >
+                        <u><b>Company Name : {{Company.val.name}}</b></u>
+                                
+                                
+                    </div>
+
+                </ion-item>    
+            </ion-list>
+			
+			</div>
+			<div class="item item-body">
+            <button  class="button button-full button-positive" ng-click="ModalForStockType()" value="products">
+                Select Stock Type
+            </button>
+            <ion-item  style="background-color: White; important">
+                    <div >
+                        <u><b>Stock Type : {{StockType}}</b></u>
+                                
+                                
+                    </div>
+
+                </ion-item>    
+            </ion-list> 
+			</div>
+			<div class="list">
+
+   <label class="item item-input item-select">
+    <div class="input-label" >
+      Stock Name
+    </div>
+    <select ng-model="data.selectedstock" ng-change="GetStock()"><!-- WHAT IS NG-CHANGE -->
+      <option  value="{{stock.id}}"  ng-repeat="stock in stocks"  >{{stock.val.name}}</option> <!-- WHAT IS VALUE -->
+      
+    </select>
+	</label>
+	 <label class="item item-input">
+    <div class="input-label" >
+	Stock Value </div>
+	
+<input type="number" ng-model="data.StockValue" />
+</label>
+	 <label class="item item-input">
+    <div class="input-label" >
+	Stock Unit </div>
+	{{data.Stock.val.unit}}
+
+</label>
+
+
+<button  class="button button-full button-positive" ng-click="updatestock()" >
+               Update Stock
+            </button>
+</div>
+			
+			</div>
+			<script id="my-company.html" type="text/ng-template">
+            <ion-modal-view class="ion-nifty-modal" ng-init="LoadCompaniesList()">
+                <div class="ion-modal-content-custom">
+                    <ion-content class="padding">
+                        <button class="button button-full button-positive" ng-click="CompanyModal.hide()">Close</button>
+                        <ion-list>
+                            <ion-item ng-repeat="company in CompanyList" ng-click="SelectCompany(company)">
+                                {{company.val.name}}
+                            </ion-item>
+                        </ion-list>
+                    </ion-content>
+                </div>
+            </ion-modal-view>
+        </script>
+		<script id="my-stocktype.html" type="text/ng-template">
+            <ion-modal-view class="ion-nifty-modal"  >
+                <div class="ion-modal-content-custom">
+                    <ion-content class="padding">
+                        <button class="button button-full button-positive" ng-click="StockModal.hide()">Close</button>
+                        <ion-list>
+                            <ion-item ng-click="Selectstock1('products')"  >
+							
+                                <b>Finished Products</b>
+							
+						
+                            </ion-item>
+                        
+                            <ion-item ng-click="Selectstock1('raw')">
+                              <b >RawMaterials</b>
+							
+							
+                            </ion-item>
+                        </ion-list>
+
+                    </ion-content>
+                </div>
+            </ion-modal-view>
+        </script>
+	</ion-content>
+
+</ion-view>

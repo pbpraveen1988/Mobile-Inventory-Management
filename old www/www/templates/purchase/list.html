@@ -1,0 +1,125 @@
+<ion-view title="Purchases List" ng-controller="PurchaseController as vm" >
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <a href="#/app/purchase_add" class="button button-icon button-clear ion-plus"></a>
+    </ion-nav-buttons>
+    <ion-content>
+       <!--  <ion-list>
+            <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" ng-if="PurchaseList.length == 0">
+                No Records Found!
+            </ion-item>
+            <ion-item ng-repeat="list in PurchaseList" class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
+                <div class="item item-button-right">
+                    <h2>{{list.val.Date}}  -- {{list.id}}</h2>
+                    <button ng-click="CreateInvoice(list.challanid)" class="button button-positive">
+                        Invoice
+                    </button>
+                </div>
+            </ion-item> style="margin-left:70%;"
+        </ion-list> -->
+		
+		<ion-list>
+<div class="row">
+  <ion-checkbox classs="col" ng-model="data.Company" ng-change="LoadCompanylist()" >
+   </ion-checkbox>
+	<label class="item item-input item-select col">
+    <div class="input-label" >
+     Select Comapany
+    </div>
+    <select  >
+      <option   value="Company.id" ng-repeat="Company in CompanyList"  >{{Company.val.name}}</option>
+      
+    </select>
+	</label>
+	</div>
+<!-- <div class="row">
+  <ion-checkbox classs="col" ng-model="data.Vendors" ng-change="LoadVendorslist()" >
+   </ion-checkbox>
+	<label class="item item-input item-select col">
+    <div class="input-label" >
+     Select Vendors
+    </div>
+    <select  >
+      <option  value="Vendor.id" ng-repeat="Vendor in VendorsList"  >{{Vendor.val.name}}</option>
+      
+    </select>
+	</label>
+	</div> -->
+	<div class="row">
+  <ion-checkbox classs="col" ng-model="data.Vendor" ng-change="LoadVendors()" >
+   </ion-checkbox>
+	<label class="item item-input item-select col">
+    <div class="input-label" >
+     Select Vendors
+    </div>
+    <select  >
+      <option  value="Vendor.id" ng-repeat="Vendor in VendorsList"  >{{Vendor.val.name}}</option>
+      
+    </select>
+	</label>
+	</div>
+	<div class="row">
+  <ion-checkbox classs="col" ng-model="data.Product" ng-change="CheckProducts()" >
+   </ion-checkbox>
+	<label class="item item-input item-select col">
+    <div class="input-label" >
+     Select Product
+    </div>
+    <select  >
+      <option  value="Product.id" ng-repeat="Product in ProductsList"  >{{Product.val.name}}</option>
+      
+    </select>
+	</label>
+	</div>
+	
+</ion-list>
+		
+		
+
+</div>
+<!--  <div class="list ">
+ 
+                <div class="row" >
+				<ion-checkbox classs="col"  >
+   </ion-checkbox>
+                    <div class="col col-33">From Date</div>
+                    <div class="col col">
+                        <label class="item item-input" style="background-color: white">
+                            <input type="date" placeholder="Date" ng-model="FormValues.datenew" ng-required="true">
+                        </label>
+                    </div>
+                </div>
+               
+            
+                <div class="row" >
+                    <div class="col col-43">To Date</div>
+                    <div class="col col">
+                        <label class="item item-input" style="background-color: white">
+                            <input type="date" placeholder="Date" ng-model="FormValues.datenew" ng-required="true">
+                        </label>
+                    </div>
+                </div>
+               
+            </div> -->
+		 <div class="button-bar">
+  <a class="button button-positive" href="#/app/purchase_ListofTransaction/{{Vendor.id}}/{{data.Product}}/{{data.Vendor}}">Show</a>
+
+  </div>
+  
+        <script id="pdf-viewer.html" type="text/ng-template">
+            <ion-modal-view cache-view="false" >
+                <ion-header-bar>
+            <a id="print" ></a>
+                    <button ng-click="print()"  class="button button-icon icon ion-printer"></button>
+                    <h1 class="title">Invoice</h1>
+                    <button ng-click="vm.modal.hide()" class="button button-icon icon ion-android-close"></button>
+                </ion-header-bar>
+                <ion-content>
+                    <ng-pdf ng-if="pdfUrl" id="pdfjs" template-url="partials/viewer.html" canvasid="pdf" scale="page-fit"></ng-pdf>
+                </ion-content>
+            </ion-modal-view>
+        </script>
+    </ion-content>
+</ion-view>

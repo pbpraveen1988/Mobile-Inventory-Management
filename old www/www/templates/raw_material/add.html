@@ -1,0 +1,104 @@
+<ion-view ng-controller="rawmaterial" title="Row Material">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-content>
+        <form name="rawmaterialForm" novalidate="" ng-submit="Save(rawmaterialForm)">
+            <div class="list">             
+
+                <label class="item item-input" ng-class="{ 'has-errors' : rawmaterialForm.name.$invalid && rawmaterialForm.$submitted, 'no-errors' : rawmaterialForm.name.$valid && rawmaterialForm.$submitted}">
+                    <input type="text" placeholder="Raw Material Name" name="name" ng-minlength="5" ng-model="RawMaterial.name" required>
+                </label>
+                <div class="error-container" ng-show="rawmaterialForm.name.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.name.$error">
+                    <div class="error" ng-message="required">
+                        <i class="ion-information-circled"></i>
+                        This field is required!
+                    </div>
+                    <div class="error" ng-message="minlength">
+                        <i class="ion-information-circled"></i>
+                        Minimum length of this field is 5 characters!
+                    </div>
+                </div>
+                <label class="item item-input">
+                    <input type="text" placeholder="Raw Material Type" name="type"  ng-model="RawMaterial.type" required>
+                </label>
+                <div class="error-container" ng-show="rawmaterialForm.type.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.type.$error">
+                    <div class="error" ng-message="required">
+                        <i class="ion-information-circled"></i>
+                        This field is required!
+                    </div>                   
+                </div>
+                <label class="item item-input">
+                    <input type="number" placeholder="Purchase Price" name="price" required ng-model="RawMaterial.price">
+                </label>
+                <div class="error-container" ng-show="rawmaterialForm.price.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.price.$error">
+                    <div class="error" ng-message="required">
+                        <i class="ion-information-circled"></i>
+                        This field is required!
+                    </div>
+                    <div class="error" ng-message="minlength">
+                        <i class="ion-information-circled"></i>
+                        Minimum length of this field is 2 characters!
+                    </div>
+                </div>
+                <label class="item item-input">
+                    <input type="text" name="description" required placeholder="Material Description" ng-minlength="5" ng-model="RawMaterial.description">
+                </label>
+				
+                <div class="error-container" ng-show="rawmaterialForm.description.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.description.$error">
+                    <div class="error" ng-message="required">
+                        <i class="ion-information-circled"></i>
+                        This field is required!
+                    </div>
+                    <div class="error" ng-message="minlength">
+                        <i class="ion-information-circled"></i>
+                        Minimum length of this field is 5 characters!
+                    </div>
+                </div>
+				<label class="item item-input">
+                    <input type="text" name="unit" required placeholder="Material Unit"  ng-model="material.unit">
+                </label>
+				
+                <div class="error-container" ng-show="rawmaterialForm.unit.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.unit.$error">
+                    <div class="error" ng-message="required">
+                        <i class="ion-information-circled"></i>
+                        This field is required!
+                    </div>
+                    <!-- <div class="error" ng-message="minlength">
+                        <i class="ion-information-circled"></i>
+                        Minimum length of this field is 5 characters!
+                    </div> -->
+                </div>
+                <label class="item item-input">
+                    <input type="number" name="vat" placeholder="Vat (in %)" ng-model="RawMaterial.vat" required>
+                </label>
+                <div class="error-container" ng-show="rawmaterialForm.vat.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.vat.$error">
+                    <div class="error" ng-message="required">
+                        <i class="ion-information-circled"></i>
+                        This field is required!
+                    </div>                  
+                </div>
+				<label class="item item-input">
+                    <input type="number" name="openingStock" placeholder="Opening Stock" ng-model="RawMaterial.openstock" required>
+                </label>
+                <div class="error-container" ng-show="rawmaterialForm.openingStock.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.openingStock.$error">
+                    <div class="error" ng-message="required">
+                        <i class="ion-information-circled"></i>
+                        This field is required!
+                    </div>                  
+                </div>
+				
+				<ion-list>
+
+  <ion-checkbox ng-model="RawMaterial.checkProducts">Save this as Finished Product</ion-checkbox>
+  
+
+</ion-list>
+
+                <label class="item">
+                    <button class="button button-block button-positive" type="submit">Submit</button>
+                </label>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

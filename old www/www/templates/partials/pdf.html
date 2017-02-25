@@ -1,0 +1,13 @@
+﻿<ion-modal-view cache-view="false" ng-init="Test()" ng-controller="TestCtrl">
+                <ion-header-bar>
+            <a id="print" ></a>
+                    <button ng-click="print()"  class="button button-icon icon ion-printer"></button>
+                    <h1 class="title">Invoice</h1>
+                    <button ng-click="vm.modal.hide()" class="button button-icon icon ion-android-close"></button>
+                </ion-header-bar>
+                <ion-content>
+            <div id="can">
+                    <ng-pdf ng-if="pdfUrl" id="pdfjs" template-url="partials/viewer.html" canvasid="pdf" scale="page-fit"></ng-pdf>
+            </div>
+                </ion-content>
+            </ion-modal-view>

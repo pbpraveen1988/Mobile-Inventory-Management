@@ -1,0 +1,47 @@
+<ion-view title="Material LIST" ng-controller="rawmaterial" ng-init="Select()">
+<ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <a href="#/app/material_add" class="button button-icon button-clear ion-plus"></a>
+    </ion-nav-buttons>
+<ion-content>
+
+
+<div class="list">
+		<label class="item item-input item-select">
+    <div class="input-label" >
+     Select Comapany
+    </div>
+    <select  ng-init="SelectCompany()" >
+      <option   ng-repeat="Company in CompaniesList"  >{{Company.val.name}}</option>
+      
+    </select>
+	</label>
+	</div>
+	<div class="list list-inset">
+  <label class="item item-input">
+    <i class="icon ion-search placeholder-icon"></i>
+    <input type="text" placeholder="Search">
+  </label>
+</div>
+	<!--  <ion-list>
+	 <ion-item class="item-remove-animate item-avatar item-icon-right" ng-if="RawMaterials.length == 0">
+	 	  No Records Found !
+	 </ion-item>	 
+      <ion-item ng-repeat="list in RawMaterials"
+	  class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#/app/material_details/{{list.mid}}" style="padding-left: 7%;">
+          <h2>{{list.val.name}}</h2>
+		  <i class="icon ion-chevron-right icon-accessory" style="color:black;"></i>
+		  <div class="button-bar">
+			<ion-option-button class="ion-edit icon-left button-positive" ng-click="Selectid(list.mid)">
+				Edit
+			</ion-option-button>
+		   <ion-option-button class="ion-ios-trash-outline icon-left button-assertive " ng-click="Delete(list.mid)">
+			  Delete
+		   </ion-option-button>
+		  </div>
+      </ion-item>
+    </ion-list> -->
+  </ion-content>
+</ion-view>

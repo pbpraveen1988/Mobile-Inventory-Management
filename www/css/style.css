@@ -36,7 +36,11 @@
 	 background-color: gainsboro;
 } */
 
-
+.app-icon
+{
+text-align: center;
+padding : 3%;
+}
 
 
 .error-container {
