@@ -6,6 +6,7 @@ angular.module('starter.controllers.Purchase', [])
     $scope.Purchase = new Object();
 	$scope.VendorsList  = [];
 	$scope.CompanyList  = [];
+	
     var vm = this;
     setDefaultsForPdfViewer($scope);
     $scope.pdfUrl = null;
@@ -197,8 +198,94 @@ debugger;
 			  
     // };
 	
-	$scope.LoadCompanylist = function () {
+	// $scope.LoadCompanylist = function () {
         
+		
+			// $ionicLoading.show({
+							// content: 'Loading',
+							// animation: 'fade-in',
+							// showBackdrop: true,
+							// maxWidth: 200,
+							// showDelay: 0
+						// });
+			// debugger;
+			
+			// DATABASE.database().ref('Company').on('value',function(snap){
+			  // snap.forEach(function(s){
+				 // var a = new Object();
+				 // a.id = s.key;
+				 // a.val = s.val();
+			// $scope.CompanyList.push(a);
+			
+			  // })
+			  
+			// })
+			  // DATABASE.database().ref('Vendors').on('value',function(snap){
+			  // snap.forEach(function(s1){
+				 // var a1 = new Object();
+				 // a1.id = s1.key;
+				 // a1.val = s1.val();
+				// $scope.VendorsList.push(a1);
+			  
+			   // })
+			  
+			    
+			// })			 
+			 // $ionicLoading.hide(); 
+    // };
+	$scope.LoadCompanylist = function () {
+ // alert($scope.data.Company) this will show true or false means this model is selected or not
+		if(!$scope.data.Company)
+		 {
+		 return false;
+		 }	
+		// if (!$scope.data.Company == true) {
+            // $ionicPopup.alert({
+                // title: 'Alert',
+                // template: 'Please Select Company'
+            // });
+            // return false;
+        // }
+		// alert("after if");
+			$ionicLoading.show({
+							content: 'Loading',
+							animation: 'fade-in',
+							showBackdrop: true,
+							maxWidth: 200,
+							showDelay: 0
+						});
+			debugger;
+			$scope.CompanyList = [];
+			DATABASE.database().ref('Company').on('value',function(snap){
+			  snap.forEach(function(s){
+				 var a = new Object();
+debugger;
+				 a.id = s.key;
+				 a.val = s.val();
+			$scope.CompanyList.push(a);
+			
+			  })
+			  
+			})
+			  // DATABASE.database().ref('Vendors').on('value',function(snap){
+			  // snap.forEach(function(s1){
+				 // var a1 = new Object();
+				 // a1.id = s1.key;
+				 // a1.val = s1.val();
+				// $scope.VendorsList.push(a1);
+			  
+			   // })
+			  
+			    
+			// })			 
+			 $ionicLoading.hide(); 
+    }; 
+	$scope.LoadVendors = function () {
+         if(!$scope.data.Vendors)
+		 {
+		 return false;
+		 }
+		
 		
 			$ionicLoading.show({
 							content: 'Loading',
@@ -209,16 +296,7 @@ debugger;
 						});
 			debugger;
 			
-			DATABASE.database().ref('Company').on('value',function(snap){
-			  snap.forEach(function(s){
-				 var a = new Object();
-				 a.id = s.key;
-				 a.val = s.val();
-			$scope.CompanyList.push(a);
-			
-			  })
-			  
-			})
+		$scope.VendorsList  = [];	
 			  DATABASE.database().ref('Vendors').on('value',function(snap){
 			  snap.forEach(function(s1){
 				 var a1 = new Object();
@@ -232,6 +310,38 @@ debugger;
 			})			 
 			 $ionicLoading.hide(); 
     };
+	
+	
+	$scope.CheckProducts = function () {
+	if(!$scope.data.Product)
+		 {
+		 return false;
+		 }
+$ionicLoading.show({
+                content: 'Loading',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 200,
+                showDelay: 0
+            });
+       
+debugger;
+$scope.ProductsList  = [];
+
+DATABASE.database().ref('products').on('value',function(snap){
+$scope.Products  = [];
+  snap.forEach(function(s){
+     var a = new Object();
+	 a.pid = s.key;
+	 a.val = s.val();
+    $scope.ProductsList.push(a);
+  
+  }).then
+  $ionicLoading.hide();
+  
+  
+});
+};
 	
 	$scope.viewvendor = function () {
             debugger;

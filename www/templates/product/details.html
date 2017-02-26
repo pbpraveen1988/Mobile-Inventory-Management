@@ -42,10 +42,22 @@
 		  </label>
 		</div>
 		
-	<!--
-		<label class="item">
-			<button class="button button-block button-positive" type="submit" >Update</button>
-		</label>
-	-->
+  <button name="submit" ng-click="ShowStock()" class="button button-full button-positive ink" type="button">
+   Show Stock
+  </button>
+
+    <label ng-show="CompaniesListWithStock.length != 0" class="item item-input">
+    <i class="icon ion-search placeholder-icon"></i>
+    <input type="text" placeholder="Search by company" ng-model="search">
+  </label>
+    <ion-list>
+      <ion-item ng-repeat="list in CompaniesListWithStock | filter:search" class="item-remove-animate item-avatar item-icon-right"
+        type="item-text-wrap">
+        {{list.companyName}}
+        <span class="item-note">
+      {{list.stock}}
+    </span>
+        </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>
