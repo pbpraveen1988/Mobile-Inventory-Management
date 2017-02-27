@@ -7,7 +7,7 @@
         <form name="productsForm" novalidate="" ng-submit="Save(productsForm)">
             <div class="list list-inset">      
                 <label class="item item-input" ng-class="{ 'has-errors' : productsForm.name.$invalid && productsForm.$submitted, 'no-errors' : productsForm.name.$valid && productsForm.$submitted}">
-                    <input type="text" placeholder="Product Name" name="name" ng-minlength="5" ng-model="Products.name" required>
+                    <input type="text" placeholder="Product Name" name="name" ng-minlength="2" ng-model="Products.name" required>
                 </label>
             </div>
             <div class="error-container" ng-show="productsForm.name.$error && productsForm.$submitted" ng-messages="productsForm.name.$error">
@@ -73,7 +73,7 @@
                     <input type="number" placeholder="Vat (in %)" ng-model="Products.vat">
                 </label>
             </div>
-			<label class="item item-input">
+			<!-- <label class="item item-input">
                     <input type="number" name="openingStock" placeholder="Opening Stock" ng-model="Products.openstock" required>
                 </label>
                 <div class="error-container" ng-show="productsForm.openingStock.$error && productsForm.$submitted" ng-messages="productsForm.openingStock.$error">
@@ -81,7 +81,7 @@
                         <i class="ion-information-circled"></i>
                         This field is required!
                     </div>                  
-                </div>
+                </div> -->
 			
 
             <label class="item">

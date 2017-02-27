@@ -11,11 +11,15 @@
   
   <ion-content>
 	 <ion-list>
+	 <label class="item item-input">
+    <i class="icon ion-search placeholder-icon"></i>
+    <input type="text" placeholder="Search" ng-model="search">
+  </label>
 	  <ion-item ng-if="CustomersList.length == 0" class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" >
 	  No Records Found!
 	  </ion-item>
 	 
-      <ion-item ng-repeat="list in CustomersList" class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#/app/customer_details/{{list.cid}}">
+      <ion-item ng-repeat="list in CustomersList | filter:search" class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#/app/customer_details/{{list.cid}}">
           <h2>{{list.val.name}}</h2>
 		  <i class="icon ion-chevron-right icon-accessory"></i>
 

@@ -10,7 +10,11 @@
 	  <ion-item  class="item-remove-animate item-avatar" type="item-text-wrap" ng-if="VendorsList.length == 0">
 	  No Records Found!
 	  </ion-item>
-      <ion-item ng-repeat="list in VendorsList" class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#/app/vender_details/{{list.cid}}">
+	  <label class="item item-input">
+    <i class="icon ion-search placeholder-icon"></i>
+    <input type="text" placeholder="Search" ng-model="search">
+  </label>
+      <ion-item ng-repeat="list in VendorsList | filter:search" class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#/app/vender_details/{{list.cid}}">
           <h2>{{list.val.name}}</h2>
 		  <i class="icon ion-chevron-right icon-accessory"></i>
 		  <div class="button-bar">

@@ -56,7 +56,7 @@
                     </div>
                 </div>
 				<label class="item item-input">
-                    <input type="text" name="unit" required placeholder="Material Unit"  ng-model="material.unit">
+                    <input type="text" name="unit" required placeholder="Material Unit"  ng-model="RawMaterial.unit">
                 </label>
 				
                 <div class="error-container" ng-show="rawmaterialForm.unit.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.unit.$error">
@@ -79,7 +79,7 @@
                     </div>                  
                 </div>
 				<label class="item item-input">
-                    <input type="number" name="openingStock" placeholder="Opening Stock" ng-model="RawMaterial.openstock" required>
+                    <input type="number" name="openingStock" placeholder="Opening Stock" ng-model="RawMaterial.openingstock" required>
                 </label>
                 <div class="error-container" ng-show="rawmaterialForm.openingStock.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.openingStock.$error">
                     <div class="error" ng-message="required">

@@ -12,10 +12,14 @@
 	
   <ion-content>
 	 <ion-list>
+	 <label class="item item-input">
+    <i class="icon ion-search placeholder-icon"></i>
+    <input type="text" placeholder="Search" ng-model="search">
+  </label>
 	  <ion-item ng-if="CompanyList.length == 0" class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" >
 	  No Records Found !
 	  </ion-item>
-      <ion-item ng-repeat="list in CompanyList" class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#/app/company_details/{{list.id}}">
+      <ion-item ng-repeat="list in CompanyList | filter:search" class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#/app/company_details/{{list.id}}">
           <h2>{{list.val.name}}</h2>
 		  <i class="icon ion-chevron-right icon-accessory"></i>
 
