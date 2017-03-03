@@ -3,8 +3,8 @@
         <button menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
     </ion-nav-buttons>
     <ion-content>
-	<div class="item item-body">
-            <button  class="button button-full button-positive" ng-click="ModalForCompaniesList()" value="company">
+	<div class="item item-body" >
+            <button  class="button button-full button-positive" ng-click="ModalForCompaniesList()" >
                 Select Company
             </button>
             <ion-item  style="background-color: White; important">
@@ -39,7 +39,7 @@
       Stock Name
     </div>
     <select ng-model="data.selectedstock" ng-change="GetStock()"><!-- WHAT IS NG-CHANGE -->
-      <option  value="{{stock.id}}"  ng-repeat="stock in stocks"  >{{stock.val.name}}</option> <!-- WHAT IS VALUE -->
+      <option  value="{{stock.id}}"  ng-repeat="stock in stocks" >{{stock.name}}</option> <!-- WHAT IS VALUE -->
       
     </select>
 	</label>
@@ -52,7 +52,7 @@
 	 <label class="item item-input">
     <div class="input-label" >
 	Stock Unit </div>
-	{{data.Stock.val.unit}}
+	{{data.Stock.unit}}
 
 </label>
 

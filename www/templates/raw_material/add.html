@@ -5,9 +5,17 @@
     <ion-content>
         <form name="rawmaterialForm" novalidate="" ng-submit="Save(rawmaterialForm)">
             <div class="list">             
-
+<label class="item item-input item-select col">
+    <div class="input-label" >
+     Select Comapany
+    </div>
+    <select ng-model="RawMaterial.companyName" ng-init="LoadCompanylist()">
+      <option   value="{{Company.id}}" ng-repeat="Company in CompanyList"  >{{Company.val.name}}</option>
+      
+    </select>
+	</label>
                 <label class="item item-input" ng-class="{ 'has-errors' : rawmaterialForm.name.$invalid && rawmaterialForm.$submitted, 'no-errors' : rawmaterialForm.name.$valid && rawmaterialForm.$submitted}">
-                    <input type="text" placeholder="Raw Material Name" name="name" ng-minlength="5" ng-model="RawMaterial.name" required>
+                    <input type="text" placeholder="Raw Material Name" name="name" ng-minlength="1" ng-model="RawMaterial.name" required>
                 </label>
                 <div class="error-container" ng-show="rawmaterialForm.name.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.name.$error">
                     <div class="error" ng-message="required">
@@ -42,7 +50,7 @@
                     </div>
                 </div>
                 <label class="item item-input">
-                    <input type="text" name="description" required placeholder="Material Description" ng-minlength="5" ng-model="RawMaterial.description">
+                    <input type="text" name="description" required placeholder="Material Description" ng-minlength="1" ng-model="RawMaterial.description">
                 </label>
 				
                 <div class="error-container" ng-show="rawmaterialForm.description.$error && rawmaterialForm.$submitted" ng-messages="rawmaterialForm.description.$error">

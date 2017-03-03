@@ -5,7 +5,16 @@
     <ion-content>
 
         <form name="productsForm" novalidate="" ng-submit="Save(productsForm)">
-            <div class="list list-inset">      
+            <div class="list list-inset"> 
+<label class="item item-input item-select col">
+    <div class="input-label" >
+     Select Comapany
+    </div>
+    <select ng-model="Products.companyName" ng-init="LoadCompanylist()" >
+      <option   value="{{Company.id}}" ng-repeat="Company in CompanyList"  >{{Company.val.name}}</option>
+      
+    </select>
+	</label>			
                 <label class="item item-input" ng-class="{ 'has-errors' : productsForm.name.$invalid && productsForm.$submitted, 'no-errors' : productsForm.name.$valid && productsForm.$submitted}">
                     <input type="text" placeholder="Product Name" name="name" ng-minlength="2" ng-model="Products.name" required>
                 </label>

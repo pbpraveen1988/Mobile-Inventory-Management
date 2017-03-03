@@ -17,12 +17,14 @@ angular.module('starter.controllers.stock', [])
 	 
 	 $scope.RawMaterials = SharedDataService.RawMaterial;	
 	 $scope.StockValue = 0; // WHY WE HAVE ASSIGNED II TO ZERO.// 
+	
+	
 	$scope.Selectstock1 = function(type)
 	{
 		if(type == 'products')
 		{
 			$scope.StockType = "Products";
-			debugger;
+			;
 			// $scope.stocks  = [];
 			// $scope.stocktype = new Object();
             $ionicLoading.show({
@@ -32,14 +34,37 @@ angular.module('starter.controllers.stock', [])
 				maxWidth: 200,
 				showDelay: 0
 		    });
-			DATABASE.database().ref('products')
+			DATABASE.database().ref('stock').orderByChild('company').equalTo($scope.Company.id)
 			.on('value',function(snap){$scope.stocks  = [];
-				  snap.forEach(function(s){
-					 var a = new Object();
-					 a.id = s.key;
-					 a.val = s.val();
-					$scope.stocks.push(a);
-			})
+			
+			;
+			
+		    var s =	snap.val();
+			
+			for(i in s)
+			{
+			if(s[i].raw != undefined)
+			{
+			 var a = new Object();
+					 a.id = i;
+					 a.val = s[i];
+					 
+			  DATABASE.database().ref('rawmaterials').child(s[i].raw)
+			  .on('value',function(snapshot){
+			     a.name = snapshot.val().name;
+				 a.unit = snapshot.val().unit;
+				 $scope.stocks.push(a);
+				 console.log($scope.stocks);
+				 try
+				 {
+				 $scope.$digest();
+				 }catch(e){}
+				
+			  }
+			  );
+			  }
+			}
+				  
              SharedDataService.stock = $scope.stocks;
 			 $ionicLoading.hide();		
             });
@@ -56,7 +81,7 @@ angular.module('starter.controllers.stock', [])
 				maxWidth: 200,
 				showDelay: 0
 		 });
-			debugger;
+			;
 			$scope.stocks  = [];
 			DATABASE.database().ref('rawmaterials').on('value',function(snap){ //???????//
             $scope.stocks  = [];
@@ -84,7 +109,7 @@ angular.module('starter.controllers.stock', [])
 							maxWidth: 200,
 							showDelay: 0
 						});
-			debugger;
+			;
 			$scope.CompanyList  = [];
 			DATABASE.database().ref('Company').on('value',function(snap){
 			  snap.forEach(function(s){
@@ -125,18 +150,19 @@ angular.module('starter.controllers.stock', [])
 	
 	$scope.SelectCompany = function (company) {
 
-        $scope.Company = company;
+         $scope.Company = company;
          $scope.CompanyModal.hide();
     };
   
 	$scope.GetStock = function() {
-	debugger;
+	;
 		
 					
 		$scope.data.Stock = Enumerable.From($scope.stocks)
 					  .Where(function (x) { return x.id == $scope.data.selectedstock })
 					  .SingleOrDefault();
 					$scope.data.StockValue = $scope.data.Stock.val.stock;  
+					console.log($scope.data.Stock);
 			// SUPPOSE I PUSH ANY DATA IN $SCOPE.DATA.STOCK; CAN I USE THAT $SCOPE.DATA.STOCK ANYWHERE IN ASSOCIATEDSD HTML//		
  
   }
@@ -144,7 +170,7 @@ angular.module('starter.controllers.stock', [])
    
    $scope.updatestock = function()
    {
-   debugger;
+   ;
 		$ionicLoading.show({
 						content: 'Loading',
 						animation: 'fade-in',

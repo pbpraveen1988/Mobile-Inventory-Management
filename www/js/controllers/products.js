@@ -86,42 +86,84 @@ angular.module('starter.controllers.products', [])
     /* old code */
 
     /* Start Insert data in RawMaterial */
-    $scope.Save = function (productsForm) {
-      if (productsForm.$valid) {
-        $ionicLoading.show({
-          content: 'Loading',
-          animation: 'fade-in',
-          showBackdrop: true,
-          maxWidth: 200,
-          showDelay: 0
-        });
-        debugger;
+    // $scope.Save = function (productsForm) {
+      // if (productsForm.$valid) {
+        // $ionicLoading.show({
+          // content: 'Loading',
+          // animation: 'fade-in',
+          // showBackdrop: true,
+          // maxWidth: 200,
+          // showDelay: 0
+        // });
+        // debugger;
 
-        var StockValue = $scope.Products.openstock;
-        $scope.Products.openstock = null;
+        // var StockValue = $scope.Products.openstock;
+        // $scope.Products.openstock = null;
 
-        DATABASE.database().ref('products')
-          .push($scope.Products).then(function (res) {
+        // DATABASE.database().ref('products')
+          // .push($scope.Products).then(function (res) {
 
-            DATABASE.database().ref('stock').child('products').child(res.key).set(StockValue);
-            $ionicLoading.hide();
-            $ionicPopup.alert({
-              title: 'Saved.',
-              template: 'Data Saved successfully'
-            });
+            // DATABASE.database().ref('stock').child('products').child(res.key).set(StockValue);
+            // $ionicLoading.hide();
+            // $ionicPopup.alert({
+              // title: 'Saved.',
+              // template: 'Data Saved successfully'
+            // });
 
-            $scope.Products = new Object();
-            $state.go('app.product_list', {}, {
+            // $scope.Products = new Object();
+            // $state.go('app.product_list', {}, {
 
-            });
+            // });
 
-          }, function (err) {
-            console.error(err);
-          });
-      }
-    };
+          // }, function (err) {
+            // console.error(err);
+          // });
+      // }
+    // };
     /*End Save Button.*/
+ $scope.Save = function (productsForm) {
+     if (productsForm.$valid) {
+         $ionicLoading.show({
+             content: 'Loading',
+             animation: 'fade-in',
+             showBackdrop: true,
+             maxWidth: 200,
+             showDelay: 0
+         });
+         debugger;
 
+         var StockValue = $scope.Products.openingstock;
+         $scope.Products.openingstock = null;
+
+         DATABASE.database().ref('products')
+             .push($scope.Products)
+			 .then(function (res) {
+			  debugger;
+                 var newobje = new Object();
+				 newobje.product = res.key;
+				 newobje.stock = StockValue;
+                newobje.company = $scope.Products.companyName
+                $scope.newobject = newobje;
+				  debugger;
+                 DATABASE.database().ref('stock').push($scope.newobject);
+                 
+                 $ionicLoading.hide();
+                 $ionicPopup.alert({
+                     title: 'Saved.',
+                     template: 'Data Saved successfully'
+                 });
+
+                 $scope.Products = new Object();
+                 $state.go('app.product_list', {}, {
+
+                 });
+
+             }, function (err) {
+                 console.error(err);
+             });
+     }
+	 
+ };
 
     /* Select data in Products */
     $scope.Select = function () {
@@ -168,7 +210,50 @@ angular.module('starter.controllers.products', [])
         }
       })
     };
-
+$scope.LoadCompanylist = function () {
+ // alert($scope.data.Company) this will show true or false means this model is selected or not
+			
+		// if (!$scope.data.Company == true) {
+            // $ionicPopup.alert({
+                // title: 'Alert',
+                // template: 'Please Select Company'
+            // });
+            // return false;
+        // }
+		// alert("after if");
+			$ionicLoading.show({
+							content: 'Loading',
+							animation: 'fade-in',
+							showBackdrop: true,
+							maxWidth: 200,
+							showDelay: 0
+						});
+			debugger;
+			$scope.CompanyList = [];
+			DATABASE.database().ref('Company').on('value',function(snap){
+			  snap.forEach(function(s){
+				 var a = new Object();
+debugger;
+				 a.id = s.key;
+				 a.val = s.val();
+			$scope.CompanyList.push(a);
+			
+			  })
+			  
+			})
+			  // DATABASE.database().ref('Vendors').on('value',function(snap){
+			  // snap.forEach(function(s1){
+				 // var a1 = new Object();
+				 // a1.id = s1.key;
+				 // a1.val = s1.val();
+				// $scope.VendorsList.push(a1);
+			  
+			   // })
+			  
+			    
+			// })			 
+			 $ionicLoading.hide(); 
+    }; 
     /*End Delete Button.*/
 
     /*Start Selection Button*/
