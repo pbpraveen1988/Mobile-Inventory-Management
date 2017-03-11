@@ -4,7 +4,6 @@ angular.module('starter.controllers.stock', [])
      $scope.Company = new Object();	// Selected Company
      $scope.stock = new Object();
 	 $scope.product = new Object();
-	 $scope.stock = new Object();
 	 $scope.StockType = '';
 	 $scope.CheckCompany = false;
      $scope.CompanyModal = new Object();
@@ -13,7 +12,6 @@ angular.module('starter.controllers.stock', [])
 	 $scope.CompanyList = SharedDataService.Company; // HOW TO USE SHAREDATASERVICES//
 	 $scope.products = SharedDataService.product;
 	 $scope.stocks = SharedDataService.stock;
-	 $scope.stocks = SharedDataService.stock;	
 	 
 	 $scope.RawMaterials = SharedDataService.RawMaterial;	
 	 $scope.StockValue = 0; // WHY WE HAVE ASSIGNED II TO ZERO.// 
@@ -21,9 +19,9 @@ angular.module('starter.controllers.stock', [])
 	
 	$scope.Selectstock1 = function(type)
 	{
-		if(type == 'products')
+		if(type == 'raw')
 		{
-			$scope.StockType = "Products";
+			$scope.StockType = "Raw Materials";
 			;
 			// $scope.stocks  = [];
 			// $scope.stocktype = new Object();
@@ -37,7 +35,7 @@ angular.module('starter.controllers.stock', [])
 			DATABASE.database().ref('stock').orderByChild('company').equalTo($scope.Company.id)
 			.on('value',function(snap){$scope.stocks  = [];
 			
-			;
+			
 			
 		    var s =	snap.val();
 			
@@ -45,15 +43,17 @@ angular.module('starter.controllers.stock', [])
 			{
 			if(s[i].raw != undefined)
 			{
-			 var a = new Object();
-					 a.id = i;
-					 a.val = s[i];
+			 var b = new Object();
+					 b.id = i;
+					 b.val = s[i];
 					 
 			  DATABASE.database().ref('rawmaterials').child(s[i].raw)
 			  .on('value',function(snapshot){
-			     a.name = snapshot.val().name;
-				 a.unit = snapshot.val().unit;
-				 $scope.stocks.push(a);
+				  debugger;
+			     b.name = snapshot.val().name;
+				 b.unit = snapshot.val().unit;
+				 $scope.stocks.push(b);
+				 debugger;
 				 console.log($scope.stocks);
 				 try
 				 {
@@ -71,9 +71,9 @@ angular.module('starter.controllers.stock', [])
 	           
 			
 		}
-		else if(type == 'raw')
+		else if(type == 'products')
 		{
-	     $scope.StockType = "Raw Materials";
+	     $scope.StockType = "Finished products";
 		 $ionicLoading.show({
 				content: 'Loading',
 				animation: 'fade-in',
@@ -83,17 +83,53 @@ angular.module('starter.controllers.stock', [])
 		 });
 			;
 			$scope.stocks  = [];
-			DATABASE.database().ref('rawmaterials').on('value',function(snap){ //???????//
-            $scope.stocks  = [];
-			  snap.forEach(function(s){
-				 var a = new Object();
-				 a.id = s.key;
-				 a.val = s.val();
-				$scope.stocks.push(a);
-			  })
-			  SharedDataService.stock = $scope.stocks;
-			  $ionicLoading.hide();
-			});
+			DATABASE.database().ref('stock').orderByChild('company').equalTo($scope.Company.id)
+			.on('value',function(snap){$scope.stocks  = [];
+			
+			
+			
+		    var s =	snap.val();
+			
+			for(i in s)
+			{
+			if(s[i].product != undefined)
+			{
+			 var a = new Object();
+					 a.id = i;
+					 a.val = s[i];
+				debugger;	 
+			  DATABASE.database().ref('products').child(s[i].product)
+			  .on('value',function(snapshot){
+				  debugger;
+			     a.name = snapshot.val().name;
+				 a.unit = snapshot.val().unit;
+				 $scope.stocks.push(a);
+				 debugger;
+				 console.log($scope.stocks);
+			//	 try
+			//	 {
+			//	 $scope.$digest();
+			//	 }catch(e){}
+				
+			  }
+			  );
+			  }
+			}
+				  
+             SharedDataService.stock = $scope.stocks;
+			 $ionicLoading.hide();		
+            });
+		//	 DATABASE.database().ref('rawmaterials').on('value',function(snap){ //???????//
+          //  $scope.stocks  = [];
+			//  snap.forEach(function(s){
+			//	 var a = new Object();
+			//	 a.id = s.key;
+			//	 a.val = s.val();
+			//	$scope.stocks.push(a);
+			//  })
+			//  SharedDataService.stock = $scope.stocks;
+			 // $ionicLoading.hide();
+	//		});
 			   
 			  
 	    }
@@ -170,7 +206,7 @@ angular.module('starter.controllers.stock', [])
    
    $scope.updatestock = function()
    {
-   ;
+   
 		$ionicLoading.show({
 						content: 'Loading',
 						animation: 'fade-in',
@@ -187,10 +223,10 @@ if($scope.StockType == "Raw Materials")
   {
  
   
-  DATABASE.database().ref('rawmaterials')
+  DATABASE.database().ref('stock')
   .child($scope.data.selectedstock).set($scope.data.Stock.val)
   .then(function(e){          //??????//
-  
+   $ionicLoading.hide();
   $ionicPopup.alert({
                                   title: 'Saved.',
                                   template: 'Stock Updated  successfully'
@@ -202,7 +238,7 @@ if($scope.StockType == "Raw Materials")
   }else
   {  
    
-  DATABASE.database().ref('products')
+  DATABASE.database().ref('stock')
   .child($scope.data.selectedstock).set($scope.data.Stock.val).then(function(e){
            $ionicLoading.hide();
                 $ionicPopup.alert({

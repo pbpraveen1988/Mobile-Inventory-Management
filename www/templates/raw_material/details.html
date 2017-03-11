@@ -11,6 +11,7 @@
 			<span class="col input-label">RawMaterial Name</span>
 			<label  class="col" ng-model= "RawMaterial.name">{{RawMaterial.name}}</label>
     </label>
+    
     <label class="item item-input">
 			<span class="col input-label">RawMaterial Type</span>
 			<label class="col"  ng-model= "RawMaterial.type">{{RawMaterial.type}}</label>
@@ -31,10 +32,7 @@
 			<span class="col input-label">Vat (in %)</span>
 			<label  class="col" ng-model= "RawMaterial.vat">{{RawMaterial.vat}}</label>
     </label>
-	<label class="item  item-input">
-			<span class="col input-label">Open Stock</span>
-			<label  class="col" ng-model= "RawMaterial.openingstock">{{RawMaterial.openingstock}}</label>
-    </label>
+	
     <button name="submit" ng-click="ShowStock()" class="button button-full button-positive ink" type="button">
    Show Stock
   </button>

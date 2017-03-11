@@ -29,7 +29,7 @@ debugger;
            DATABASE.database().ref('rawmaterials').push($scope.RawMaterial).then(function (res){
 			   debugger;
                   var newobje = new Object();
-				 newobje.RawMaterials = res.key;
+				 newobje.raw = res.key;
 				 newobje.stock = stockValue;
                   newobje.company = $scope.companyname
                  $scope.newobject = newobje;
@@ -79,14 +79,40 @@ debugger;
 			 // , function (err) {
                  // console.error(err);
              }
-			
+			else {
 			 // , function (err) {
                  // console.error(err);
              // });
-			 
+			  $scope.companyname = $scope.RawMaterial.companyName;
+           var stockValue = $scope.RawMaterial.openingstock;
+           // $scope.RawMaterial.openingStock = null;
+           DATABASE.database().ref('rawmaterials').push($scope.RawMaterial).then(function (res){
+			   debugger;
+                  var newobje = new Object();
+				 newobje.raw = res.key;
+				 newobje.stock = stockValue;
+                  newobje.company = $scope.companyname
+                 $scope.newobject = newobje;
+				   debugger;
+                 DATABASE.database().ref('stock').push($scope.newobject);
+				 
+				 // // $ionicLoading.hide();
+                 // // $ionicPopup.alert({
+                     // // title: 'Saved.',
+                     // // template: 'Data Saved successfully'
+                 // // });
+
+                  $scope.RawMaterial = null;
+                 $scope.RawMaterial = new Object();
+                  $state.go('app.material_list', {}, {
+
+                  });
+
+             });
+             $ionicLoading.hide();
      }
 	 
- };
+ }};
             
             // .then(function (snap) {
               // DATABASE.database().ref('stock').child('rawmaterials')

@@ -24,7 +24,7 @@ angular.module('starter.controllers.products', [])
         showDelay: 0
       });
       DATABASE.database().ref("stock")
-        .orderByChild('products').equalTo($stateParams.productid)
+        .orderByChild('product').equalTo($stateParams.productid)
         .on("value", function (snap) {
           debugger;
           snap.forEach(function (snapshot) {
