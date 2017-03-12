@@ -447,5 +447,83 @@ DATABASE.database().ref('Sales')
 
 
      }
+$scope.LoadcustomerList = function () {
+ // alert($scope.data.Company) this will show true or false means this model is selected or not
+			
+		// if (!$scope.data.Company == true) {
+            // $ionicPopup.alert({
+                // title: 'Alert',
+                // template: 'Please Select Company'
+            // });
+            // return false;
+        // }
+		// alert("after if");
+			$ionicLoading.show({
+							content: 'Loading',
+							animation: 'fade-in',
+							showBackdrop: true,
+							maxWidth: 200,
+							showDelay: 0
+						});
+			debugger;
+			$scope.customerList = [];
+			DATABASE.database().ref('Customers').on('value',function(snap){
+			  snap.forEach(function(s){
+				 var a = new Object();
+debugger;
+				 a.id = s.key;
+				 a.val = s.val();
+			$scope.customerList.push(a);
+			
+			  })
+			  
+			})
+			  // DATABASE.database().ref('Vendors').on('value',function(snap){
+			  // snap.forEach(function(s1){
+				 // var a1 = new Object();
+				 // a1.id = s1.key;
+				 // a1.val = s1.val();
+				// $scope.VendorsList.push(a1);
+			  
+			   // })
+			  
+			    
+			// })			 
+			 $ionicLoading.hide(); 
+    };
+    $scope.LoadCompaniesList = function () {
+        // $scope.CompaniesList = [];
+        // var query_customer = "SELECT * FROM CompanyInfo";
+        // $cordovaSQLite.execute(DATABASE, query_customer).then(function (res) {
+            // for (var i = 0; i < res.rows.length; i++) {
+                // $scope.CompaniesList.push(res.rows.item(i));
+            // }
+        // }, function (err) {
+            // console.error(err);
+        // });
+    // }
+$ionicLoading.show({
+                content: 'Loading',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 200,
+                showDelay: 0
+            });
+debugger;
+$scope.CompanyList  = [];
 
+DATABASE.database().ref('Company').on('value',function(snap){
+
+  snap.forEach(function(s){
+     var a = new Object();
+	 a.id = s.key;
+	 a.val = s.val();
+    $scope.CompanyList.push(a);
+  
+  }).then
+  $ionicLoading.hide();
+  
+  SharedDataService.Company = $scope.CompanyList;
+});
+    }; 
 })

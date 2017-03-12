@@ -1,34 +1,46 @@
 angular.module('starter.controllers.Account', [])
 
-  .controller('AccountController', function ($scope, $state, $ionicPopup, $ionicModal, $ionicLoading, DATABASE,SharedDataService) {
+  .controller('AccountController', function ($scope, $state, $ionicPopup, $ionicModal, $ionicLoading, DATABASE, SharedDataService) {
 
 
-//we have to uncomment on publish
-// debugger;
-// $ionicLoading.hide();
-//   if(SharedDataService.alreadyLoggedIn)   
-//   {
-//      if($state.current.name  != 'app.list')
-//      {
-//       $state.go('app.list', {}, {
-//           reload: true
-//         });
-//      }
-//   }else
-//   {
-//     debugger 
-//       if($state.current.name  != 'login')
-//       {
-//          $state.go('login', {}, {
-//           reload: true
-//         });
+    //we have to uncomment on publish
+    // debugger;
+    // $ionicLoading.hide();
+    //   if(SharedDataService.alreadyLoggedIn)   
+    //   {
+    //      if($state.current.name  != 'app.list')
+    //      {
+    //       $state.go('app.list', {}, {
+    //           reload: true
+    //         });
+    //      }
+    //   }else
+    //   {
+    //     debugger 
+    //       if($state.current.name  != 'login')
+    //       {
+    //          $state.go('login', {}, {
+    //           reload: true
+    //         });
 
-//       }
-//   }
+    //       }
+    //   }
 
 
     $scope.User = new Object();
     $scope.data = new Object();
+
+    // $scope.load = function (ev) {
+    //   debugger;
+    //   DATABASE.database().ref('stock').orderByChild('company').startAt("-KeYPY7XgvtnMX9PVr76").endAt("-KeYPY7XgvtnMX9PVr76")
+    //     .on('value', function (darta) {
+    //       debugger;
+    //        var s = darta.val();
+
+    //     });
+    // }
+
+
     $scope.register = function () {
       debugger;
 
@@ -132,7 +144,7 @@ angular.module('starter.controllers.Account', [])
             title: 'Success',
             template: 'Kindly! Check the Email '
           });
-       
+
         }).catch(function (err) {
           $ionicLoading.hide();
           $ionicPopup.alert({
@@ -146,10 +158,9 @@ angular.module('starter.controllers.Account', [])
 
 
     $scope.signIn = function (form) {
-      if(!form.$valid)
-    {
-    return false;
-    }
+      if (!form.$valid) {
+        return false;
+      }
 
       $ionicLoading.show({
         content: 'Loading',

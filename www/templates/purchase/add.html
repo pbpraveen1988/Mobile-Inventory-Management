@@ -10,8 +10,8 @@
     <div class="input-label" >
      Select Company
     </div>
-    <select  ng-init="LoadCompaniesList()" >
-      <option   ng-repeat="Company in CompanyList"  >{{Company.val.name}}</option>
+    <select  ng-init="LoadCompaniesList()" ng-model="FormValues.Company">
+      <option   ng-repeat="Company in CompanyList" value="{{Company.id}}"  >{{Company.val.name}}</option>
       
     </select>
 	</label>

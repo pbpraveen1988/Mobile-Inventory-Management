@@ -9,210 +9,196 @@ angular.module('starter.controllers.rawmaterial', [])
     $scope.EditId = $stateParams.rawid;
     $scope.RawMaterials = SharedDataService.RawMaterial;
     /* Insert data in RawMaterial */
-     $scope.Save = function (rawmaterialForm) {
-debugger;
-       if (rawmaterialForm.$valid) {
+    $scope.Save = function (rawmaterialForm) {
+
+      if (rawmaterialForm.$valid) {
         $ionicLoading.show({
           content: 'Loading',
-           animation: 'fade-in',
-           showBackdrop: true,
-           maxWidth: 200,
-           showDelay: 0
+          animation: 'fade-in',
+          showBackdrop: true,
+          maxWidth: 200,
+          showDelay: 0
         });
 
-         if ($scope.RawMaterial.checkProducts) {
+        if ($scope.RawMaterial.checkProducts) {
           $scope.RawMaterial.checkProducts = null;
-		   $scope.RawMaterialsStock = [];
-		   $scope.companyname = $scope.RawMaterial.companyName;
-           var stockValue = $scope.RawMaterial.openingstock;
-           // $scope.RawMaterial.openingStock = null;
-           DATABASE.database().ref('rawmaterials').push($scope.RawMaterial).then(function (res){
-			   debugger;
-                  var newobje = new Object();
-				 newobje.raw = res.key;
-				 newobje.stock = stockValue;
-                  newobje.company = $scope.companyname
-                 $scope.newobject = newobje;
-				   debugger;
-                 DATABASE.database().ref('stock').push($scope.newobject);
-				 
-				 // // $ionicLoading.hide();
-                 // // $ionicPopup.alert({
-                     // // title: 'Saved.',
-                     // // template: 'Data Saved successfully'
-                 // // });
+          $scope.RawMaterialsStock = [];
+          $scope.companyname = $scope.RawMaterial.companyName;
+          var stockValue = $scope.RawMaterial.openingstock;
+          DATABASE.database().ref('rawmaterials').push($scope.RawMaterial).then(function (res) {
+            var newobje = new Object();
+            newobje.raw = res.key;
+            newobje.stock = stockValue;
+            newobje.company = $scope.companyname
+            $scope.newobject = newobje;
+            DATABASE.database().ref('stock').push($scope.newobject);
+            $scope.RawMaterial = null;
+            $scope.RawMaterial = new Object();
+          });
 
-                  $scope.RawMaterial = null;
-                 $scope.RawMaterial = new Object();
-                 // $state.go('app.material_list', {}, {
+          // $scope.RawMaterial.openingstock = null;
 
-                 // });
+          DATABASE.database().ref('products')
+            .push($scope.RawMaterial).then(function (res) {
+              debugger;
+              var newobject = new Object();
+              newobject.product = res.key;
+              newobject.stock = stockValue;
+              newobject.company = $scope.companyname
+              $scope.newobjected = newobject;
+              debugger;
+              DATABASE.database().ref('stock').push($scope.newobjected);
 
-             });
-			  
-         // $scope.RawMaterial.openingstock = null;
 
-         DATABASE.database().ref('products')
-             .push($scope.RawMaterial).then(function (res) {
-			   debugger;
-                  var newobject = new Object();
-				  newobject.product = res.key;
-				  newobject.stock = stockValue;
-                 newobject.company = $scope.companyname
-                 $scope.newobjected = newobject;
-				   debugger;
-                 DATABASE.database().ref('stock').push($scope.newobjected);
-                 
-                 
-                 $ionicPopup.alert({
-                     title: 'Saved.',
-                     template: 'Data Saved successfully'
-                 });
+              $ionicPopup.alert({
+                title: 'Saved.',
+                template: 'Data Saved successfully'
+              });
 
-                 $scope.Products = new Object();
-                 $state.go('app.material_list', {}, {
+              $scope.Products = new Object();
+              $state.go('app.material_list', {}, {
 
-                 });
+              });
 
-             });
-			 $ionicLoading.hide();
-			 // , function (err) {
-                 // console.error(err);
-             }
-			else {
-			 // , function (err) {
-                 // console.error(err);
-             // });
-			  $scope.companyname = $scope.RawMaterial.companyName;
-           var stockValue = $scope.RawMaterial.openingstock;
-           // $scope.RawMaterial.openingStock = null;
-           DATABASE.database().ref('rawmaterials').push($scope.RawMaterial).then(function (res){
-			   debugger;
-                  var newobje = new Object();
-				 newobje.raw = res.key;
-				 newobje.stock = stockValue;
-                  newobje.company = $scope.companyname
-                 $scope.newobject = newobje;
-				   debugger;
-                 DATABASE.database().ref('stock').push($scope.newobject);
-				 
-				 // // $ionicLoading.hide();
-                 // // $ionicPopup.alert({
-                     // // title: 'Saved.',
-                     // // template: 'Data Saved successfully'
-                 // // });
+            });
+          $ionicLoading.hide();
+          // , function (err) {
+          // console.error(err);
+        } else {
+          // , function (err) {
+          // console.error(err);
+          // });
+          $scope.companyname = $scope.RawMaterial.companyName;
+          var stockValue = $scope.RawMaterial.openingstock;
+          // $scope.RawMaterial.openingStock = null;
+          DATABASE.database().ref('rawmaterials').push($scope.RawMaterial).then(function (res) {
+            debugger;
+            var newobje = new Object();
+            newobje.raw = res.key;
+            newobje.stock = stockValue;
+            newobje.company = $scope.companyname
+            $scope.newobject = newobje;
+            debugger;
+            DATABASE.database().ref('stock').push($scope.newobject);
 
-                  $scope.RawMaterial = null;
-                 $scope.RawMaterial = new Object();
-                  $state.go('app.material_list', {}, {
+            // // $ionicLoading.hide();
+            // // $ionicPopup.alert({
+            // // title: 'Saved.',
+            // // template: 'Data Saved successfully'
+            // // });
 
-                  });
+            $scope.RawMaterial = null;
+            $scope.RawMaterial = new Object();
+            $state.go('app.material_list', {}, {
 
-             });
-             $ionicLoading.hide();
-     }
-	 
- }};
-            
-            // .then(function (snap) {
-              // DATABASE.database().ref('stock').child('rawmaterials')
-                // .child(snap.key).set(stockValue);
-              // DATABASE.database().ref('products')
-                // .push($scope.RawMaterial).then(function (snapshot) {
-                  // DATABASE.database().ref('stock').child('products')
-                    // .child(snapshot.key).set(stockValue);
-					// DATABASE.database().ref('stock')
-            // .push($scope.RawMaterialsStock);
-                // });
-              // $ionicLoading.hide();
-              // $ionicPopup.alert({
-                // title: 'Saved.',
-                // template: 'Data Saved successfully'
-              // });
+            });
 
-              // $scope.RawMaterial = null;
-              // $scope.RawMaterial = new Object();
-              // $state.go('app.material_list', {}, {
-                // reload: true
-              // });
+          });
+          $ionicLoading.hide();
+        }
+
+      }
+    };
+
+    // .then(function (snap) {
+    // DATABASE.database().ref('stock').child('rawmaterials')
+    // .child(snap.key).set(stockValue);
+    // DATABASE.database().ref('products')
+    // .push($scope.RawMaterial).then(function (snapshot) {
+    // DATABASE.database().ref('stock').child('products')
+    // .child(snapshot.key).set(stockValue);
+    // DATABASE.database().ref('stock')
+    // .push($scope.RawMaterialsStock);
+    // });
+    // $ionicLoading.hide();
+    // $ionicPopup.alert({
+    // title: 'Saved.',
+    // template: 'Data Saved successfully'
+    // });
+
+    // $scope.RawMaterial = null;
+    // $scope.RawMaterial = new Object();
+    // $state.go('app.material_list', {}, {
+    // reload: true
+    // });
 
 
 
-            
-        // } else {
 
-          // var stockValue = $scope.RawMaterial.openstock;
-          // $scope.RawMaterial.openstock = null;
+    // } else {
 
-          // $scope.RawMaterial.checkProducts = null;
-          // DATABASE.database().ref('rawmaterials')
-            // .push($scope.RawMaterial)
-            // .then(function (snap) {
-              // debugger;
-              // DATABASE.database().ref('stock').child('rawmaterials')
-                // .child(snap.key).set(stockValue);
-              // console.log("fdfdfd");
-              // $ionicLoading.hide();
-              // $ionicPopup.alert({
-                // title: 'Saved.',
-                // template: 'Data Saved successfully'
-              // });
+    // var stockValue = $scope.RawMaterial.openstock;
+    // $scope.RawMaterial.openstock = null;
 
-              // $scope.RawMaterial = null;
-              // $scope.RawMaterial = new Object();
-              // $state.go('app.material_list', {}, {
-                // reload: true
-              // });
-            // }).catch(function (er) {});
-        // }
+    // $scope.RawMaterial.checkProducts = null;
+    // DATABASE.database().ref('rawmaterials')
+    // .push($scope.RawMaterial)
+    // .then(function (snap) {
+    // debugger;
+    // DATABASE.database().ref('stock').child('rawmaterials')
+    // .child(snap.key).set(stockValue);
+    // console.log("fdfdfd");
+    // $ionicLoading.hide();
+    // $ionicPopup.alert({
+    // title: 'Saved.',
+    // template: 'Data Saved successfully'
+    // });
 
-      // }
+    // $scope.RawMaterial = null;
+    // $scope.RawMaterial = new Object();
+    // $state.go('app.material_list', {}, {
+    // reload: true
+    // });
+    // }).catch(function (er) {});
+    // }
+
+    // }
     // };
-  // $scope.Save = function (rawmaterialForm) {
-     // if (rawmaterialForm.$valid) {
-         // $ionicLoading.show({
-             // content: 'Loading',
-             // animation: 'fade-in',
-             // showBackdrop: true,
-             // maxWidth: 200,
-             // showDelay: 0
-         // });
-         // debugger;
+    // $scope.Save = function (rawmaterialForm) {
+    // if (rawmaterialForm.$valid) {
+    // $ionicLoading.show({
+    // content: 'Loading',
+    // animation: 'fade-in',
+    // showBackdrop: true,
+    // maxWidth: 200,
+    // showDelay: 0
+    // });
+    // debugger;
 
-         // var stockValue = $scope.RawMaterial.openstock;
-          // $scope.RawMaterial.openstock = null;
+    // var stockValue = $scope.RawMaterial.openstock;
+    // $scope.RawMaterial.openstock = null;
 
-          // $scope.RawMaterial.checkProducts = null;
+    // $scope.RawMaterial.checkProducts = null;
 
-         // DATABASE.database().ref('rawmaterials')
-             // .push($scope.rawmaterials)
-			 // .then(function (res) {
-			  // debugger;
-                 // var newobje = new Object();
-				 // newobje.product = res.key;
-				 // newobje.stock = StockValue;
-                // newobje.company = $scope.Products.companyName
-                // $scope.newobject = newobje;
-				  // debugger;
-                 // DATABASE.database().ref('stock').push($scope.newobject);
-                 
-                 // $ionicLoading.hide();
-                 // $ionicPopup.alert({
-                     // title: 'Saved.',
-                     // template: 'Data Saved successfully'
-                 // });
+    // DATABASE.database().ref('rawmaterials')
+    // .push($scope.rawmaterials)
+    // .then(function (res) {
+    // debugger;
+    // var newobje = new Object();
+    // newobje.product = res.key;
+    // newobje.stock = StockValue;
+    // newobje.company = $scope.Products.companyName
+    // $scope.newobject = newobje;
+    // debugger;
+    // DATABASE.database().ref('stock').push($scope.newobject);
 
-                 // $scope.Products = new Object();
-                 // $state.go('app.product_list', {}, {
+    // $ionicLoading.hide();
+    // $ionicPopup.alert({
+    // title: 'Saved.',
+    // template: 'Data Saved successfully'
+    // });
 
-                 // });
+    // $scope.Products = new Object();
+    // $state.go('app.product_list', {}, {
 
-             // }, function (err) {
-                 // console.error(err);
-             // });
-     // }
-	 
- // };
+    // });
+
+    // }, function (err) {
+    // console.error(err);
+    // });
+    // }
+
+    // };
     $scope.CompaniesListWithStock = [];
     $scope.ShowStock = function () {
       debugger;
@@ -236,9 +222,9 @@ debugger;
                 $scope.CompaniesListWithStock.push(CompanyObject);
                 debugger;
               });
-               $ionicLoading.hide();
-          });
             $ionicLoading.hide();
+          });
+          $ionicLoading.hide();
           debugger;
         });
     }
@@ -348,50 +334,50 @@ debugger;
         }
       })
     }
-$scope.LoadCompanylist = function () {
- // alert($scope.data.Company) this will show true or false means this model is selected or not
-			
-		// if (!$scope.data.Company == true) {
-            // $ionicPopup.alert({
-                // title: 'Alert',
-                // template: 'Please Select Company'
-            // });
-            // return false;
-        // }
-		// alert("after if");
-			$ionicLoading.show({
-							content: 'Loading',
-							animation: 'fade-in',
-							showBackdrop: true,
-							maxWidth: 200,
-							showDelay: 0
-						});
-			debugger;
-			$scope.CompanyList = [];
-			DATABASE.database().ref('Company').on('value',function(snap){
-			  snap.forEach(function(s){
-				 var a = new Object();
-debugger;
-				 a.id = s.key;
-				 a.val = s.val();
-			$scope.CompanyList.push(a);
-			
-			  })
-			  
-			})
-			  // DATABASE.database().ref('Vendors').on('value',function(snap){
-			  // snap.forEach(function(s1){
-				 // var a1 = new Object();
-				 // a1.id = s1.key;
-				 // a1.val = s1.val();
-				// $scope.VendorsList.push(a1);
-			  
-			   // })
-			  
-			    
-			// })			 
-			 $ionicLoading.hide(); 
-    }; 
+    $scope.LoadCompanylist = function () {
+      // alert($scope.data.Company) this will show true or false means this model is selected or not
+
+      // if (!$scope.data.Company == true) {
+      // $ionicPopup.alert({
+      // title: 'Alert',
+      // template: 'Please Select Company'
+      // });
+      // return false;
+      // }
+      // alert("after if");
+      $ionicLoading.show({
+        content: 'Loading',
+        animation: 'fade-in',
+        showBackdrop: true,
+        maxWidth: 200,
+        showDelay: 0
+      });
+      debugger;
+      $scope.CompanyList = [];
+      DATABASE.database().ref('Company').on('value', function (snap) {
+        snap.forEach(function (s) {
+          var a = new Object();
+          debugger;
+          a.id = s.key;
+          a.val = s.val();
+          $scope.CompanyList.push(a);
+
+        })
+
+      })
+      // DATABASE.database().ref('Vendors').on('value',function(snap){
+      // snap.forEach(function(s1){
+      // var a1 = new Object();
+      // a1.id = s1.key;
+      // a1.val = s1.val();
+      // $scope.VendorsList.push(a1);
+
+      // })
+
+
+      // })			 
+      $ionicLoading.hide();
+    };
 
 
 
