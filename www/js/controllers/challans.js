@@ -261,17 +261,26 @@ angular.module('starter.controllers.challans', [])
                       return x.pid == s.val().raw
                     }).SingleOrDefault();
                   if (productObject != undefined && productObject != null) {
-                    indexOf = ProductsArray.indexOf(productObject);
-                    ProductsArray.splice(indexOf, 1);
+                    indexOf = ProductsArray.indexOf(productObject);         // why//
+                    ProductsArray.splice(indexOf, 1);                       // why//
                     var stock = s.val().stock + productObject.Qty;
                     var child = angular.copy(s.val());
                     child.stock = stock;
                     DATABASE.database().ref('stock').child(s.key)
                       .set(child);
+                      debugger;
                   }
                 }
               });
-              //alert saveed successfully redirect
+              
+              $ionicPopup.alert({
+              title: 'Saved.',
+              template: 'Purchase Completed'
+            });
+            $state.go('app.purchase_list', {}, {
+
+            });
+
             });
         });
             

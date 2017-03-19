@@ -6,7 +6,7 @@
         <div class="list">
 	<label class="item item-input item-select">
     <div class="input-label" >
-     Select Company
+     Select Customer
     </div>
     <select  ng-init="LoadcustomerList()" >
       <option   ng-repeat="customer in customerList"  >{{customer.val.name}}</option>
@@ -308,6 +308,25 @@
         </ion-modal-view>
     </script>
 
+ <script id="Companywise.html" type="text/ng-template">
+        <ion-modal-view class="ion-nifty-modal"  >
+            <div class="ion-modal-content-custom">
+                <ion-content class="padding">
+                    <button class="button button-full button-positive" ng-click="Companywisemodal.hide()">Close</button>
+                    <ion-list>
+                        <ion-item  ng-repeat="Product in ProductArray" ng-click="Selectedproduct(customer)">
+                            <div class="row">
+                                <!--<label class="col-80">{{Company}}</label>
+                           <label class="col-33"> {{Stock}}</label>-->
+                            <label class="col-80">{{Product.companyname}}</label>
+                           <label class="col-33"> {{Product.stock}}</label>
+                            </div>
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+            </div>
+        </ion-modal-view>
+    </script>
 
     <script id="product.html" type="text/ng-template">
         <ion-modal-view class="ion-nifty-modal" ng-init="LoadProducts()">

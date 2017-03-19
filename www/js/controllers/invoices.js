@@ -5,9 +5,11 @@ angular.module('starter.controllers.invoices', [])
     $scope.CustomersList = new Array();   // Customers List
     $scope.Customer = new Object();  // SElected Customer
     $scope.CheckCustomer = false;
-    $scope.Customermodal = new Object();   // To open the Modal (popup)
+    $scope.Customermodal = new Object();
+    $scope.Companywisemodal = new Object();   // To open the Modal (popup)
     $scope.FormValues = new Object();
-    $scope.FormValues.challansno = new Date().valueOf();
+    
+       $scope.FormValues.challansno = new Date().valueOf();
      $scope.CustomersList = SharedDataService.customers;
 	 $scope.ProductList = SharedDataService.Product;
     $scope.ModalForCustomersList = function () {
@@ -17,6 +19,15 @@ angular.module('starter.controllers.invoices', [])
         }).then(function (modaldata) {
             $scope.Customermodal = modaldata;
             $scope.Customermodal.show();
+        });
+    }
+     $scope.ModalForCompanywise = function () {
+        $ionicModal.fromTemplateUrl('Companywise.html', {
+            scope: $scope,
+            unfocusOnHide: false
+        }).then(function (modaldata) {
+            $scope.Companywisemodal = modaldata;
+            $scope.Companywisemodal.show();
         });
     }
 
@@ -135,6 +146,7 @@ DATABASE.database().ref('Company').on('value',function(snap){
     $scope.Product = new Object();  // SElected Product
     $scope.ProductModal = new Object(); // Modal for Product
     $scope.ProductNos = new Object(); // Modal for Quantity
+    
     $scope.SelectedProducts = new Array(); // Selected Products
 
     $scope.TotalAmount = 0;   // Total Amount
@@ -197,7 +209,66 @@ DATABASE.database().ref('Company').on('value',function(snap){
 
     $scope.SelectProduct = function (product) {
         $scope.Product = product;
-        $ionicModal.fromTemplateUrl('nos.html', {
+ $scope.ProductArray = [];
+        debugger;
+        $ionicModal.fromTemplateUrl('Companywise.html', {
+            scope: $scope,
+            unfocusOnHide: false
+        }).then(function (modaldata) {
+            $scope.Companywisemodal = modaldata;
+            $scope.Companywisemodal.show();
+//             DATABASE.database().ref('stock').orderByChild('product').equalTo($scope.Product.pid)
+//             .on('value',function(snap){
+//   snap.forEach(function(s){
+//       debugger;
+//        DATABASE.database().ref('company').equalTo($scope.Product.val.companyName).on('value',function(snap){
+//            snap.forEach(function(h){
+//            var a = new Object();
+//                     a.name = h.val().name;
+//  					 a.pid = s.key;
+//  					 a.val = s.val();
+//  					$scope.ProductList.push(a);
+//            })
+DATABASE.database().ref('stock').orderByChild('product')
+    .equalTo($scope.Product.pid).on('value', function (snap) {
+        snap.forEach(function (s) {
+           var a = new Object();
+           debugger;
+           a.stock = s.val().stock;
+           a.ccc = s.val()
+            
+            DATABASE.database().ref('Company').child(s.val().company)
+            .on('value', function (snapshot) {
+                debugger;
+
+             var fff  = snapshot.val();
+               a.companyname =  snapshot.val().name;
+             
+               $scope.ProductArray.push(a);
+
+                        });
+                       
+        })
+    })
+       
+ 					 
+				  
+				  }).then
+ 				  $ionicLoading.hide();
+				  
+				 
+				            
+             
+            
+            
+            
+    };
+    
+     $scope.SelectedProduct = function (product) {
+        $scope.Product = product;
+        debugger;
+        var pp = product;
+        $ionicModal.fromTemplateUrl('Companywise.html', {
             scope: $scope,
             unfocusOnHide: false
         }).then(function (modaldata) {
@@ -205,6 +276,9 @@ DATABASE.database().ref('Company').on('value',function(snap){
             $scope.ProductNos.show();
         });
     }
+    
+    
+    
 
     // Insert items after selection 
     $scope.addListItem = function (form) {
@@ -526,4 +600,41 @@ DATABASE.database().ref('Company').on('value',function(snap){
   SharedDataService.Company = $scope.CompanyList;
 });
     }; 
+    $scope.LoadProductcomapnywise = function (product) {
+
+        $scope.ProductList = [];
+		$ionicLoading.show({
+                content: 'Loading',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 200,
+                showDelay: 0
+            });
+						
+				debugger;
+				$scope.ProductList  = [];
+				$scope.Product = new Object();
+				DATABASE.database().ref('stock').orderByChild('product').equalTo(product.id)
+          .on('value', function (snap) {
+
+				  snap.forEach(function(s){
+					 var a = new Object();
+					 a.id = s.key;
+					 a.val = s.val();
+					$scope.ProductList.push(a);
+				  
+				  }).then
+				  $ionicLoading.hide();
+				  
+				  SharedDataService.Product = $scope.ProductList;
+				});
+        // var query_customer = "SELECT * FROM ProductsMaster";
+        // $cordovaSQLite.execute(DATABASE, query_customer).then(function (res) {
+            // for (var i = 0; i < res.rows.length; i++) {
+                // $scope.ProductList.push(res.rows.item(i));
+            // }
+        // }, function (err) {
+            // console.error(err);
+        // });
+    }
 })
