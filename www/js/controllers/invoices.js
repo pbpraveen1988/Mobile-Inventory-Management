@@ -211,12 +211,12 @@ DATABASE.database().ref('Company').on('value',function(snap){
         $scope.Product = product;
  $scope.ProductArray = [];
         debugger;
-        $ionicModal.fromTemplateUrl('Companywise.html', {
+        $ionicModal.fromTemplateUrl('nos.html', {
             scope: $scope,
             unfocusOnHide: false
         }).then(function (modaldata) {
-            $scope.Companywisemodal = modaldata;
-            $scope.Companywisemodal.show();
+            $scope.ProductNos = modaldata;
+            $scope.ProductNos.show();
 //             DATABASE.database().ref('stock').orderByChild('product').equalTo($scope.Product.pid)
 //             .on('value',function(snap){
 //   snap.forEach(function(s){

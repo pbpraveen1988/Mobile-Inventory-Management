@@ -43,7 +43,8 @@ angular.module('starter.controllers.stock', [])
                 b.id = i;
                 b.val = s[i];
 
-                DATABASE.database().ref('rawmaterials').child(s[i].raw)
+                DATABASE.database().ref('rawmaterials')
+                .child(s[i].raw)
                   .on('value', function (snapshot) {
                     debugger;
                     b.name = snapshot.val().name;
@@ -96,10 +97,10 @@ angular.module('starter.controllers.stock', [])
                     $scope.stocks.push(a);
                     debugger;
                     console.log($scope.stocks);
-                    //	 try
-                    //	 {
-                    //	 $scope.$digest();
-                    //	 }catch(e){}
+                    	//  try
+                    	//  {
+                    	//  $scope.$digest();
+                    	//  }catch(e){}
 
                   });
               }
@@ -108,17 +109,17 @@ angular.module('starter.controllers.stock', [])
             SharedDataService.stock = $scope.stocks;
             $ionicLoading.hide();
           });
-        //	 DATABASE.database().ref('rawmaterials').on('value',function(snap){ //???????//
+        // 	 DATABASE.database().ref('rawmaterials').on('value',function(snap){ //???????//
         //  $scope.stocks  = [];
         //  snap.forEach(function(s){
-        //	 var a = new Object();
-        //	 a.id = s.key;
-        //	 a.val = s.val();
-        //	$scope.stocks.push(a);
+        // 	 var a = new Object();
+        // 	 a.id = s.key;
+        // 	 a.val = s.val();
+        // 	$scope.stocks.push(a);
         //  })
         //  SharedDataService.stock = $scope.stocks;
         // $ionicLoading.hide();
-        //		});
+        // 		});
 
 
       }
@@ -178,7 +179,7 @@ angular.module('starter.controllers.stock', [])
       $scope.CompanyModal.hide();
     };
 
-    $scope.GetStock = function () {;
+    $scope.GetStock = function () {
 
 
       $scope.data.Stock = Enumerable.From($scope.stocks)
